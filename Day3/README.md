@@ -267,7 +267,7 @@ String str3 = new String("example"); //new 연산자를 이용한 방식
 String str4 = new String("example"); //new 연산자를 이용한 방식
 ```
 
-![[str.png]]
+![](static/str.png)
 ```java
 public class compare {
     public static void main(String[] args) {
