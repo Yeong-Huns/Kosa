@@ -14,10 +14,12 @@ package anonymousTest;
 public class Driver {
     public static void main(String[] args) {
       Solution solution = new Solution();
-      Solution.AddNum c = (a, b)-> a / b;
-      Solution.calc(7, 8, c);
+      Solution.AddNum c = Integer::sum;
+
       int x = solution.solution(4,7);
-      System.out.println(x);
+      System.out.println("========");
+        int x2 = c.ssaf(4,5,c);
+        System.out.println(x2);
     }
 
 }
@@ -25,8 +27,11 @@ class Solution{
 
     interface AddNum{
         int addNum(int a, int b);
+        default int ssaf(int a, int b, AddNum c){
+            return c.addNum(a,b);
+        }
     }
-    public static int calc(int a , int b, AddNum add){
+    public int calc(int a , int b, AddNum add){
         return add.addNum(a, b);
     }
 
