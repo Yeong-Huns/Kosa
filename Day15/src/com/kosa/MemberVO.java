@@ -23,4 +23,17 @@ public class MemberVO {
     private int height;
     private int weight;
     private int age;
+
+    public MemberVO(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public MemberVO(String id, String name, int height, int weight, int age) {
+        this.id = id;
+        this.name = name;
+        this.height = height;
+        this.weight = weight;
+        this.age = age;
+    }
 }
