@@ -1,7 +1,6 @@
 package com.kosa.product;
 
 import com.kosa.DBConnection;
-import com.kosa.MemberVO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

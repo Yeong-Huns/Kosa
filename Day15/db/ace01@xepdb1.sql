@@ -93,3 +93,4 @@ create or replace procedure procedure_test_drive(p_deptno emp.deptno%type)
     exec function_test_drive(30)
 
 
+select * from product;

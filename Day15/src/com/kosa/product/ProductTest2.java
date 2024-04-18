@@ -1,8 +1,5 @@
 package com.kosa.product;
 
-import com.kosa.MemberDAO;
-import com.kosa.MemberVO;
-
 import java.util.ArrayList;
 
 /**
