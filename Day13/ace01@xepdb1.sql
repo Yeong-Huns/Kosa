@@ -339,8 +339,109 @@ END;
 EXEC PROC4(7788);
 
 
+SET SERVEROUTPUT ON;
+
+GRANT EXECUTE 
+ON MEP_TYPES_PACK
+TO PUBLIC ;
+
+
+CREATE OR REPLACE VIEW V1 
+AS 
+SELECT ENAME, SAL, JOB 
+FROM EMP;
+
+
+
+CREATE OR REPLACE PROCEDURE PROC1(P_DNUM EMP.DEPTNO%TYPE)
+IS 
+TYPE TAB1 IS TABLE OF EMP.SAL%TYPE INDEX BY PLS_INTEGER;
+T1 TAB1;
+BEGIN 
+SELECT SAL BULK COLLECT INTO T1
+FROM EMP 
+WHERE DEPTNO = P_DNUM; 
+FOR I IN T1.FIRST .. T1.LAST LOOP
+DBMS_OUTPUT.PUT_LINE(T1(I));
+END LOOP;
+END;
+/
+EXEC PROC1(20);
+
+CREATE OR REPLACE PROCEDURE PROC1(P_DNUM EMP.DEPTNO%TYPE)
+IS 
+TYPE TAB1 IS TABLE OF EMP%ROWTYPE INDEX BY PLS_INTEGER; 
+T1 TAB1; 
+BEGIN
+SELECT * BULK COLLECT INTO T1
+FROM EMP
+WHERE DEPTNO = P_DNUM; 
+
+FOR I IN T1.FIRST .. T1.LAST LOOP
+DBMS_OUTPUT.PUT_LINE(T1(I).EMPNO);
+DBMS_OUTPUT.PUT_LINE(T1(I).ENAME);
+DBMS_OUTPUT.PUT_LINE('---------');
+END LOOP;
+END; 
+/
+EXEC PROC1(20);
+
+
+  create or replace procedure proc1(p_deptno emp.deptno%type)
+  is
+    TYPE emp_record_type IS RECORD
+    (empno emp.empno%type,
+     ename emp.ename%type,
+     sal   emp.sal%type,
+     job   emp.job%type);
+
+    TYPE emp_table_type IS TABLE OF emp_record_type
+      INDEX BY pls_integer;
+
+    emp_tab emp_table_type;
+  begin
+    select empno, ename, sal, job BULK COLLECT INTO emp_tab
+    from emp
+    where deptno = p_deptno;
+
+    for i in emp_tab.first .. emp_tab.last loop
+      dbms_output.put_line(emp_tab(i).empno);
+      dbms_output.put_line(emp_tab(i).ename);
+      dbms_output.put_line('-----');
+    end loop;
+  end;
+  /
+  exec proc1(20);
+
+
+
+drop table t1 cascade constraints purge;
+create table t1 as select employee_id, first_name from employees;
+
+
+SELECT * FROM T1;
+
+ drop table member cascade constraints purge;
+
+  create table member
+  (id     varchar2(10) primary key,
+   name   varchar2(10),
+   height number(5),
+   weight number(5),
+   age    number(5));
+
+  insert into member values('001', 'Peter', 175, 67, 24);
+  insert into member values('002', 'Diana', 188, 78, 31);
+  insert into member values('003', 'Jennifer', 165, 48, 17);
+  insert into member values('004', 'Bruce', 177, 78, 23);
+
+  commit;
+
+SELECT * FROM MEMBER;
 
 /*
+
+
 DECLARE 
 I_NUM EMP.EMPNO%TYPE;
 CURSOR C1 (E_NUM EMP.EMPNO%TYPE) IS

@@ -1,3 +1,10 @@
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * packageName    :
  * fileName       : ${NAME}
@@ -11,6 +18,12 @@
  */
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("Hello world!");
+
+        int[] arr = {1,2,3,4,5,};
+
+
     }
+
 }
