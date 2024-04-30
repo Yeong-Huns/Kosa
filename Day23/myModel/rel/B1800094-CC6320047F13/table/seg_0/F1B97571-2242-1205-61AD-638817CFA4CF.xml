@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F1B97571-2242-1205-61AD-638817CFA4CF" name="Books">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>85DFC016-A9D9-D3F8-DCAD-43322DDCC8BA</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="book_id" id="2604CA07-22E0-3456-8F1B-52D9C5728E31">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>C5BD933C-1FB9-8685-124D-6F1B19EC4E2B</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3D6FD336-699C-A269-6406-D0DBC2C2507B</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="title" id="87DAA5C1-D444-862B-EF7B-6C42346692E6">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>20FA2007-A589-9425-6B6D-534DC6B5A618</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>FA732C1F-4509-0429-4970-F86AF8D300AC</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="author_last_name" id="DD550B89-4029-E0D0-1887-56B4AE1BCA41">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>F6AD96BC-252D-A997-5FF2-84C8FA92A17C</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>AE52F0F6-4783-33E1-22A9-A0CA493074E5</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="author_first_name" id="69FDC88F-C83B-8240-504B-321D3B4EAF78">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>95B438FA-751D-B44B-5300-AF8366BC3DE2</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>AE52F0F6-4783-33E1-22A9-A0CA493074E5</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="rating" id="F0EF85A7-69DC-B608-1242-E87344E95389">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>4A8C5ACA-914F-BDF8-728F-0F36D711D6E4</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="499A997A-B381-CFBB-6B3A-54A13F887567" name="Books_PK">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>DF8590C6-A151-C2AC-490D-F74298A0A813</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2604CA07-22E0-3456-8F1B-52D9C5728E31"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

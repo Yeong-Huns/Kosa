@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="09CE416F-F71C-113D-1C9E-9F8AEB27F7E4" containerWithKeyObject="F59583CE-8735-8DC4-6BD3-039897F776C4" localFKIndex="7510C373-826E-9B1C-10B2-DC5FD47797AE" name="Transactions_Patrons_FK">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>CDD9FCB5-1000-96BC-794C-70BF0A052FB0</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<referredTableLongName>Patrons</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>97546DBC-92DA-000A-821E-4E82E8F8CD0D</referredTableID>
+<keyObject>9F858A91-6F9E-288E-9FBC-197E818EFAAA</keyObject>
+<referredKeyID>9F858A91-6F9E-288E-9FBC-197E818EFAAA</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>patron_id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

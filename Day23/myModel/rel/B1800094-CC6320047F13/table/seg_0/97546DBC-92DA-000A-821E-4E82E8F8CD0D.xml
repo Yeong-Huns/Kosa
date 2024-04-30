@@ -1,0 +1,120 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="97546DBC-92DA-000A-821E-4E82E8F8CD0D" name="Patrons">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>C94CEFF7-AE0D-B0A4-AE84-46C439EE8CE3</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="patron_id" id="BF998F6B-E5D7-8653-1B8F-13227C4782C1">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>8BC4FE39-E357-A0AE-843D-5E9881D5FC0F</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>376DCBC2-B71C-1C1C-2533-5903DD63255A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_name" id="AE3E96C8-D493-71F4-C891-E44E509CB88C">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>B84BBFB1-41FD-5B04-C99C-9519E1869564</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>AE52F0F6-4783-33E1-22A9-A0CA493074E5</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="first_name" id="EE62F696-3996-AA40-9591-B4F174073A0B">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>BC0D81C2-BDE7-9CB6-951C-633C7E988EC2</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>AE52F0F6-4783-33E1-22A9-A0CA493074E5</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="street_address" id="60F35D0B-BC04-DB0F-FEF2-3212A9AF8D18">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>7E9605FC-69F4-647E-B024-EB767B46330B</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>1FC24D03-6773-8E2A-4140-B78864589943</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="city" id="FCE1C78C-44D5-E89E-81A9-4DBE3535B548">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>D6F51ECA-7A71-9626-C88A-897F3626819E</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>0FA5F0B5-192A-622B-F182-328BE83E85C4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="state" id="35D4E07C-B5BF-EF64-D65D-8681D7AEEDBF">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>65C5D8B3-D019-E94E-B5F9-FA385A52673B</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>6252E19A-D0A1-AB32-8F42-013EBD75AE70</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="zip" id="C88A5A54-C1FD-CDD5-9C7E-AC1A69929072">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>4500942D-4DA8-C2A0-D0DC-14E63562630C</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>44DEEB33-7A3E-0067-4046-18E8D06BF10E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="location" id="23FE725D-63FC-21EE-EDF7-60D4C94557DA">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>8102D28C-CDB6-D2B7-C517-01E2323253EA</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>3</use>
+<structuredType>47E390DE-0671-C4B1-8428-0F45CBEE18F8</structuredType>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9F858A91-6F9E-288E-9FBC-197E818EFAAA" name="Patrons_PK">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:24:02 UTC</createdTime>
+<generatorID>4D89F460-0D52-AB76-A813-7698655168EB</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BF998F6B-E5D7-8653-1B8F-13227C4782C1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

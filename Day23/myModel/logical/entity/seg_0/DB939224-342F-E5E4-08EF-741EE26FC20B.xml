@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DB939224-342F-E5E4-08EF-741EE26FC20B" name="Transactions">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 04:57:26 UTC</createdTime>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="transaction_id" id="67D7B991-1821-A7BC-D0A3-2B95CD413A7D">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 04:57:43 UTC</createdTime>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>376DCBC2-B71C-1C1C-2533-5903DD63255A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="transaction_date" id="C77CFFF6-7259-3579-1EA4-CC2D646B8C45">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 04:57:44 UTC</createdTime>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="transaction_type" id="CCB5598D-523C-0828-3D33-CB555B886944">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 04:57:45 UTC</createdTime>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>376DCBC2-B71C-1C1C-2533-5903DD63255A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="book_id" id="F0914079-FF23-37BC-E49E-AC81CC2B423A">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:18:28 UTC</createdTime>
+<generatorID>17382B88-7A68-5DBC-1C69-C321189DAB81</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>C5BD933C-1FB9-8685-124D-6F1B19EC4E2B</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>3D6FD336-699C-A269-6406-D0DBC2C2507B</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="patron_id" id="B32A679A-DE1B-67C9-56E1-AFBBC5987D8E">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 07:20:22 UTC</createdTime>
+<generatorID>CDD9FCB5-1000-96BC-794C-70BF0A052FB0</generatorID>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>8BC4FE39-E357-A0AE-843D-5E9881D5FC0F</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>376DCBC2-B71C-1C1C-2533-5903DD63255A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="186755B7-495E-8AC6-0172-175F2FEF0669" name="Transactions PK">
+<createdBy>KOSA</createdBy>
+<createdTime>2024-04-29 04:59:53 UTC</createdTime>
+<ownerDesignName>myModel</ownerDesignName>
+<engineerTo>
+<item key="B1800094-BC3A-D2BF-41FA-CC6320047F13" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>67D7B991-1821-A7BC-D0A3-2B95CD413A7D</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
