@@ -9,8 +9,6 @@ public class WorkStartPanel extends JPanel {
         setBackground(new Color(157, 157, 157));
         setLayout(null);
         initalize();
-
-
     }
 
     private void initalize() {

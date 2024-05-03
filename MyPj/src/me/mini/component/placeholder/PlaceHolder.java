@@ -21,9 +21,8 @@ public class PlaceHolder extends JTextField {
     public PlaceHolder(String text) {
         super(text);
         initialize(text);
+        //전달받은 text 내용대로 placeHolder 생성
     }
-
-
     private void initialize(String text){
         setForeground(Color.GRAY);
         setFont(new Font("D2Coding", Font.PLAIN, 18));

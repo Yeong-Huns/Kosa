@@ -1,5 +1,6 @@
-import me.mini.view.ViewConstructor;
-import me.mini.view.main.MainFrame;
+import me.mini.viewManager.View;
+import me.mini.viewManager.ViewConstructor;
+import me.mini.viewManager.MainFrame;
 
 import java.awt.*;
 
@@ -21,7 +22,8 @@ public class Main {
                 try {
                     ViewConstructor system = new ViewConstructor();
                     MainFrame.getInstance().setVisible(true);
-                    System.out.println("Working Directory = " + System.getProperty("user.dir"));
+                    System.out.println(View.SIGNUP);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

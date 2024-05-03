@@ -21,7 +21,6 @@ public class PwdPlaceHolder extends JPasswordField {
         super(text);
         initialize();
     }
-
     private void initialize() {
         setForeground(Color.GRAY);
         setFont(new Font("D2Coding", Font.PLAIN, 18));
@@ -35,7 +34,6 @@ public class PwdPlaceHolder extends JPasswordField {
                     setEchoChar('●');
                 }
             }
-
             public void focusLost(FocusEvent e) {
                 String passText = String.valueOf(getPassword());
                 if (passText.isEmpty()) {

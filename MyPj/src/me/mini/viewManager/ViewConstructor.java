@@ -1,12 +1,9 @@
-package me.mini.view;
+package me.mini.viewManager;
 
 import me.mini.view.attendance.AttendanceManagementPanel;
-import me.mini.view.attendanceDetail.CommutePanel;
-import me.mini.view.commuteTime.CommuteTimePanel;
+import me.mini.view.attendanceDetail.AttendanceDetailPanel;
+import me.mini.view.commuteTime.CommutePanel;
 import me.mini.view.login.LoginPanel;
-import me.mini.view.main.MainFrame;
-import me.mini.view.main.MainCard;
-import me.mini.view.main.MainLayOut;
 import me.mini.view.signUp.SignUpPanel;
 
 import javax.swing.*;
@@ -38,17 +35,11 @@ public class ViewConstructor {
     private void initializeUI() {
         LoginPanel loginPanel = new LoginPanel();
         SignUpPanel signUpPanel = new SignUpPanel();
-        CommuteTimePanel commuteTimePanel = new CommuteTimePanel();
+        CommutePanel commutePanel = new CommutePanel();
         AttendanceManagementPanel attendanceManagementPanel = new AttendanceManagementPanel();
-        CommutePanel commutePanel = new CommutePanel("근태 현황");
+        AttendanceDetailPanel attendanceDetailPanel = new AttendanceDetailPanel("근태 현황");
+
         frame.add(cards);
         cardLayout.show(cards, "Login"); // 처음에 로그인 패널을 보여줍니다.
-    }
-
-    public void setCardLayout(JPanel panel, String str) {
-        this.cardLayout.show(panel, str);
-    }
-    public JPanel getCards() {
-        return this.cards;
     }
 }

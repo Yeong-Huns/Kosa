@@ -1,15 +1,13 @@
 package me.mini.view.commuteTime;
 
-import me.mini.view.main.MainCard;
-
 import javax.swing.*;
 
-public class CommuteTimePanel extends JPanel {
-    public CommuteTimePanel() {
+public class CommuteTimeInnerPanel extends JPanel {
+    public CommuteTimeInnerPanel() {
         setBounds(0, 80, 586, 683);
         setLayout(null);
         initialize();
-        MainCard.getInstance().add(this, "CommuteTime");
+
     }
 
     private void initialize() {

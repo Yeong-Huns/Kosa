@@ -1,5 +1,8 @@
 package me.mini.component.panel;
 
+import me.mini.component.button.BackButton;
+import me.mini.component.label.TitleLabel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,5 +22,11 @@ public class TopPanel extends JPanel {
         super(new BorderLayout());
         setBackground(Color.LIGHT_GRAY);
         setPreferredSize(new Dimension(580, 100));
+    }
+    public TopPanel(String str){
+        super(new BorderLayout());
+        setBackground(Color.LIGHT_GRAY);
+        setPreferredSize(new Dimension(580, 100));
+        add(new TitleLabel(" "+str), BorderLayout.WEST);
     }
 }

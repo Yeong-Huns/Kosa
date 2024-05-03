@@ -1,4 +1,4 @@
-package me.mini.view.main;
+package me.mini.viewManager;
 
 import javax.swing.*;
 import java.awt.*;

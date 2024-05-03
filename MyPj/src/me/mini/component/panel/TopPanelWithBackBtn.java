@@ -1,15 +1,14 @@
-package me.mini.view.attendanceDetail;
+package me.mini.component.panel;
 
 import me.mini.component.button.BackButton;
 import me.mini.component.label.TitleLabel;
-import me.mini.component.panel.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * packageName    : me.mini.view.commuteLIst
- * fileName       : Header
+ * packageName    : me.mini.component.panel
+ * fileName       : TopPanelWithBackBtn
  * author         : Yeong-Huns
  * date           : 2024-05-03
  * description    :
@@ -18,10 +17,12 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-03        Yeong-Huns       최초 생성
  */
-public class Header extends TopPanel {
-    public Header(String str) {
+public class TopPanelWithBackBtn extends TopPanel{
+    public TopPanelWithBackBtn(String str) {
+        super();
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setOpaque(false);
+        setBackground(Color.LIGHT_GRAY);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;

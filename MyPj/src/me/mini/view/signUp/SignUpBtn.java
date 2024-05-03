@@ -1,8 +1,6 @@
 package me.mini.view.signUp;
 
 import me.mini.component.button.CommonButton;
-import me.mini.view.main.MainCard;
-import me.mini.view.main.MainLayOut;
 
 import java.awt.*;
 

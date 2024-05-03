@@ -1,6 +1,10 @@
 package me.mini.view.login;
 
-import me.mini.view.main.MainCard;
+import me.mini.component.panel.TopPanel;
+import me.mini.component.placeholder.PlaceHolder;
+import me.mini.component.placeholder.PwdPlaceHolder;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.View;
 
 import javax.swing.*;
 
@@ -20,14 +24,23 @@ public class LoginPanel extends JPanel {
     public LoginPanel() {
         setBounds(0, 0, 586, 863);
         setLayout(null);
-        MainCard.getInstance().add(this, "Login");
         initialize();
+        MainCard.getInstance().add(this, View.LOGIN.toString());
     }
     private void initialize() {
-        add(new IdField("아이디를 입력하세요"));
-        add(new PasswordField("비밀번호를 입력하세요"));
+        PlaceHolder idField = new PlaceHolder("아이디를 입력하세요");
+        idField.setBounds(12, 288, 562, 55);
+        add(idField);
+
+        PwdPlaceHolder pwdField = new PwdPlaceHolder("비밀번호를 입력하세요");
+        pwdField.setBounds(12, 395, 562, 55);
+        add(pwdField);
+
         add(new SignInBtn("로그인"));
         add(new SingUpPageBtn());
+        TopPanel loginHeader = new TopPanel("로그인");
+        loginHeader.setBounds(10, 10, 580, 100);
+        add(loginHeader);
         //LoginBtn loginBtn = new LoginBtn("로그인");
         //loginPanel.add(loginBtn);
     }

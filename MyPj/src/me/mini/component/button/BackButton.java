@@ -1,7 +1,7 @@
 package me.mini.component.button;
 
-import me.mini.view.main.MainCard;
-import me.mini.view.main.MainLayOut;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.MainLayOut;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,10 @@
-package me.mini.view.main;
+package me.mini.viewManager;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * packageName    : me.mini.view
- * fileName       : MainPanel
+ * fileName       : MyLayOut
  * author         : Yeong-Huns
  * date           : 2024-05-02
  * description    :
@@ -13,16 +13,13 @@ import javax.swing.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class MainCard extends JPanel {
-    private static MainCard instance;
-    private MainCard() {
-        super(MainLayOut.getInstance());
-    }
-    public static MainCard getInstance() {
+public class MainLayOut extends CardLayout {
+    private static MainLayOut instance ;
+    private MainLayOut(){}
+    public static MainLayOut getInstance() {
         if (instance == null) {
-            instance = new MainCard();
+            instance = new MainLayOut();
         }
         return instance;
     }
-
 }

@@ -3,7 +3,9 @@ package me.mini.view.attendanceDetail;
 import me.mini.component.panel.BottomPanel;
 import me.mini.component.panel.ScrollPanel;
 import me.mini.component.panel.ScrollableRecordsPanel;
-import me.mini.view.main.MainCard;
+import me.mini.component.panel.TopPanelWithBackBtn;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +21,14 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class CommutePanel extends JPanel{
-    public CommutePanel(String string) {
+public class AttendanceDetailPanel extends JPanel{
+    public AttendanceDetailPanel(String string) {
         super(new BorderLayout());
-        MainCard.getInstance().add(this, "Records");
+        MainCard.getInstance().add(this, View.ATTENDANCE.toString());
         initialize(string);
     }
     private void initialize(String string){
-        add(new Header(string), BorderLayout.NORTH);
+        add(new TopPanelWithBackBtn(string), BorderLayout.NORTH);
         add(new ScrollPanel(new ScrollableRecordsPanel()), BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }

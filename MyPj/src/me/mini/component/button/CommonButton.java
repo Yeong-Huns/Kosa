@@ -1,7 +1,7 @@
 package me.mini.component.button;
 
-import me.mini.view.main.MainCard;
-import me.mini.view.main.MainLayOut;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.MainLayOut;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +23,6 @@ public class CommonButton extends JButton {
         setFont(new Font("D2Coding", Font.BOLD, 14));
         setPreferredSize(new Dimension(120, 40));
         addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(),disPlayName));
-        // 이 버튼을 누르면 어떤 페이지로 이동할지 저장합니다.
+        // disPlayName -> card 페이지 이름
     }
 }

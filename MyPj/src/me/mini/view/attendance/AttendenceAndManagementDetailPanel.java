@@ -1,7 +1,5 @@
 package me.mini.view.attendance;
 
-import me.mini.view.main.MainCard;
-
 import javax.swing.JPanel;
 
 public class AttendenceAndManagementDetailPanel extends JPanel {

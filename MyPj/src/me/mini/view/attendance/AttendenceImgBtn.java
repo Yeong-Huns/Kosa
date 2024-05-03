@@ -1,11 +1,9 @@
 package me.mini.view.attendance;
 
-import me.mini.view.main.MainCard;
-import me.mini.view.main.MainLayOut;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.MainLayOut;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AttendenceImgBtn extends JButton {
     public AttendenceImgBtn() {
@@ -13,7 +11,7 @@ public class AttendenceImgBtn extends JButton {
     }
 
     private void initialize() {
-        String attendenceImg = "src/me/mini/image/attendance.jpg";
+        String attendenceImg = "img/attendance.jpg";
         ImageIcon imageIcon = new ImageIcon(attendenceImg);
         setIcon(new ImageIcon(attendenceImg));
         setBounds(0, 0, 586, 125);

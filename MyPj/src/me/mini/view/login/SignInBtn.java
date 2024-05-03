@@ -1,7 +1,8 @@
 package me.mini.view.login;
 
-import me.mini.view.main.MainLayOut;
-import me.mini.view.main.MainCard;
+import me.mini.viewManager.MainLayOut;
+import me.mini.viewManager.MainCard;
+import me.mini.viewManager.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class SignInBtn extends JButton {
     private void initialize() {
         setFont(new Font("D2Coding", Font.PLAIN, 18));
         setBounds(161, 495, 250, 55);
-        addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), "CommuteTime"));
+        addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE.toString()));
     }
 
 }
