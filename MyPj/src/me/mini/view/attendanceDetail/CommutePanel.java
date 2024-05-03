@@ -1,6 +1,9 @@
-package me.mini.view.commuteLIst;
+package me.mini.view.attendanceDetail;
 
-import me.mini.view.common.*;
+import me.mini.component.panel.BottomPanel;
+import me.mini.component.panel.ScrollPanel;
+import me.mini.component.panel.ScrollableRecordsPanel;
+import me.mini.view.main.MainCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,10 +22,12 @@ import java.awt.*;
 public class CommutePanel extends JPanel{
     public CommutePanel(String string) {
         super(new BorderLayout());
+        MainCard.getInstance().add(this, "Records");
         initialize(string);
     }
     private void initialize(String string){
-        add(new TopPanel(new TitleLabel(string)), BorderLayout.NORTH);
+        add(new Header(string), BorderLayout.NORTH);
         add(new ScrollPanel(new ScrollableRecordsPanel()), BorderLayout.CENTER);
+        add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

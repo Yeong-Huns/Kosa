@@ -1,11 +1,11 @@
-package me.mini.view.common;
+package me.mini.component.panel;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * packageName    : me.mini.view.common
- * fileName       : TopPanel
+ * fileName       : ScrollPane
  * author         : Yeong-Huns
  * date           : 2024-05-02
  * description    :
@@ -14,14 +14,10 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class TopPanel extends JPanel {
-    public TopPanel() {
-        setBackground(Color.LIGHT_GRAY);
-        setPreferredSize(new Dimension(580, 100));
-    }
-    public TopPanel(TitleLabel titleLabel) {
-        setBackground(Color.LIGHT_GRAY);
-        setPreferredSize(new Dimension(580, 100));
-        add(titleLabel);
+public class ScrollPanel extends JScrollPane {
+    public ScrollPanel(Component view) {
+        super(view);
+        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     }
 }

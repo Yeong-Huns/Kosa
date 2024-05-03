@@ -1,4 +1,4 @@
-package me.mini.view.login;
+package me.mini.component.placeholder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,17 +6,17 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 /**
- * packageName    : me.mini
- * fileName       : PlaceHolderPWD
+ * packageName    : me.mini.component.placeholder.password
+ * fileName       : PwdPlaceHolder
  * author         : Yeong-Huns
- * date           : 2024-05-02
+ * date           : 2024-05-03
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2024-05-02        Yeong-Huns       최초 생성
+ * 2024-05-03        Yeong-Huns       최초 생성
  */
-public class PwdPlaceHolder extends JPasswordField{
+public class PwdPlaceHolder extends JPasswordField {
     public PwdPlaceHolder(String text) {
         super(text);
         initialize();
@@ -26,7 +26,6 @@ public class PwdPlaceHolder extends JPasswordField{
         setForeground(Color.GRAY);
         setFont(new Font("D2Coding", Font.PLAIN, 18));
         setEchoChar((char) 0);  // 초기에 텍스트 보이게
-        setBounds(12, 395, 562, 55);
         addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 String passText = String.valueOf(getPassword());

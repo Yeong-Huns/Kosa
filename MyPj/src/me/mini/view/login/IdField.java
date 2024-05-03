@@ -1,11 +1,10 @@
-package me.mini.view.common;
+package me.mini.view.login;
 
-import javax.swing.*;
-import java.awt.*;
+import me.mini.component.placeholder.PlaceHolder;
 
 /**
- * packageName    : me.mini.view.common
- * fileName       : TitleLabel
+ * packageName    : me.mini
+ * fileName       : PlaceHolder
  * author         : Yeong-Huns
  * date           : 2024-05-02
  * description    :
@@ -14,9 +13,9 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class TitleLabel extends JLabel{
-    public TitleLabel(String text) {
+public class IdField extends PlaceHolder {
+    public IdField(String text) {
         super(text);
-        super.setFont(new Font("D2coding", Font.BOLD, 24));
+        setBounds(12, 288, 562, 55);
     }
 }

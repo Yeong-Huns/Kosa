@@ -1,6 +1,7 @@
-package me.mini.view;
+package me.mini.view.main;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * packageName    : me.mini.view
@@ -13,32 +14,25 @@ import javax.swing.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class MainFrame {
-    private JFrame frame;
+public class MainFrame extends JFrame {
     private static MainFrame instance;
-    private static MainFrame getInstance() {
+    public static MainFrame getInstance() {
         if (instance == null) {
             instance = new MainFrame();
             return instance;
         }
-        return MainFrame.getInstance();
+        return instance;
     }
     private MainFrame() {
+        super("타임 인 아웃 V2");
         initialize();
     }
     private void initialize() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 600, 900);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
-    }
-    public void setVisible(){
-        frame.setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 900);
+        setLayout(new BorderLayout());
     }
 
-    public void inVisible(){
-        frame.setVisible(false);
-    }
 
 
 }

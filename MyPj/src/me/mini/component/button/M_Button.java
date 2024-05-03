@@ -1,4 +1,4 @@
-package me.mini.view.common;
+package me.mini.component.button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class CommonButton extends JButton {
-    public CommonButton(String text) {
+public class M_Button extends JButton {
+    public M_Button(String text) {
         super(text);
         setPreferredSize(new Dimension(120, 40));
     }

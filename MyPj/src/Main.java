@@ -1,4 +1,7 @@
-import me.mini.ViewMain;
+import me.mini.view.ViewConstructor;
+import me.mini.view.main.MainFrame;
+
+import java.awt.*;
 
 /**
  * packageName    :
@@ -13,6 +16,16 @@ import me.mini.ViewMain;
  */
 public class Main {
     public static void main(String[] args) {
-
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ViewConstructor system = new ViewConstructor();
+                    MainFrame.getInstance().setVisible(true);
+                    System.out.println("Working Directory = " + System.getProperty("user.dir"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

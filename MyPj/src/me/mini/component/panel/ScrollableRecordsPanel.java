@@ -1,4 +1,4 @@
-package me.mini.view.common;
+package me.mini.component.panel;
 
 import javax.swing.*;
 import java.awt.*;
