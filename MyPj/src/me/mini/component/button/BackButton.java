@@ -20,6 +20,7 @@ import java.awt.*;
 public class BackButton extends JButton {
     public BackButton() {
         super("<<");
+        setFont(new Font("D2Coding", Font.BOLD, 14));
         setPreferredSize(new Dimension(50, 50));
         setBorderPainted(false);
         setOpaque(false);

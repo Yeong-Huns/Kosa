@@ -1,6 +1,6 @@
 package me.mini.view.signUp;
 
-import me.mini.component.button.L_Button;
+import me.mini.component.button.CommonButton;
 import me.mini.view.main.MainCard;
 import me.mini.view.main.MainLayOut;
 
@@ -17,11 +17,10 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-03        Yeong-Huns       최초 생성
  */
-public class SignUpBtn extends L_Button {
+public class SignUpBtn extends CommonButton {
     public SignUpBtn() {
-        super("회원가입");
+        super("회원가입", "attendance");
         setBounds(192, 555 ,180, 60);
         setFont(new Font("D2Coding", Font.PLAIN, 18));
-        addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), "attendance"));
     }
 }

@@ -8,11 +8,11 @@ public class CommuteTimePanel extends JPanel {
     public CommuteTimePanel() {
         setBounds(0, 80, 586, 683);
         setLayout(null);
-        initalize();
+        initialize();
         MainCard.getInstance().add(this, "CommuteTime");
     }
 
-    private void initalize() {
+    private void initialize() {
         add(new DNamePanel());
         add(new WorkStartPanel());
         add(new WorkEndPanel());

@@ -1,6 +1,6 @@
 package me.mini.view.login;
 
-import me.mini.component.button.S_Button;
+import me.mini.component.button.CommonButton;
 import me.mini.view.main.MainCard;
 import me.mini.view.main.MainLayOut;
 
@@ -17,9 +17,9 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-03        Yeong-Huns       최초 생성
  */
-public class SingUpPageBtn extends S_Button{
+public class SingUpPageBtn extends CommonButton {
     public SingUpPageBtn() {
-        super("회원가입");
+        super("회원가입", "SignUp");
         initialize();
     }
     private void initialize() {
@@ -28,6 +28,5 @@ public class SingUpPageBtn extends S_Button{
         setBorderPainted(false);
         setOpaque(false);
         setContentAreaFilled(false);
-        addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), "SignUp"));
     }
 }
