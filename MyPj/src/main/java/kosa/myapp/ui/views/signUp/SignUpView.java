@@ -1,6 +1,6 @@
 package main.java.kosa.myapp.ui.views.signUp;
 
-import main.java.kosa.myapp.ui.components.button.Btn;
+import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.components.panels.TopPanelWithBackBtn;
 import main.java.kosa.myapp.ui.components.placeholder.PlaceHolder;
@@ -33,7 +33,7 @@ public class SignUpView extends JPanel {
         add(new PlaceHolder("아이디를 입력하세요").setYPosition(288));
         add(new PlaceHolder("휴대폰 번호를 입력하세요").setYPosition(458));
 
-        add(new CommonButton("회원가입", Btn.X_LARGE).setPosition(161, 555));
+        add(new CommonButton("회원가입", ButtonType.X_LARGE).changeViewTo(View.COMMUTE).setPosition(161, 555));
         add(new TopPanelWithBackBtn("회원가입").setAbsoluteLayout());
     }
 }

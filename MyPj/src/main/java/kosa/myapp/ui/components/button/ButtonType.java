@@ -16,16 +16,18 @@ import java.awt.*;
  * 2024-05-05        Yeong-Huns       최초 생성
  */
 @Getter
-public enum Btn {
+public enum ButtonType {
     X_LARGE(new Dimension(250, 60), 18),
     LARGE(new Dimension(180, 60), 16),
     DEFAULT(new Dimension(120, 40), 14),
-    SMALL(new Dimension(85, 35), 12);
+    SMALL(new Dimension(85, 35), 12),
+    IMAGE_BUTTON(new Dimension(586, 125), 0),
+    ;
 
     private final Dimension size;
     private final int fontSize;
 
-    Btn(Dimension size, int fontSize) {
+    ButtonType(Dimension size, int fontSize) {
         this.size = size;
         this.fontSize = fontSize;
     }

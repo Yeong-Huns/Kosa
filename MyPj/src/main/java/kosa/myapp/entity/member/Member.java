@@ -1,4 +1,4 @@
-package main.java.kosa.myapp.model;
+package main.java.kosa.myapp.entity.member;
 
 import lombok.Getter;
 

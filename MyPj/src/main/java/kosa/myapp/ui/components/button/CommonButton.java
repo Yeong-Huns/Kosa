@@ -1,5 +1,10 @@
 package main.java.kosa.myapp.ui.components.button;
 
+import main.java.kosa.myapp.config.Image;
+import main.java.kosa.myapp.ui.frames.MainCard;
+import main.java.kosa.myapp.ui.frames.MainLayOut;
+import main.java.kosa.myapp.ui.views.View;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,15 +23,19 @@ public class CommonButton extends JButton {
 
     public CommonButton(String text) {
         super(text);
-        initialize(Btn.DEFAULT);
+        initialize(ButtonType.DEFAULT);
     }
 
-    public CommonButton(String text, Btn buttonType) {
+    public CommonButton(ButtonType buttonType) {
+        setPreferredSize(buttonType.getSize());
+    }
+
+    public CommonButton(String text, ButtonType buttonType) {
         super(text);
         initialize(buttonType);
     }
 
-    private void initialize(Btn buttonType){
+    private void initialize(ButtonType buttonType){
         setFont(new Font("D2Coding", Font.BOLD, buttonType.getFontSize()));
         setPreferredSize(buttonType.getSize());
     }
@@ -43,6 +52,14 @@ public class CommonButton extends JButton {
         setContentAreaFilled(isVisible);
     }
 
+    public CommonButton changeViewTo(View cardName){
+        addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), cardName));
+        return this;
+    }
 
+    public CommonButton setImage(Image image){
+        setIcon(new ImageIcon(image.getPath()));
+        return this;
+    }
 }
 

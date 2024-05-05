@@ -1,5 +1,6 @@
 package main.java.kosa.myapp.ui.components.panels;
 
+import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.views.View;
 
@@ -21,12 +22,12 @@ public class BottomPanel extends JPanel {
     public BottomPanel() {
         super(new FlowLayout(FlowLayout.CENTER));
         setPreferredSize(new Dimension(580, 100));
-        CommonButton attendanceManagement = new CommonButton("근태관리", View.ATTENDANCE);
-        CommonButton commuteTime = new CommonButton("출퇴근체크", View.COMMUTE);
+        CommonButton attendanceManagement = new CommonButton("근태관리", ButtonType.DEFAULT).changeViewTo(View.ATTENDANCE);
+        CommonButton commuteTime = new CommonButton("출퇴근체크", ButtonType.DEFAULT).changeViewTo(View.COMMUTE);
         add(attendanceManagement);
         add(commuteTime);
         for (int i = 1; i <= 2; i++) {
-            CommonButton button = new CommonButton("구현예정 " + i, View.LOGIN);
+            CommonButton button = new CommonButton("구현예정 " + i, ButtonType.DEFAULT).changeViewTo(View.LOGIN);
             add(button);
         }
     }
