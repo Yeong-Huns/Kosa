@@ -1,9 +1,6 @@
 package main.java.kosa.myapp.service.member;
 
-import lombok.RequiredArgsConstructor;
-import main.java.kosa.myapp.repository.member.MemberDAO;
-
-import java.lang.reflect.Member;
+import main.java.kosa.myapp.repository.member.MemberRepository;
 
 /**
  * packageName    : main.java.kosa.myapp.service.member
@@ -18,14 +15,14 @@ import java.lang.reflect.Member;
  */
 
 public class MemberService {
-    private final MemberDAO memberDAO;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemberDAO memberDAO) {
-        this.memberDAO = memberDAO;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = MemberRepository.getInstance();
     }
 
-    public void insertMember(Member member){
-        memberDAO.insertMember(member);
+    public void insertMember(main.java.kosa.myapp.entity.member.Member member){
+        this.memberRepository.insertMember(member);
     };
 
 

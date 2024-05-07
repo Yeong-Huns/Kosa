@@ -1,4 +1,4 @@
-package main.java.kosa.myapp.ui.views.AnnualLeaves;
+package main.java.kosa.myapp.ui.views.annualLeaves;
 
 import main.java.kosa.myapp.ui.views.View;
 import main.java.kosa.myapp.ui.components.panels.*;

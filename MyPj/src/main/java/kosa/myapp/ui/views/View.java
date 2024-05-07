@@ -18,6 +18,7 @@ public enum View {
     ATTENDANCE("Attendance"),
     MY_ATTENDANCE("MyAttendance"),
     ANNUAL_LEAVES("AnnualLeaves"),
+    APPROVAL("Approval")
     ;
     private final String Value;
 

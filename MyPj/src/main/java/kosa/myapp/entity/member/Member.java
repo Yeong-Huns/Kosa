@@ -1,6 +1,6 @@
 package main.java.kosa.myapp.entity.member;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * -----------------------------------------------------------
  * 2024-05-04        Yeong-Huns       최초 생성
  */
-@Getter
+@Data
 public class Member {
     private int member_id;
     private String id;
