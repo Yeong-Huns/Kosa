@@ -35,6 +35,8 @@ public class MainFrame extends JFrame {
         setSize(600, 900);
         setLayout(new BorderLayout());
         initializeUI();
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 
@@ -48,6 +50,5 @@ public class MainFrame extends JFrame {
         ApprovalView approvalView = new ApprovalView();
         add(cards);
         cardLayout.show(cards, View.LOGIN);//처음에 로그인 패널을 보여줍니다.
-
     }
 }

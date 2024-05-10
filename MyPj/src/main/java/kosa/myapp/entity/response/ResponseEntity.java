@@ -2,6 +2,10 @@ package main.java.kosa.myapp.entity.response;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 /**
  * packageName    : main.java.kosa.myapp.dto
  * fileName       : Response
@@ -29,6 +33,40 @@ public class ResponseEntity<T> {
         this.data = null;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+    }
+    private boolean isSuccess() {
+        return errorCode == 0;
+    }
+
+    public T executeIfSuccessOrElseThrow(Runnable onSuccess, Runnable onFailure) {
+        if (isSuccess()) {
+            onSuccess.run();
+            return data;
+        } else {
+            onFailure.run();
+            throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+        }
+    }
+
+    public T orElseThrow(Runnable action){
+        if(!isSuccess()){
+            action.run();
+            throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+        }
+        return data;
+    }
+
+    public T getOrThrow(){
+        if(isSuccess()){return data;}
+        throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+    }
+
+    public T ifPresent(Runnable action){
+        if(isSuccess()){
+            action.run();
+            return data;
+        }
+        throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
     }
 
     public ResponseEntity<T> response(int errorCode, String errorMessage) {

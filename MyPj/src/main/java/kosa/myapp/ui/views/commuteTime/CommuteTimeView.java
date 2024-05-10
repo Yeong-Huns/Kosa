@@ -26,7 +26,7 @@ public class CommuteTimeView extends JPanel {
         MainCard.getInstance().add(this, View.COMMUTE);
     }
     private void initialize() {
-        add(new TopPanel(), BorderLayout.NORTH);
+        add(new TopPanel("출퇴근체크"), BorderLayout.NORTH);
         add(new CommuteTimeInnerPanel(), BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }

@@ -6,6 +6,7 @@ import main.java.kosa.myapp.ui.frames.MainCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.AnnualLeaves
@@ -27,6 +28,8 @@ public class AnnualLeavesView extends JPanel {
     private void initialize() {
         add(new TopPanelWithBackBtn("휴가", View.ATTENDANCE), BorderLayout.NORTH);
         add(new ScrollPanel(new ScrollableRecordsPanel()), BorderLayout.CENTER);
+
+
         add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

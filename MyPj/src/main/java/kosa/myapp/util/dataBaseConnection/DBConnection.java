@@ -22,44 +22,57 @@ import java.util.Properties;
  */
 public class DBConnection {
     private static Connection conn;
+    private static Properties properties = new Properties();
 
-    private DBConnection() {
-    }
+    private DBConnection() { }
 
     static {
-        // 환경설정 파일을 읽어오기 위한 객체 생성
-        Properties properties  = new Properties();
-        Reader reader;
-        try {
-            reader = new FileReader("lib/oracle.properties");  // 읽어올 파일 지정
-            properties.load(reader);                           // 설정 파일 로딩하기
-        } catch (FileNotFoundException e1) {
-            System.out.println("예외: 지정한 파일을 찾을수없습니다 :" + e1.getMessage());
-            e1.printStackTrace();
+        loadProperties();
+        connectDB();
+    }
+
+    private static void loadProperties() {
+        try (Reader reader = new FileReader("lib/oracle.properties")) {
+            properties.load(reader);
         } catch (IOException e) {
+            System.out.println("Error loading properties: " + e.getMessage());
             e.printStackTrace();
         }
+    }
 
+    private static void connectDB() {
+        if (conn != null) {
+            try {
+                if (!conn.isClosed()) {
+                    return;  // 연결이 이미 열려 있으면 메서드 종료
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        // 연결 시도
         String driverName = properties.getProperty("driver");
         String url = properties.getProperty("url");
         String user = properties.getProperty("user");
         String pwd = properties.getProperty("password");
-
         try {
             Class.forName(driverName);
             conn = DriverManager.getConnection(url, user, pwd);
-            System.out.println("connection success");
-            System.out.println("DB커넥션 성공!");
-        } catch (ClassNotFoundException e) {
-            System.out.println("예외: 드라이버로드 실패 :" + e.getMessage());
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("예외: connection fail :" + e.getMessage());
+            System.out.println("DB 접속완료!");  // 연결 성공 시 메시지 출력
+        } catch (Exception e) {
+            System.out.println("DB connection failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
     public static Connection getConnection() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                connectDB();  // 연결을 시도하고 성공 메시지는 connectDB 내에서 출력
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to check connection status: " + e.getMessage());
+            e.printStackTrace();
+        }
         return conn;
     }
 }

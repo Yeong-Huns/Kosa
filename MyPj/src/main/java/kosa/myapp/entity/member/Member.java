@@ -17,7 +17,7 @@ import java.time.LocalDate;
  */
 @Data
 public class Member {
-    private int member_id;
+    private int memberId;
     private String id;
     private String Password;
     private String Name;

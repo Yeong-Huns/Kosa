@@ -4,9 +4,7 @@ import main.java.kosa.myapp.entity.response.ResponseEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * packageName    : main.java.kosa.myapp.util.dataBaseConnection
@@ -20,102 +18,92 @@ import java.util.Optional;
  * 2024-05-05        Yeong-Huns       최초 생성
  */
 public class CallableStatementTemplate {
+    private static CallableStatementTemplate callableStatement;
+    private final Connection conn;
 
-    public ResponseEntity<Void> execute(String sql, PreparedStatementSetter pss, int resultCodeIndex, int resultMessageIndex) {
-        try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+    public static CallableStatementTemplate getCallableStatement() {
+        if (callableStatement == null) {
+            callableStatement = new CallableStatementTemplate();
+        }
+         return callableStatement;
+    }
+
+    private CallableStatementTemplate() {
+        this.conn = DBConnection.getConnection();
+    }
+
+
+
+    public ResponseEntity<Void> executeUpdate(String sql, PreparedStatementSetter pss) {
+        try (CallableStatement cs = conn.prepareCall(sql)) {
+            int lastIndex = getLastIndex(sql);
             pss.setValues(cs);
             cs.executeUpdate();
-            int resultCode = cs.getInt(resultCodeIndex);
-            String resultMessage = cs.getString(resultMessageIndex);
+            int resultCode = cs.getInt(lastIndex-1);
+            String resultMessage = cs.getString(lastIndex);
             return new ResponseEntity<Void>(resultCode, resultMessage);
         } catch (SQLException ex) {
             return new ResponseEntity<Void>(ex.getErrorCode(), ex.getMessage());
+        } catch (RuntimeException ex) {
+            System.out.println("QueryForManyError  : { 오류코드 : " + 404 + " , 오류 메세지 : " + ex.getMessage() + "}");
+            return new ResponseEntity<>(404,"올바르지 못한 입력 값");
         }
     }
 
-    public <T>ResponseEntity<List<T>> findList(String sql, PreparedStatementSetter pss, RowMapper<T> rowMapper, int resultCodeIndex, int resultMessageIndex){
-        try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
+    public <T>ResponseEntity<List<T>> queryForMany(String sql, PreparedStatementSetter pss, RowMapper<T> rowMapper){
+        try (CallableStatement cs = conn.prepareCall(sql)) {
+            int lastIndex = getLastIndex(sql);
             pss.setValues(cs);
-            ResultSet rs = cs.executeQuery();
-            int rowNum = 0;
-            List<T> results = new ArrayList<T>();
+            cs.executeQuery();
+            ResultSet rs = (ResultSet) cs.getObject(lastIndex - 2);
+            List<T> results = new ArrayList<>();
+            if(rs == null) return new ResponseEntity<>(results, 0, "반환값 0");
+            int rowNum = 1;
             while (rs.next()) {
-                results.add(rowMapper.mapRow(rs, rowNum++));
+                results.add(rowMapper.mapRow(rs, rowNum));
+                rowNum++;
             }
-            int resultCode = cs.getInt(resultCodeIndex);
-            String resultMessage = cs.getString(resultMessageIndex);
-            return new ResponseEntity<>(results ,resultCode,resultMessage);
+            int resultCode = cs.getInt(lastIndex-1);
+            String resultMessage = cs.getString(lastIndex);
+            return new ResponseEntity<>(results, resultCode, resultMessage);
         } catch (SQLException ex) {
+            System.out.println("QueryForManyError  : { 오류코드 : " + ex.getErrorCode() + " , 오류 메세지 : " + ex.getMessage() + "}");
             return new ResponseEntity<>(ex.getErrorCode(),ex.getMessage());
+        } catch (RuntimeException ex){
+            return new ResponseEntity<>(404,ex.getMessage());
         }
     }
 
-    public <T>ResponseEntity<T> findOne(String sql, PreparedStatementSetter pss, RowMapper<T> rowMapper, int resultCodeIndex, int resultMessageIndex){
-        try(Connection conn = DBConnection.getConnection();
-            CallableStatement cs = conn.prepareCall(sql)){
+    public <T> ResponseEntity<T> queryForOne(String sql, PreparedStatementSetter pss, RowMapper<T> rowMapper) {
+        try (CallableStatement cs = conn.prepareCall(sql)) {
+            int lastIndex = getLastIndex(sql);
             pss.setValues(cs);
-            ResultSet rs = cs.executeQuery();
+            cs.executeQuery();
+            ResultSet rs = (ResultSet) cs.getObject(lastIndex - 2);
             T result = null;
-            if(rs.next()){
-                result = rowMapper.mapRow(rs, 0);
+            boolean hasResult = rs.next();
+            if (hasResult) {
+                result = rowMapper.mapRow(rs, 1);
             }
-            int resultCode = cs.getInt(resultCodeIndex);
-            String resultMessage = cs.getString(resultMessageIndex);
-            if(rs.next()){
-                return new ResponseEntity<>(null, 4, "Query did not return a unique result");
+            int resultCode = cs.getInt(lastIndex - 1);
+            String resultMessage = cs.getString(lastIndex);
+            // 결과가 두 번째 행을 가지고 있는지 확인합니다.
+            /*
+            if (hasResult && rs.next()) {
+                return new ResponseEntity<>(null, 4, "쿼리 결과가 유니크 값을 반환하지 않습니다");
             }
-            return new ResponseEntity<>(result,resultCode,resultMessage);
-        }
-        catch (SQLException ex){
-            return new ResponseEntity<>(ex.getErrorCode(),ex.getMessage());
-        }
-
-    }
-
-
-    public <T> Optional<T> findById(String sql,
-                                            PreparedStatementSetter pss, RowMapper<T> rowMapper) {
-        try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
-            pss.setValues(cs);
-            ResultSet rs = cs.executeQuery();
-            if (rs.next()) {
-                return Optional.of(rowMapper.mapRow(rs, 0));
-            }
-            return Optional.empty();
+             */
+            return new ResponseEntity<>(result, resultCode, resultMessage);
         } catch (SQLException ex) {
-            throw new RuntimeException("Database access error:", ex);
-        }
-    }
-
-    public boolean isExists(String sql, PreparedStatementSetter pss) {
-        try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
-            pss.setValues(cs);
-            ResultSet rs = cs.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            return new ResponseEntity<>(ex.getErrorCode(), ex.getMessage());
+        } catch (Exception ex) {
+            return new ResponseEntity<>(500, "서버 내부 오류: " + ex.getMessage());
         }
     }
 
 
-    public <T> List<T> getQueryResult(String sql, PreparedStatementSetter pss, RowMapper<T> rowMapper) {
-        List<T> results = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection();
-             CallableStatement cs = conn.prepareCall(sql)) {
-            pss.setValues(cs);
-            ResultSet rs = cs.executeQuery();
-            int rowNum = 0;
-            while (rs.next()) {
-                results.add(rowMapper.mapRow(rs, rowNum++));
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        return results;
+    private int getLastIndex(String sql){
+        return (int)sql.chars().filter(e->e=='?').count();
     }
 
     @FunctionalInterface

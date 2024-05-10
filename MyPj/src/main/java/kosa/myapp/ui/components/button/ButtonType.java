@@ -22,6 +22,7 @@ public enum ButtonType {
     DEFAULT(new Dimension(120, 40), 14),
     SMALL(new Dimension(85, 35), 12),
     IMAGE_BUTTON(new Dimension(586, 125), 0),
+    ARROW(new Dimension(50, 50), 14),
     ;
 
     private final Dimension size;

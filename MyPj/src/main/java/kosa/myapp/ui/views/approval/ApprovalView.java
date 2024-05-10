@@ -26,7 +26,7 @@ public class ApprovalView extends JPanel {
     }
     private void initialize() {
         add(new TopPanel("결재함"), BorderLayout.NORTH);
-        add(new ScrollPanel(new ApprovalDetail()), BorderLayout.CENTER);
+        add(new ApprovalDetail(1), BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

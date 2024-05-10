@@ -19,4 +19,6 @@ public class BoldLabel extends JLabel{
         super(text);
         super.setFont(new Font("D2coding", Font.BOLD, size));
     }
+
+
 }

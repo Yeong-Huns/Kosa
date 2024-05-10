@@ -1,5 +1,6 @@
 package main.java.kosa.myapp.ui.views.signUp;
 
+import main.java.kosa.myapp.Main;
 import main.java.kosa.myapp.controller.member.MemberController;
 import main.java.kosa.myapp.entity.member.Member;
 import main.java.kosa.myapp.entity.response.ResponseEntity;
@@ -13,6 +14,7 @@ import main.java.kosa.myapp.ui.frames.MainLayOut;
 import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
+import java.util.OptionalInt;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.signUp
@@ -55,17 +57,13 @@ public class SignUpView extends JPanel {
             System.out.println(nameField.getText());
             System.out.println(numberField.getText());
 
-            showDialog(MemberController.getInstance().insertMember(newMember));
+            showDialog(newMember);
         });
         add(submit);
         add(new TopPanelWithBackBtn("회원가입").setAbsoluteLayout());
     }
-    private void showDialog(ResponseEntity<Void> response){
-        if(response.getErrorCode() == 0){
-            JOptionPane.showMessageDialog(null, response.getErrorMessage(), "정상 처리 되었습니다.", JOptionPane.INFORMATION_MESSAGE);
-            MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
-        }else{
-            JOptionPane.showMessageDialog(null, "회원 등록에 실패했습니다: " + response.getErrorMessage(), "회원 등록 실패", JOptionPane.ERROR_MESSAGE);
-        }
+    private void showDialog(Member member){
+        MemberController.getInstance().insertMember(member);
+        MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
     }
 }

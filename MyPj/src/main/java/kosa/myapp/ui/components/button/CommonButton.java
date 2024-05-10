@@ -7,6 +7,7 @@ import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * packageName    : me.mini.view.common
@@ -56,6 +57,8 @@ public class CommonButton extends JButton {
         addActionListener(e -> MainLayOut.getInstance().show(MainCard.getInstance(), cardName));
         return this;
     }
+
+
 
     public CommonButton setImage(Image image){
         setIcon(new ImageIcon(image.getPath()));

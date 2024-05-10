@@ -1,11 +1,25 @@
 package main.java.kosa.myapp.ui.views.approval;
 
 import com.toedter.calendar.JCalendar;
+import main.java.kosa.myapp.Main;
+import main.java.kosa.myapp.controller.approval.ApprovalController;
+import main.java.kosa.myapp.dto.approval.response.GetAnnualLeavesApproveResponse;
+import main.java.kosa.myapp.entity.approval.Approval;
+import main.java.kosa.myapp.entity.response.ResponseEntity;
+import main.java.kosa.myapp.ui.components.button.ButtonType;
+import main.java.kosa.myapp.ui.components.button.CommonButton;
+import main.java.kosa.myapp.ui.components.panels.CalendarPanel;
+import main.java.kosa.myapp.ui.components.panels.CalendarType;
+import main.java.kosa.myapp.ui.components.panels.ScrollPanel;
+import main.java.kosa.myapp.ui.components.panels.ScrollableRecordsPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.approval
@@ -19,72 +33,71 @@ import java.time.format.DateTimeFormatter;
  * 2024-05-07        Yeong-Huns       최초 생성
  */
 public class ApprovalDetail extends JPanel {
-    private JComboBox<String> dateCombo;
-    private JButton prevButton, nextButton, applyButton;
-    private LocalDate currentDate;
+    private CalendarPanel calendarPanel;
+    private CommonButton applyButton;
+    private ScrollableRecordsPanel scrollableRecordsPanel;
+    private ScrollPanel scrollPanel;
+    private final int approvalType;
 
-    public ApprovalDetail() {
+    public ApprovalDetail(int approvalType) {
+        this.approvalType = approvalType;
         SpringLayout layout = new SpringLayout();
         setLayout(layout);
         initialize();
         alignComponents(layout);
+        List<AnnualRecordJPanel> defaultPan = new ArrayList<>();
+        defaultPan.add(new AnnualRecordJPanel());
+        scrollableRecordsPanel.printRecord(defaultPan);
+    }
+
+    public void printRecord(int sessionKey){
+        Approval approval = new Approval();
+        approval.setMemberId(sessionKey);
+        approval.setApprovalType(1);
+        approval.setApprovalDate(calendarPanel.getCurrentDate());
+        showDialog(ApprovalController.getInstance().getAnnualLeavesApproval(approval));
+    }
+
+    private void showDialog(ResponseEntity<List<GetAnnualLeavesApproveResponse>> response){
+        if(response.getErrorCode() == 0){ // DB에서 반환할 데이터를 찾았습니다
+            List<AnnualRecordJPanel> panelList = response.getData().stream()
+                    .map(GetAnnualLeavesApproveResponse::toAnnualRecordJPanel)
+                    .toList();
+            // DB 조회가 성공(errorCode = 0) 하면 GetAnnualLeavesApproveResponse를 JPanel로 바꿉니다.
+            scrollableRecordsPanel.printRecord(panelList);
+        }else{
+            List<AnnualRecordJPanel> defaultPanel = new ArrayList<>();
+            defaultPanel.add(new AnnualRecordJPanel());
+            scrollableRecordsPanel.printRecord(defaultPanel);
+        }
     }
 
     private void initialize() {
-        currentDate = LocalDate.now();
-        dateCombo = new JComboBox<>();
-        updateDateCombo(currentDate);
-
-        prevButton = new JButton("<");
-        nextButton = new JButton(">");
-        applyButton = new JButton("신청");
-
-        add(dateCombo);
-        add(prevButton);
-        add(nextButton);
+        applyButton = new CommonButton("신청", ButtonType.SMALL);
+        calendarPanel = new CalendarPanel(CalendarType.YEAR_MONTH);
+        scrollableRecordsPanel = new ScrollableRecordsPanel();
+        scrollPanel = new ScrollPanel(scrollableRecordsPanel);
+        calendarPanel.setButtonAction(e->printRecord(Main.getSessionKey()) );
         add(applyButton);
-
-        prevButton.addActionListener(e -> navigateMonths(-1));
-        nextButton.addActionListener(e -> navigateMonths(1));
-
+        add(calendarPanel);
+        add(scrollPanel);
         applyButton.addActionListener(e -> showOptions());
     }
 
     private void alignComponents(SpringLayout layout) {
-        layout.putConstraint(SpringLayout.WEST, prevButton, -90, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, prevButton, 35, SpringLayout.NORTH, this);
-
-        layout.putConstraint(SpringLayout.WEST, dateCombo, 5, SpringLayout.EAST, prevButton);
-        layout.putConstraint(SpringLayout.NORTH, dateCombo, 35, SpringLayout.NORTH, this);
-
-        layout.putConstraint(SpringLayout.WEST, nextButton, 5, SpringLayout.EAST, dateCombo);
-        layout.putConstraint(SpringLayout.NORTH, nextButton, 35, SpringLayout.NORTH, this);
-
         layout.putConstraint(SpringLayout.EAST, applyButton, -20, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, applyButton, 5, SpringLayout.NORTH, this);
+
+        layout.putConstraint(SpringLayout.WEST, calendarPanel, 0, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, calendarPanel, 5, SpringLayout.SOUTH, applyButton);
+
+        layout.putConstraint(SpringLayout.WEST, scrollPanel, 0, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, scrollPanel, 5, SpringLayout.SOUTH, calendarPanel);
     }
 
-    private void navigateMonths(int direction) {
-        int monthIndex = currentDate.getMonthValue() - 1 + direction;
-        int year = currentDate.getYear();
-        if (monthIndex < 0) {
-            year--;
-            monthIndex = 11;
-        } else if (monthIndex > 11) {
-            year++;
-            monthIndex = 0;
-        }
-        currentDate = LocalDate.of(year, monthIndex + 1, 1);
-        updateDateCombo(currentDate);
-    }
 
-    private void updateDateCombo(LocalDate date) {
-        String formattedDate = date.getYear() + "년 " + (date.getMonthValue()) + "월";
-        dateCombo.removeAllItems();
-        dateCombo.addItem(formattedDate);
-    }
 
-    public void showOptions() {
+    private void showOptions() {
         String[] options = {"퇴근 누락", "휴가"};
         String choice = (String) JOptionPane.showInputDialog(this, "구분 선택", "결재 신청",
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
