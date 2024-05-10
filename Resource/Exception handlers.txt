@@ -1,0 +1,374 @@
+
+# Exception 개요
+
+  ** https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/plsql-error-handling.html#GUID-0502DC1A-F0A5-4180-A912-6A5CDC855F56
+
+  Error -> Logic   Error
+        -> Syntax  Error
+        -> Runtime Error -> Oracle-defined Exception - Predefined excetion      -> [1] when name then
+           (Exception)                               - Non-predefined excetion  -> [2] put name to the exception then handling
+                                                                                -> [3] when others then
+                         -> User-defined Exception                              -> [4] declare, raise, handling  
+                                                                                -> [5] raise_application_error procedure
+
+  * Predefined excetion
+
+    C:\Users\COM> cd C:\app\KOSA\product\21c\dbhomeXE\rdbms\admin 
+    C:\Users\COM> dir cat* /W
+    C:\Users\COM> dir utl* /W
+    C:\Users\COM> dir dbms* /W
+    C:\Users\COM> dir prvt* /W
+
+    C:\Users\COM> notepad stdspec.sql
+
+# Every Oracle error has a number, 
+  but exceptions must be handled by name. 
+
+  - 출처 : 9i documentation
+
+# http://scidb.tistory.com/entry/PLSQL-면접문제 
+
+# Exception Propagation
+
+  https://docs.oracle.com/en/database/oracle/oracle-database/12.2/lnpls/plsql-error-handling.html#GUID-A99B76C3-44DF-40E1-AB7A-454C6805B9BB
+
+  -> An exception raised in a declaration propagates immediately to the enclosing block.
+  -> An exception raised inside a handler propagates immediately to the enclosing block.
+
+# Exception 처리하지 않을 경우 vs Exception 처리할 경우
+
+  (1) Exception 처리하지 않을 경우
+
+    drop table t1 purge;
+    create table t1 (no number);
+
+    begin
+      insert into t1 values (1000);
+      dbms_output.put_line(100/0);
+      insert into t1 values (2000);
+    end;
+    /
+
+    select * from t1;
+
+  (2) Exception 처리할 경우
+
+    begin
+      insert into t1 values (1000);
+      dbms_output.put_line(100/0);
+      insert into t1 values (2000);
+    exception
+      when zero_divide then
+        null;
+    end;
+    /
+
+    select * from t1;
+
+    rollback;
+
+  (3) Exception 발생과 상관없이 두번째 insert 문장 무조건 수행해야 한다면?
+
+    begin
+      begin
+        insert into t1 values (1000);
+        dbms_output.put_line(100/0);
+      exception
+        when zero_divide then
+          null;
+      end;
+
+      insert into t1 values (2000);
+    end;
+    /
+
+    select * from t1;
+
+    rollback;
+
+
+# Exception 처리 방법 패턴 5가지
+
+  [1] when name then
+
+    create or replace procedure p1(a number, b number)   
+    is
+    begin
+      dbms_output.put_line(a/b);
+    exception
+      when zero_divide then
+        dbms_output.put_line('0으로 나눌 수 없습니다!');
+    end;
+    /
+
+    exec p1(100, 2)  -- 성공
+    exec p1(100, 0)  -- 실패
+
+
+  [2] put name to the exception then handling
+
+    drop table t1 purge;
+    create table t1 (no number not null);
+
+    create or replace procedure  insert_t1(a number)
+    is
+    begin
+      insert into t1 values(a);
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+
+      ↓↓
+
+    create or replace procedure insert_t1(a number)
+    is
+      e_null exception;
+      pragma exception_init(e_null, -1400);
+    begin
+      insert into t1 values(a);
+    exception
+      when e_null then
+        dbms_output.put_line('Null 값을 입력할 수 없습니다!');
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+
+      ↓↓
+
+    create or replace package pack_exceptions
+    is
+      e_null exception;
+      pragma exception_init(e_null, -1400);
+    end;
+    /
+
+    create or replace procedure insert_t1(a number)
+    is
+    begin
+      insert into t1 values(a);
+    exception
+      when pack_exceptions.e_null then
+        dbms_output.put_line('Null 값을 입력할 수 없습니다!');
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+
+
+  [3] when others then
+
+    drop table t1 purge;
+    create table t1 (no number not null);
+
+    create or replace procedure insert_t1(a number)
+    is
+    begin
+      insert into t1 values(a);
+    exception
+      when others then
+        dbms_output.put_line(sqlcode);
+        dbms_output.put_line(sqlerrm);
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+
+      ↓↓
+
+    drop table t_errors purge;
+
+    create table t_errors
+    (error_date      date,
+     subprogram_name varchar2(30),
+     error_code      varchar2(60),
+     error_message   varchar2(60));
+
+    create or replace procedure insert_t1(a number)
+    is
+      v_error_code    varchar2(60);
+      v_error_message varchar2(60);
+    begin
+      insert into t1 values(a);
+    exception
+      when others then
+        v_error_code := substr(sqlcode, 1, 30);
+        v_error_message := substr(sqlerrm, 1, 30);
+
+        insert into t_errors
+        values(sysdate, 'insert_t1', v_error_code, v_error_message);
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+    select * from t_errors;
+
+      ↓↓
+
+    drop table t_errors purge;
+
+    create table t_errors
+    (error_date      date,
+     subprogram_name varchar2(30),
+     error_code      varchar2(60),
+     error_message   varchar2(60));
+
+    create or replace procedure insert_error_messages
+     (error_date      in date,
+      subprogram_name in varchar2,
+      error_code      in varchar2,
+      error_message   in varchar2)
+    is
+      v_error_code    varchar2(60);
+      v_error_message varchar2(60);
+    begin
+        v_error_code := substr(error_code, 1, 30);
+        v_error_message := substr(error_message, 1, 30);
+
+        insert into t_errors
+        values(sysdate, subprogram_name,  v_error_code, v_error_message );
+    end;
+    /
+
+    create or replace procedure insert_t1(a number)
+    is
+    begin
+      insert into t1 values(a);
+    exception
+      when others then
+        insert_error_messages(sysdate, 'insert_t1', sqlcode, sqlerrm);
+    end;
+    /
+
+    exec insert_t1(1000);
+    exec insert_t1(Null);
+
+    select * from t1;
+    select * from t_errors;
+
+
+  [4] declare, raise, handling 
+
+    create or replace procedure p1(a number)
+    is
+      v_sal     employees.salary%type;
+      e_too_low exception;
+    begin
+      select salary into v_sal
+      from employees
+      where employee_id = a;
+
+      if v_sal < 10000 then
+        raise e_too_low;
+      end if;
+
+      dbms_output.put_line(a||' 사원의 급여는 '||v_sal||'입니다.');
+
+    exception
+      when e_too_low then
+        dbms_output.put_line(a||' 사원의 급여가 최저 급여미만입니다. 확인해보세요!');
+    end;
+    /
+
+    exec p1(100)
+    exec p1(141)
+
+
+  [5] raise_application_error procedure
+
+      - 사용자 정의 에러를 마치 Oracle의 Non-predefined excetion처럼 사용할 수 있게 하는 프로시져
+      - https://docs.oracle.com/database/121/LNPLS/errors.htm#GUID-48F88C61-8CE9-4821-91CB-48A8F1BC09E1
+
+    create or replace procedure p1(a number)
+    is
+      v_sal employees.salary%type;
+    begin
+      select salary into v_sal
+      from employees
+      where employee_id = a;
+
+      if v_sal < 10000 then
+        RAISE_APPLICATION_ERROR(-20111, a||' 사원의 급여가 최저 급여미만입니다. 확인해보세요!');
+      end if;
+
+      dbms_output.put_line(a||' 사원의 급여는 '||v_sal||'입니다.');
+    end;
+    /
+
+    exec p1(100)
+    exec p1(141)
+
+      ↓↓
+
+    create or replace procedure p1(a number)
+    is
+      v_sal emp.sal%type;
+      e_too_null exception;
+      pragma exception_init(e_too_null, -20111);
+    begin
+      select sal into v_sal
+      from emp
+      where empno = a;
+
+      if v_sal < 1000 then
+        RAISE_APPLICATION_ERROR(-20111, a||' 사원의 급여가 최저 급여미만입니다. 확인해보세요!');
+      end if;
+
+      dbms_output.put_line(a||' 사원의 급여는 '||v_sal||'입니다.');
+    exception
+      when e_too_null then
+        dbms_output.put_line('예외 발생');
+    end;
+    /
+
+    exec p1(7369)
+
+
+    cf.트리거(Trigger)를 이용해서 특정 IP 접속 제한하기
+   
+       http://blog.naver.com/orapybubu/40025984303
+
+       C:\Users\COM> sqlplus system/oracle@localhost:1521/xepdb1
+
+       SQL> CREATE OR REPLACE TRIGGER LOGON_TRI
+            after LOGON ON ACE01.SCHEMA
+            BEGIN
+               if SUBSTR(sys_context('USERENV', 'IP_ADDRESS'), 1, 7) in ('127.0.0', '192.168')  then
+                      RAISE_APPLICATION_ERROR (-20002, 'IP '||ORA_CLIENT_IP_ADDRESS
+                              || ' is not allowed to connect database as ACE01!');
+                END IF;
+            END;
+            /
+
+       SQL> exit
+
+       C:\Users\COM> sqlplus ace01/me@localhost:1521/xepdb1
+
+         ORA-04088: 트리거 'SYSTEM.LOGON_TRI'의 수행시 오류
+         ORA-00604: 순환 SQL 레벨 1 에 오류가 발생했습니다
+         ORA-20002: IP 127.0.0.1 is not allowed to connect database as ACE01!
+
+       C:\Users\COM> sqlplus system/oracle@localhost:1521/xepdb1
+
+       SQL> drop trigger LOGON_TRI;
+
+       SQL> exit
+
+       C:\Users\COM> sqlplus ace01/me@localhost:1521/xepdb1
+

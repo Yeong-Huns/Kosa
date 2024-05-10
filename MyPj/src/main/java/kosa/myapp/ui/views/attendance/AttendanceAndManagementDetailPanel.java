@@ -22,7 +22,7 @@ public class AttendanceAndManagementDetailPanel extends JPanel {
 
         add(new CommonButton(ButtonType.IMAGE_BUTTON)
                 .setImage(Image.ATTENDANCE)
-                .changeViewTo(View.ATTENDANCE)
+                .changeViewTo(View.MY_ATTENDANCE)
                 .setPosition(0, 0));
     }
 

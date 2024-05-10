@@ -12,7 +12,7 @@ package main.java.kosa.myapp.entity.response;
  * 2024-05-05        Yeong-Huns       최초 생성
  */
 public enum ResponseStatus {
-    SUCCESS(true, ),
+    SUCCESS(true, 200, "성공"),
     ;
     private final boolean success;
     private final int statusCode;

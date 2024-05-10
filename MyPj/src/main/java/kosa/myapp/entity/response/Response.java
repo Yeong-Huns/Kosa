@@ -17,12 +17,13 @@ public class Response<T> {
     private final int statusCode;
     private final String errorMessage;
 
-    private Response(T data, boolean success, String errorMessage) {
+    public Response(T data, boolean success, int statusCode, String errorMessage) {
         this.data = data;
         this.success = success;
+        this.statusCode = statusCode;
         this.errorMessage = errorMessage;
     }
-
+/*
     public static <T> Response<T> success(T data) {
         return new Response<>(data, true, null);
     }
@@ -41,6 +42,6 @@ public class Response<T> {
 
     public String getErrorMessage() {
         return errorMessage;
-    }
+    }*/
 }
 

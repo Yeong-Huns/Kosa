@@ -1,0 +1,226 @@
+
+==============================================
+ Subprogram Parameter Passing Methods
+==============================================
+
+ ** call by value, call by reference 
+  
+  - https://docs.oracle.com/en/database/oracle/oracle-database/19/lnpls/plsql-subprograms.html#GUID-18E72176-145F-4E12-95F1-03F84B3D5DC6
+  
+     8.7.2 Subprogram Parameter Passing Methods
+     8.7.3 Subprogram Parameter Modes 
+
+  - https://chat.openai.com/share/ee819cd3-881f-4bdb-91ee-e65294d91907
+
+
+# rowtype 리턴
+
+  (1) 프로시져 
+
+    create or replace procedure proc1
+    (p_empno in  emp.empno%type, 
+     p_sawon out emp%rowtype)
+    is
+    begin
+      select * into p_sawon
+      from emp
+      where empno = p_empno;
+    end;
+    /
+
+    show errors
+
+    declare
+      rec emp%rowtype;
+    begin
+      proc1(7788, rec);
+      dbms_output.put_line(rec.empno||', '||rec.ename);
+    end;
+    /
+
+  (2) 함수
+
+    create or replace function func1
+    (p_empno in emp.empno%type) 
+     return emp%rowtype
+    is
+      emp_rec emp%rowtype;
+    begin
+      select * into emp_rec
+      from emp
+      where empno = p_empno;
+
+      return emp_rec;
+    end;
+    /
+
+    show errors
+ 
+    declare
+      rec emp%rowtype;
+    begin
+      rec := func1(7788);
+      dbms_output.put_line(rec.empno||', '||rec.ename);
+    end;
+    /
+
+
+# PL/SQL Table 리턴
+
+  (0) 사용자 정의 데이터 타입 생성
+
+    create or replace package pack_emp_types
+    is
+      type emp_sal_tab_type is table of emp.sal%type
+        index by pls_integer;
+    end;
+    /
+
+  (1) 프로시져 
+
+    create or replace procedure proc1
+    (p_deptno  in  emp.deptno%type, 
+     p_sal_tab out pack_emp_types.emp_sal_tab_type)
+    is
+    begin
+      select sal bulk collect into p_sal_tab
+      from emp
+      where deptno = p_deptno;
+    end;
+    /
+
+    show errors
+
+    create or replace procedure procedure_test_drive(p_deptno emp.deptno%type)
+    is
+      sal_tab pack_emp_types.emp_sal_tab_type;
+    begin
+      proc1(p_deptno, sal_tab);
+
+      for i in sal_tab.first .. sal_tab.last loop
+        dbms_output.put_line(sal_tab(i));
+      end loop;
+    end;
+    /
+
+    exec procedure_test_drive(30)
+
+  (2) 함수
+
+    create or replace function func1
+    (p_deptno in emp.deptno%type) 
+     return pack_emp_types.emp_sal_tab_type
+    is
+      p_sal_tab pack_emp_types.emp_sal_tab_type;
+    begin
+      select sal bulk collect into p_sal_tab
+      from emp
+      where deptno = p_deptno;
+
+      return p_sal_tab;
+    end;
+    /
+
+    show errors
+
+    create or replace procedure function_test_drive(p_deptno emp.deptno%type)
+    is
+      sal_tab pack_emp_types.emp_sal_tab_type;
+    begin
+      sal_tab := func1(p_deptno);
+
+      for i in sal_tab.first .. sal_tab.last loop
+        dbms_output.put_line(sal_tab(i));
+      end loop;
+    end;
+    /
+
+    exec function_test_drive(30)
+
+
+# PL/SQL Table of records 리턴
+
+  (0) 사용자 정의 데이터 타입 생성
+  
+    create or replace package pack_emp_types
+    is
+      type empno_ename_sal_job_rec_type is record
+      (empno emp.empno%type,
+       ename emp.ename%type,
+       sal   emp.sal%type,
+       job   emp.job%type);
+    
+      type empno_ename_sal_job_tab_type is table of empno_ename_sal_job_rec_type
+        index by pls_integer;
+    end;
+    /
+
+  (1) 프로시져 
+
+    create or replace procedure proc1
+    (p_deptno in emp.deptno%type,
+     p_empno_ename_sal_job_tab out pack_emp_types.empno_ename_sal_job_tab_type)
+    is
+    begin
+      select empno, ename, sal, job bulk collect into p_empno_ename_sal_job_tab
+      from emp
+      where deptno = p_deptno;
+    end;
+    /
+
+    show errors
+
+    create or replace procedure procedure_test_drive(p_deptno emp.deptno%type)
+    is
+      empno_ename_sal_job_tab pack_emp_types.empno_ename_sal_job_tab_type;
+    begin
+      proc1(p_deptno, empno_ename_sal_job_tab);
+
+      for i in empno_ename_sal_job_tab.first .. empno_ename_sal_job_tab.last loop
+        dbms_output.put_line(empno_ename_sal_job_tab(i).empno);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).ename);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).sal);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).job);
+        dbms_output.put_line('---------');
+      end loop;
+    end;
+    /
+
+    exec procedure_test_drive(30)
+
+  (2) 함수
+
+    create or replace function func1
+    (p_deptno in emp.deptno%type)
+     return pack_emp_types.empno_ename_sal_job_tab_type
+    is
+      empno_ename_sal_job_tab pack_emp_types.empno_ename_sal_job_tab_type;
+    begin
+      select empno, ename, sal, job bulk collect into empno_ename_sal_job_tab
+      from emp
+      where deptno = p_deptno;
+
+      return empno_ename_sal_job_tab;
+    end;
+    /
+
+    show errors
+
+    create or replace procedure function_test_drive(p_deptno emp.deptno%type)
+    is
+      empno_ename_sal_job_tab pack_emp_types.empno_ename_sal_job_tab_type;
+    begin
+      empno_ename_sal_job_tab := func1(p_deptno);
+
+      for i in empno_ename_sal_job_tab.first .. empno_ename_sal_job_tab.last loop
+        dbms_output.put_line(empno_ename_sal_job_tab(i).empno);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).ename);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).sal);
+        dbms_output.put_line(empno_ename_sal_job_tab(i).job);
+        dbms_output.put_line('---------');
+      end loop;
+    end;
+    /
+
+    exec function_test_drive(30)
+
