@@ -22,13 +22,9 @@ public class BottomPanel extends JPanel {
     public BottomPanel() {
         super(new FlowLayout(FlowLayout.CENTER));
         setPreferredSize(new Dimension(580, 100));
-        CommonButton attendanceManagement = new CommonButton("근태관리", ButtonType.DEFAULT).changeViewTo(View.ATTENDANCE);
-        CommonButton commuteTime = new CommonButton("출퇴근체크", ButtonType.DEFAULT).changeViewTo(View.COMMUTE);
-        add(attendanceManagement);
-        add(commuteTime);
-        for (int i = 1; i <= 2; i++) {
-            CommonButton button = new CommonButton("구현예정 " + i, ButtonType.DEFAULT).changeViewTo(View.LOGIN);
-            add(button);
-        }
+        add(new CommonButton("근태관리", ButtonType.DEFAULT).changeViewTo(View.ATTENDANCE));
+        add(new CommonButton("출퇴근체크", ButtonType.DEFAULT).changeViewTo(View.COMMUTE));
+        add(new CommonButton("결재함", ButtonType.DEFAULT).changeViewTo(View.APPROVAL));
+        add(new CommonButton("구현예정 ", ButtonType.DEFAULT).changeViewTo(View.LOGIN));
     }
 }

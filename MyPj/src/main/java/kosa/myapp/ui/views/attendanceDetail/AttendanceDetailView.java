@@ -9,6 +9,7 @@ import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * packageName    : me.mini.view.commuteLIst
@@ -29,7 +30,10 @@ public class AttendanceDetailView extends JPanel{
     }
     private void initialize(String string){
         add(new TopPanelWithBackBtn(string), BorderLayout.NORTH);
-        add(new ScrollPanel(new ScrollableRecordsPanel()), BorderLayout.CENTER);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("나의 근태", new ScrollPanel(new ScrollableRecordsPanel()));
+
+        add(tabbedPane, BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

@@ -1,11 +1,20 @@
 package main.java.kosa.myapp;
 
+import main.java.kosa.myapp.dto.member.request.DeleteMemberRequest;
+import main.java.kosa.myapp.entity.approval.Approval;
+import main.java.kosa.myapp.entity.member.Member;
+import main.java.kosa.myapp.repository.approval.ApprovalRepository;
+import main.java.kosa.myapp.repository.member.MemberRepository;
 import main.java.kosa.myapp.ui.frames.MainFrame;
 import main.java.kosa.myapp.util.dataBaseConnection.DBConnection;
 import oracle.jdbc.pool.OracleDataSource;
 
 import java.awt.*;
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * packageName    :
@@ -19,7 +28,10 @@ import java.sql.Connection;
  * 2024-05-02        Yeong-Huns       최초 생성
  */
 public class Main {
+    private static int sessionKey;
     public static void main(String[] args) {
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -32,5 +44,13 @@ public class Main {
                 }
             }
         });
+
+    }
+    public static int getSessionKey() {
+        return sessionKey;
+    }
+    public static void setSessionKey(int sessionKey) {
+        Main.sessionKey = sessionKey;
+        System.out.println("현재 저장된 세션키 : " + sessionKey);
     }
 }

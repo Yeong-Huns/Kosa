@@ -1,7 +1,8 @@
 package main.java.kosa.myapp.ui.frames;
 
 import main.java.kosa.myapp.ui.views.View;
-import main.java.kosa.myapp.ui.views.AnnualLeaves.AnnualLeavesView;
+import main.java.kosa.myapp.ui.views.annualLeaves.AnnualLeavesView;
+import main.java.kosa.myapp.ui.views.approval.ApprovalView;
 import main.java.kosa.myapp.ui.views.attendance.AttendanceManagementView;
 import main.java.kosa.myapp.ui.views.attendanceDetail.AttendanceDetailView;
 import main.java.kosa.myapp.ui.views.commuteTime.CommuteTimeView;
@@ -34,6 +35,8 @@ public class MainFrame extends JFrame {
         setSize(600, 900);
         setLayout(new BorderLayout());
         initializeUI();
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 
@@ -44,7 +47,7 @@ public class MainFrame extends JFrame {
         AttendanceManagementView attendanceManagementView = new AttendanceManagementView();
         AttendanceDetailView attendanceDetailView = new AttendanceDetailView("근태 현황");
         AnnualLeavesView annualLeavesView = new AnnualLeavesView();
-
+        ApprovalView approvalView = new ApprovalView();
         add(cards);
         cardLayout.show(cards, View.LOGIN);//처음에 로그인 패널을 보여줍니다.
     }
