@@ -1,21 +1,20 @@
 package main.java.kosa.myapp.ui.views.login;
 
 import main.java.kosa.myapp.Main;
-import main.java.kosa.myapp.controller.member.MemberController;
-import main.java.kosa.myapp.dto.member.request.LoginRequest;
-import main.java.kosa.myapp.entity.member.Member;
-import main.java.kosa.myapp.entity.response.ResponseEntity;
+import main.java.kosa.myapp.dto.member.Member;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
+import main.java.kosa.myapp.repository.member.MemberRepository;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.components.panels.TopPanel;
 import main.java.kosa.myapp.ui.components.placeholder.PlaceHolder;
 import main.java.kosa.myapp.ui.components.placeholder.PwdPlaceHolder;
 import main.java.kosa.myapp.ui.frames.MainCard;
+import main.java.kosa.myapp.controller.UIController;
 import main.java.kosa.myapp.ui.frames.MainLayOut;
 import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
-import java.util.OptionalInt;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.login
@@ -40,10 +39,7 @@ public class LoginView extends JPanel {
         PlaceHolder idField = new PlaceHolder("아이디를 입력하세요").setYPosition(288);
         PwdPlaceHolder pwdPlaceHolder = new PwdPlaceHolder("비밀번호를 입력하세요").setYPosition(395);
         CommonButton loginBtn = new CommonButton("로그인", ButtonType.X_LARGE).setPosition(161,495);
-        loginBtn.addActionListener(e->{
-            MemberController.getInstance().login(new LoginRequest(idField.getText(), pwdPlaceHolder.getText()));
-            MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
-        });
+        loginBtn.addActionListener(e-> redirectCommuteTime(Member.builder().id(idField.getText()).password(pwdPlaceHolder.getText()).build()));
         add(idField);
         add(pwdPlaceHolder);
         add(loginBtn);
@@ -51,5 +47,12 @@ public class LoginView extends JPanel {
         SignUpPageBtn.setButtonAppearance(false);
         add(SignUpPageBtn);
         add(new TopPanel("로그인").setAbsoluteLayout());
+    }
+    private void redirectCommuteTime(Member member){
+        ResponseEntity<Integer> response = MemberRepository.getInstance().login(member);
+        response.showDialogs();
+        response.runIfSuccess(Main::setSessionKey);
+        UIController.getInstance().getCommuteTimeView().innerPanelUpdate();
+        response.ifPresent(()->MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE));
     }
 }

@@ -1,6 +1,6 @@
 package main.java.kosa.myapp.util.dataBaseConnection;
 
-import main.java.kosa.myapp.entity.response.ResponseEntity;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,8 +45,7 @@ public class CallableStatementTemplate {
         } catch (SQLException ex) {
             return new ResponseEntity<Void>(ex.getErrorCode(), ex.getMessage());
         } catch (RuntimeException ex) {
-            System.out.println("QueryForManyError  : { 오류코드 : " + 404 + " , 오류 메세지 : " + ex.getMessage() + "}");
-            return new ResponseEntity<>(404,"올바르지 못한 입력 값");
+            return new ResponseEntity<Void>(400,ex.getMessage());
         }
     }
 
@@ -57,7 +56,7 @@ public class CallableStatementTemplate {
             cs.executeQuery();
             ResultSet rs = (ResultSet) cs.getObject(lastIndex - 2);
             List<T> results = new ArrayList<>();
-            if(rs == null) return new ResponseEntity<>(results, 0, "반환값 0");
+
             int rowNum = 1;
             while (rs.next()) {
                 results.add(rowMapper.mapRow(rs, rowNum));
@@ -70,7 +69,7 @@ public class CallableStatementTemplate {
             System.out.println("QueryForManyError  : { 오류코드 : " + ex.getErrorCode() + " , 오류 메세지 : " + ex.getMessage() + "}");
             return new ResponseEntity<>(ex.getErrorCode(),ex.getMessage());
         } catch (RuntimeException ex){
-            return new ResponseEntity<>(404,ex.getMessage());
+            return new ResponseEntity<>(400,ex.getMessage());
         }
     }
 
@@ -81,6 +80,7 @@ public class CallableStatementTemplate {
             cs.executeQuery();
             ResultSet rs = (ResultSet) cs.getObject(lastIndex - 2);
             T result = null;
+
             boolean hasResult = rs.next();
             if (hasResult) {
                 result = rowMapper.mapRow(rs, 1);
@@ -88,16 +88,15 @@ public class CallableStatementTemplate {
             int resultCode = cs.getInt(lastIndex - 1);
             String resultMessage = cs.getString(lastIndex);
             // 결과가 두 번째 행을 가지고 있는지 확인합니다.
-            /*
             if (hasResult && rs.next()) {
-                return new ResponseEntity<>(null, 4, "쿼리 결과가 유니크 값을 반환하지 않습니다");
+                return new ResponseEntity<>(result, 4, "쿼리 결과가 유니크 값을 반환하지 않습니다");
             }
-             */
+
             return new ResponseEntity<>(result, resultCode, resultMessage);
         } catch (SQLException ex) {
-            return new ResponseEntity<>(ex.getErrorCode(), ex.getMessage());
+            return new ResponseEntity<>(null, ex.getErrorCode(), ex.getMessage());
         } catch (Exception ex) {
-            return new ResponseEntity<>(500, "서버 내부 오류: " + ex.getMessage());
+            return new ResponseEntity<>(null,500, "서버 내부 오류: " + ex.getMessage());
         }
     }
 

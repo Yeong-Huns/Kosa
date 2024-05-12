@@ -1,11 +1,6 @@
 package main.java.kosa.myapp.ui.views.approval;
 
 import com.toedter.calendar.JCalendar;
-import main.java.kosa.myapp.Main;
-import main.java.kosa.myapp.controller.approval.ApprovalController;
-import main.java.kosa.myapp.dto.approval.response.GetAnnualLeavesApproveResponse;
-import main.java.kosa.myapp.entity.approval.Approval;
-import main.java.kosa.myapp.entity.response.ResponseEntity;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.components.panels.CalendarPanel;
@@ -19,7 +14,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.approval
@@ -49,7 +43,7 @@ public class ApprovalDetail extends JPanel {
         defaultPan.add(new AnnualRecordJPanel());
         scrollableRecordsPanel.printRecord(defaultPan);
     }
-
+    /*
     public void printRecord(int sessionKey){
         Approval approval = new Approval();
         approval.setMemberId(sessionKey);
@@ -57,7 +51,8 @@ public class ApprovalDetail extends JPanel {
         approval.setApprovalDate(calendarPanel.getCurrentDate());
         showDialog(ApprovalController.getInstance().getAnnualLeavesApproval(approval));
     }
-
+*/
+    /*
     private void showDialog(ResponseEntity<List<GetAnnualLeavesApproveResponse>> response){
         if(response.getErrorCode() == 0){ // DB에서 반환할 데이터를 찾았습니다
             List<AnnualRecordJPanel> panelList = response.getData().stream()
@@ -71,13 +66,13 @@ public class ApprovalDetail extends JPanel {
             scrollableRecordsPanel.printRecord(defaultPanel);
         }
     }
-
+    */
     private void initialize() {
         applyButton = new CommonButton("신청", ButtonType.SMALL);
         calendarPanel = new CalendarPanel(CalendarType.YEAR_MONTH);
         scrollableRecordsPanel = new ScrollableRecordsPanel();
         scrollPanel = new ScrollPanel(scrollableRecordsPanel);
-        calendarPanel.setButtonAction(e->printRecord(Main.getSessionKey()) );
+        //calendarPanel.setButtonAction(e->printRecord(Main.getSessionKey()) );
         add(applyButton);
         add(calendarPanel);
         add(scrollPanel);

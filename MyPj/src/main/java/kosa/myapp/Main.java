@@ -1,20 +1,11 @@
 package main.java.kosa.myapp;
 
-import main.java.kosa.myapp.dto.member.request.DeleteMemberRequest;
-import main.java.kosa.myapp.entity.approval.Approval;
-import main.java.kosa.myapp.entity.member.Member;
-import main.java.kosa.myapp.repository.approval.ApprovalRepository;
-import main.java.kosa.myapp.repository.member.MemberRepository;
-import main.java.kosa.myapp.ui.frames.MainFrame;
+import main.java.kosa.myapp.controller.UIController;
 import main.java.kosa.myapp.util.dataBaseConnection.DBConnection;
 import oracle.jdbc.pool.OracleDataSource;
 
 import java.awt.*;
 import java.sql.Connection;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * packageName    :
@@ -35,7 +26,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MainFrame frame = new MainFrame();
+                    UIController frame = UIController.getInstance();
                     OracleDataSource ods = new OracleDataSource();
                     /* 설정 파일 + 싱글턴 패턴 활용 접속 */
                     Connection conn5 = DBConnection.getConnection();

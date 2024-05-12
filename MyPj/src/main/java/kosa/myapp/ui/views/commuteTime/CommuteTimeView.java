@@ -20,14 +20,19 @@ import java.awt.*;
  * 2024-05-03        Yeong-Huns       최초 생성
  */
 public class CommuteTimeView extends JPanel {
+    private final CommuteTimeInnerPanel commuteTimeInnerPanel;
     public CommuteTimeView() {
         super(new BorderLayout());
+        commuteTimeInnerPanel = new CommuteTimeInnerPanel();
         initialize();
         MainCard.getInstance().add(this, View.COMMUTE);
     }
     private void initialize() {
         add(new TopPanel("출퇴근체크"), BorderLayout.NORTH);
-        add(new CommuteTimeInnerPanel(), BorderLayout.CENTER);
+        add(commuteTimeInnerPanel, BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
+    }
+    public void innerPanelUpdate() {
+        commuteTimeInnerPanel.initialize();
     }
 }

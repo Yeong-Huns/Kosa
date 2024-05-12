@@ -1,7 +1,6 @@
-package main.java.kosa.myapp.dto.member.request;
+package main.java.kosa.myapp.dto.member;
 
 import lombok.Builder;
-import lombok.Getter;
 
 /**
  * packageName    : main.java.kosa.myapp.dto.member.request

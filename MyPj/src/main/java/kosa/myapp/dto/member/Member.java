@@ -1,6 +1,7 @@
-package main.java.kosa.myapp.entity.member;
+package main.java.kosa.myapp.dto.member;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
@@ -15,15 +16,16 @@ import java.time.LocalDate;
  * -----------------------------------------------------------
  * 2024-05-04        Yeong-Huns       최초 생성
  */
-@Data
+@Getter
+@Builder
 public class Member {
     private int memberId;
     private String id;
-    private String Password;
-    private String Name;
+    private String password;
+    private String name;
     private LocalDate workStartDate;
-    private String PhoneNumber;
-    private int AnnualLeaves;
+    private String phoneNumber;
+    private int annualLeaves;
     private int roleId;
     private int deptNo;
 }

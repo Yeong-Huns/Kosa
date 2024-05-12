@@ -1,6 +1,8 @@
-package main.java.kosa.myapp.entity.attendance;
+package main.java.kosa.myapp.dto.attendance;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,14 +18,12 @@ import java.time.LocalTime;
  * -----------------------------------------------------------
  * 2024-05-07        Yeong-Huns       최초 생성
  */
-@Data
+@Getter
+@Builder
 public class Attendance {
-    private long id;
-    private LocalDate date;
-    private int deptNO;
-    private long memberId;
-    private int approvalType;
-    private int confirm;
-    private String content;
-    private LocalTime approvalDate;
+    private int attendanceId;
+    private LocalDate attendanceDate;
+    private LocalTime startOfWork;
+    private LocalTime endOfWork;
+    private int memberId;
 }

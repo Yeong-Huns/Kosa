@@ -1,9 +1,9 @@
-package main.java.kosa.myapp.dto.attendance.response;
+package main.java.kosa.myapp.dto.attendance;
 
 import lombok.Builder;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * packageName    : main.java.kosa.myapp.dto.attendance.response
@@ -17,5 +17,5 @@ import java.time.LocalDateTime;
  * 2024-05-10        Yeong-Huns       최초 생성
  */
 @Builder
-public record GetDeptMonthlyAttendanceResponse(String memberName, int deptNo, LocalDate date, LocalDateTime startOfWork, LocalDateTime endOfWork) {
+public record GetDeptMonthlyAttendanceResponse(String memberName, int deptNo, LocalDate date, LocalTime startOfWork, LocalTime endOfWork) {
 }

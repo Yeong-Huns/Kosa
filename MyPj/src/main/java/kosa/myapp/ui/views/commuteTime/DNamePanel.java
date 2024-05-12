@@ -1,26 +1,26 @@
 package main.java.kosa.myapp.ui.views.commuteTime;
 
+import main.java.kosa.myapp.ui.components.label.PlainLabel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class DNamePanel extends JPanel {
-    public DNamePanel() {
+    public DNamePanel(String deptName){
         setBackground(new Color(157, 157, 157));
         setBounds(20, 20, 543, 70);
         setLayout(null);
-        initalize();
+        initialize(deptName);
     }
 
-    private void initalize() {
-        JLabel workState = new JLabel("현재 근무지");
+    private void initialize(String deptName) {
+        PlainLabel workState = new PlainLabel("현재 근무지", 18);
         workState.setForeground(new Color(255, 255, 255));
-        workState.setFont(new Font("D2coding", Font.PLAIN, 18));
         workState.setBounds(28, 25, 100, 20);
         add(workState);
 
-        JLabel hrDept = new JLabel("HR부서");
+        PlainLabel hrDept = new PlainLabel(deptName, 21);
         hrDept.setForeground(new Color(255, 255, 255));
-        hrDept.setFont(new Font("D2coding", Font.PLAIN, 21));
         hrDept.setHorizontalAlignment(SwingConstants.RIGHT);
         hrDept.setBounds(377, 25, 140, 20);
         add(hrDept);

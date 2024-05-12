@@ -1,10 +1,10 @@
-package main.java.kosa.myapp.entity.response;
+package main.java.kosa.myapp.dto.response;
 
 import lombok.Getter;
+import main.java.kosa.myapp.ui.dialogs.DialogUtils;
 
-import java.time.LocalDate;
+import javax.swing.*;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * packageName    : main.java.kosa.myapp.dto
@@ -27,15 +27,31 @@ public class ResponseEntity<T> {
         this.data = data;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+        verifyErrorCode();
     }
 
     public ResponseEntity(int errorCode, String errorMessage) {
         this.data = null;
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+        verifyErrorCode();
     }
-    private boolean isSuccess() {
+    public boolean isSuccess() {
         return errorCode == 0;
+    }
+
+    public void printLog(){
+        System.out.println("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+    }
+
+    public void runIfSuccess(Consumer<T> action) {
+        if (isSuccess()) {
+            action.accept(data);
+        }
+    }
+
+    public void showDialogs(){
+        DialogUtils.showDialogs(this);
     }
 
     public T executeIfSuccessOrElseThrow(Runnable onSuccess, Runnable onFailure) {
@@ -48,17 +64,8 @@ public class ResponseEntity<T> {
         }
     }
 
-    public T orElseThrow(Runnable action){
-        if(!isSuccess()){
-            action.run();
-            throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
-        }
-        return data;
-    }
-
-    public T getOrThrow(){
-        if(isSuccess()){return data;}
-        throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+    public T orElse(T alternative){
+        return isSuccess() ? data : alternative;
     }
 
     public T ifPresent(Runnable action){
@@ -69,20 +76,14 @@ public class ResponseEntity<T> {
         throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
     }
 
-    public ResponseEntity<T> response(int errorCode, String errorMessage) {
-        return new ResponseEntity<>(null, errorCode, errorMessage);
-    }
-
-    public ResponseEntity<T> response(T data, int errorCode, String errorMessage) {
-        return new ResponseEntity<>(data, errorCode, errorMessage);
-    }
-
-    public ResponseEntity<T> exception(int errorCode ,String errorMessage) {
-        return new ResponseEntity<>(null, errorCode, errorMessage);
-    }
-
-    public ResponseEntity<T> body(T data) {
-        return new ResponseEntity<T>(data, this.errorCode, this.errorMessage);
+    private void verifyErrorCode(){
+        if(errorCode != 0 && errorCode != 1){
+            JOptionPane.showMessageDialog(null,
+                    "에러 메세지 : " + errorMessage,
+                    "에러! ",
+                    JOptionPane.ERROR_MESSAGE);
+            throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
+        }
     }
 }
 

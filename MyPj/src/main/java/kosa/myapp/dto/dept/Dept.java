@@ -1,9 +1,11 @@
-package main.java.kosa.myapp.entity.dept;
+package main.java.kosa.myapp.dto.dept;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 
 /**
- * packageName    : main.java.kosa.myapp.entity.dept
+ * packageName    : main.java.kosa.myapp.dto.dept
  * fileName       : Dept
  * author         : Yeong-Huns
  * date           : 2024-05-08
@@ -13,10 +15,10 @@ import lombok.Data;
  * -----------------------------------------------------------
  * 2024-05-08        Yeong-Huns       최초 생성
  */
-@Data
+@Getter
+@Builder
 public class Dept {
     private int deptNo;
     private String deptName;
     private int beforeUsingAnnualLeaves;
-    private int memberId;
 }

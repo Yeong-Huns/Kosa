@@ -1,5 +1,7 @@
 package main.java.kosa.myapp.ui.dialogs;
 
+import main.java.kosa.myapp.dto.response.ResponseEntity;
+
 import javax.swing.*;
 
 /**
@@ -14,13 +16,20 @@ import javax.swing.*;
  * 2024-05-10        Yeong-Huns       최초 생성
  */
 public class DialogUtils {
-    public static void showSuccessMessage(String message) {
-        System.out.println("Success: " + message);
-        JOptionPane.showMessageDialog(null, message, "회원 등록 성공", JOptionPane.INFORMATION_MESSAGE);
+    public static void showDialogs(ResponseEntity<?> response) {
+        if (response.isSuccess()) {
+            showDialogs(response.getErrorMessage());
+        } else {
+            showFailureMessage(response.getErrorMessage());
+        }
     }
 
-    public static void showFailureMessage(String message) {
-        System.out.println("Failure: " + message);
-        JOptionPane.showMessageDialog(null, message, "회원 등록 실패", JOptionPane.ERROR_MESSAGE);
+    private static void showDialogs(String message) {
+        JOptionPane.showMessageDialog(null, message, "성공", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private static void showFailureMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "경고", JOptionPane.ERROR_MESSAGE);
+        //throw new IllegalArgumentException("Failure message 출력됨");
     }
 }

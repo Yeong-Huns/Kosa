@@ -1,12 +1,11 @@
 package main.java.kosa.myapp.util.test;
 
-import main.java.kosa.myapp.dto.attendance.request.GetDeptMonthlyAttendanceRequest;
-import main.java.kosa.myapp.dto.attendance.request.GetMemberMonthlyAttendanceRequest;
-import main.java.kosa.myapp.dto.attendance.response.GetCommuteInfoResponse;
-import main.java.kosa.myapp.dto.attendance.response.GetDeptMonthlyAttendanceResponse;
-import main.java.kosa.myapp.dto.attendance.response.GetMemberMonthlyAttendanceResponse;
+import main.java.kosa.myapp.dto.attendance.*;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
 import main.java.kosa.myapp.repository.attendance.AttendanceRepository;
+import main.java.kosa.myapp.ui.dialogs.DialogUtils;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -27,60 +26,59 @@ public class AttendanceTest {
     }
 
     public void getMemberMonthlyAttendanceIsExist(){
-        List<GetMemberMonthlyAttendanceResponse> list = repository.getMemberMonthlyAttendance(
-                GetMemberMonthlyAttendanceRequest.builder()
-                        .currentUserId(2)
-                        .year(2024)
-                        .month(5)
+        System.out.println("특정 멤버 범위 내 기록이 존재하는 경우 : ");
+        ResponseEntity<List<Attendance>>  response = repository.getMemberMonthlyAttendance(
+                Attendance.builder()
+                        .memberId(3)
+                        .attendanceDate(LocalDate.of(2024,5,1))
                         .build());
-        list.forEach(System.out::println);
-        boolean pass = !list.isEmpty();
-        System.out.println("특정 멤버 범위 내 기록이 존재하는 경우 : " + pass);
-
+        System.out.println(response.getErrorMessage());
+        response.runIfSuccess(value-> value.forEach(System.out::println));
     }
     public void getMemberMonthlyAttendanceNotExist(){
-        List<GetMemberMonthlyAttendanceResponse> list = repository.getMemberMonthlyAttendance(
-                GetMemberMonthlyAttendanceRequest.builder()
-                        .currentUserId(2)
-                        .year(2032)
-                        .month(5)
+        System.out.println("특정 멤버 범위 내 기록이 존재하지 않는 경우 : ");
+        ResponseEntity<List<Attendance>>  response = repository.getMemberMonthlyAttendance(
+                Attendance.builder()
+                        .memberId(3)
+                        .attendanceDate(LocalDate.of(2032,5,1))
                         .build());
-        list.forEach(System.out::println);
-        boolean pass = list.isEmpty();
-        System.out.println("특정 멤버 범위 내 기록이 존재하지 않는 경우 : " + pass);
+        System.out.println(response.getErrorMessage());
+        response.runIfSuccess(value-> value.forEach(System.out::println));
     }
 
     public void getDeptMonthlyAttendanceIsExist(){
-        List<GetDeptMonthlyAttendanceResponse> list = repository.getDeptMonthlyAttendance(
-                GetDeptMonthlyAttendanceRequest.builder()
-                        .currentUserId(2)
-                        .year(2024)
-                        .month(5)
+        System.out.println("부서별 근태 조회 범위 내 기록이 존재하는 경우 : ");
+        ResponseEntity<List<GetDeptMonthlyAttendanceResponse>> response = repository.getDeptMonthlyAttendance(
+                Attendance.builder()
+                        .memberId(3)
+                        .attendanceDate(LocalDate.of(2024,5,1))
                         .build());
-        list.forEach(System.out::println);
-        boolean pass = !list.isEmpty();
-        System.out.println("부서별 근태 조회 범위 내 기록이 존재하는 경우 : " + pass);
+        System.out.println(response.getErrorMessage());
+        response.runIfSuccess(value-> value.forEach(System.out::println));
     }
 
     public void getDeptMonthlyAttendanceNotExist(){
-        List<GetDeptMonthlyAttendanceResponse> list = repository.getDeptMonthlyAttendance(
-                GetDeptMonthlyAttendanceRequest.builder()
-                        .currentUserId(2)
-                        .year(2032)
-                        .month(5)
+        System.out.println("부서별 근태 조회 범위 내 기록이 존재하지 않는 경우 : ");
+        ResponseEntity<List<GetDeptMonthlyAttendanceResponse>> response = repository.getDeptMonthlyAttendance(
+                Attendance.builder()
+                        .memberId(3)
+                        .attendanceDate(LocalDate.of(2032,5,1))
                         .build());
-        list.forEach(System.out::println);
-        boolean pass = list.isEmpty();
-        System.out.println("부서별 근태 조회 범위 내 기록이 존재하지 않는 경우 : " + pass);
+        System.out.println(response.getErrorMessage());
+        response.runIfSuccess(value-> value.forEach(System.out::println));
     }
 
     public void resisterAttendance(){
-        repository.resisterAttendance(2);
         System.out.println("출근시간등록");
+        ResponseEntity<Void> response = repository.resisterAttendance(8);
+        System.out.println(response.getErrorMessage());
+        DialogUtils.showDialogs(response);
     }
 
     public void getCommuteInfo(){
-        GetCommuteInfoResponse getCommuteInfoResponse = repository.getCommuteInfo(2);
-        System.out.println("commuteInfo 받아오기 : " + getCommuteInfoResponse);
+        System.out.println("commuteInfo 받아오기 : ");
+        ResponseEntity<GetCommuteInfoResponse>  response = repository.getCommuteInfo(9);
+        System.out.println(response.getErrorMessage());
+        response.runIfSuccess(System.out::println);
     }
 }

@@ -1,5 +1,8 @@
-package main.java.kosa.myapp.ui.frames;
+package main.java.kosa.myapp.controller;
 
+import lombok.Getter;
+import main.java.kosa.myapp.ui.frames.MainCard;
+import main.java.kosa.myapp.ui.frames.MainLayOut;
 import main.java.kosa.myapp.ui.views.View;
 import main.java.kosa.myapp.ui.views.annualLeaves.AnnualLeavesView;
 import main.java.kosa.myapp.ui.views.approval.ApprovalView;
@@ -23,11 +26,19 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
-public class MainFrame extends JFrame {
+@Getter
+public class UIController extends JFrame {
+    private static UIController instance;
     private final MainLayOut cardLayout;
     private final MainCard cards;
-
-    public MainFrame() {
+    private LoginView loginView;
+    private SignUpView signUpView;
+    private CommuteTimeView commuteTimeView;
+    private AttendanceManagementView attendanceManagementView;
+    private AttendanceDetailView attendanceDetailView;
+    private AnnualLeavesView annualLeavesView;
+    private ApprovalView approvalView;
+    private UIController() {
         super("타임 인 아웃 V2");
         cardLayout = MainLayOut.getInstance();
         cards = MainCard.getInstance();
@@ -40,14 +51,23 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    public static UIController getInstance() {
+        if (instance == null) {
+            instance = new UIController();
+        }
+        return instance;
+    }
+
+
+
     private void initializeUI() {
-        LoginView loginView = new LoginView();
-        SignUpView signUpView = new SignUpView();
-        CommuteTimeView commuteTimeView = new CommuteTimeView();
-        AttendanceManagementView attendanceManagementView = new AttendanceManagementView();
-        AttendanceDetailView attendanceDetailView = new AttendanceDetailView("근태 현황");
-        AnnualLeavesView annualLeavesView = new AnnualLeavesView();
-        ApprovalView approvalView = new ApprovalView();
+        loginView = new LoginView();
+        signUpView = new SignUpView();
+        commuteTimeView = new CommuteTimeView();
+        attendanceManagementView = new AttendanceManagementView();
+        attendanceDetailView = new AttendanceDetailView("근태 현황");
+        annualLeavesView = new AnnualLeavesView();
+        approvalView = new ApprovalView();
         add(cards);
         cardLayout.show(cards, View.LOGIN);//처음에 로그인 패널을 보여줍니다.
     }

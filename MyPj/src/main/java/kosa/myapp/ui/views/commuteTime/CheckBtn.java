@@ -2,12 +2,11 @@ package main.java.kosa.myapp.ui.views.commuteTime;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
+import java.time.LocalTime;
 
 public class CheckBtn extends JButton {
-    public CheckBtn(String s) {
-        super(s);
+    public CheckBtn() {
+        super();
         initalize();
     }
 

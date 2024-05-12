@@ -1,20 +1,20 @@
 package main.java.kosa.myapp.ui.views.signUp;
 
 import main.java.kosa.myapp.Main;
-import main.java.kosa.myapp.controller.member.MemberController;
-import main.java.kosa.myapp.entity.member.Member;
-import main.java.kosa.myapp.entity.response.ResponseEntity;
+import main.java.kosa.myapp.dto.member.Member;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
+import main.java.kosa.myapp.repository.member.MemberRepository;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.components.panels.TopPanelWithBackBtn;
 import main.java.kosa.myapp.ui.components.placeholder.PlaceHolder;
 import main.java.kosa.myapp.ui.components.placeholder.PwdPlaceHolder;
 import main.java.kosa.myapp.ui.frames.MainCard;
+import main.java.kosa.myapp.controller.UIController;
 import main.java.kosa.myapp.ui.frames.MainLayOut;
 import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
-import java.util.OptionalInt;
 
 /**
  * packageName    : main.java.kosa.myapp.ui.views.signUp
@@ -46,24 +46,30 @@ public class SignUpView extends JPanel {
 
         CommonButton submit = new CommonButton("회원가입", ButtonType.X_LARGE).setPosition(161, 552);
         submit.addActionListener(e-> {
-            Member newMember = new Member();
-            newMember.setId(idField.getText());
-            newMember.setPassword(pwdField.getText());
-            newMember.setName(nameField.getText());
-            newMember.setPhoneNumber(numberField.getText());
-
             System.out.println(idField.getText());
             System.out.println(pwdField.getText());
             System.out.println(nameField.getText());
             System.out.println(numberField.getText());
 
-            showDialog(newMember);
+            Member newMember =
+                    Member.builder()
+                            .id(idField.getText())
+                            .password(pwdField.getText())
+                            .name(nameField.getText())
+                            .phoneNumber(numberField.getText())
+                            .build();
+            redirectCommuteTime(newMember);
         });
         add(submit);
         add(new TopPanelWithBackBtn("회원가입").setAbsoluteLayout());
     }
-    private void showDialog(Member member){
-        MemberController.getInstance().insertMember(member);
-        MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
+    private void redirectCommuteTime(Member member){
+        ResponseEntity<Void> response = MemberRepository.getInstance().insertMember(member);
+        if(response.isSuccess()){
+            response.showDialogs();
+            MemberRepository.getInstance().login(member).runIfSuccess(Main::setSessionKey);
+            UIController.getInstance().getCommuteTimeView().innerPanelUpdate();
+            MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
+        }
     }
 }
