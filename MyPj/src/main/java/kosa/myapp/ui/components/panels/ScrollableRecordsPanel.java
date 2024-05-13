@@ -30,18 +30,23 @@ public class ScrollableRecordsPanel extends JPanel {
         return numberOfRecords * (cardHeight + spacing);
     }
 
-    public void printRecord(List<? extends JPanel> panel){
+    public void printRecord(List<? extends JPanel> panels){
         //
-        // removeAll();
-        numberOfRecords = panel.size();
-        cardHeight = panel.get(0).getPreferredSize().height;
-        System.out.println("ScrollableRecordsPanel: " + numberOfRecords + " : " + cardHeight);
-        System.out.println("getTotalHeight: " + getTotalHeight());
-        setPreferredSize(new Dimension(550, getTotalHeight()));
-        for (int i = 0; i < panel.size(); i++) {
-            panel.get(i).setBounds(10, i * (cardHeight + spacing), 545, cardHeight);
-            panel.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            add(panel.get(i));
+        removeAll();  // Remove all existing components
+        numberOfRecords = panels.size();
+        cardHeight = panels.get(0).getPreferredSize().height;
+
+        int totalHeight = getTotalHeight();
+        setPreferredSize(new Dimension(550, totalHeight));  // Update preferred size based on content
+
+        for (int i = 0; i < panels.size(); i++) {
+            JPanel panel = panels.get(i);
+            panel.setBounds(10, i * (cardHeight + spacing), 545, cardHeight);
+            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            add(panel);
         }
+
+        revalidate();  // Validate the layout again after modifications
+        repaint();  // Repaint the panel to reflect changes
     }
 }

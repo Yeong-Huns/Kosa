@@ -69,7 +69,7 @@ public class ResponseEntity<T> {
     }
 
     public T ifPresent(Runnable action){
-        if(isSuccess()){
+        if(errorCode == 0 || errorCode == 1) {
             action.run();
             return data;
         }

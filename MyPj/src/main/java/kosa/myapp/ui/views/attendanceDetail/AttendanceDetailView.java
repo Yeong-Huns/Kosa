@@ -1,15 +1,15 @@
 package main.java.kosa.myapp.ui.views.attendanceDetail;
 
-import main.java.kosa.myapp.ui.components.panels.BottomPanel;
-import main.java.kosa.myapp.ui.components.panels.ScrollPanel;
-import main.java.kosa.myapp.ui.components.panels.ScrollableRecordsPanel;
-import main.java.kosa.myapp.ui.components.panels.TopPanelWithBackBtn;
+import main.java.kosa.myapp.dto.attendance.Attendance;
+import main.java.kosa.myapp.repository.attendance.AttendanceRepository;
+import main.java.kosa.myapp.ui.components.panels.*;
 import main.java.kosa.myapp.ui.frames.MainCard;
 import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * packageName    : me.mini.view.commuteLIst

@@ -22,8 +22,8 @@ import java.time.LocalDate;
  * -----------------------------------------------------------
  * 2024-05-08        Yeong-Huns       최초 생성
  */
+@Getter
 public class CalendarPanel extends JPanel {
-    @Getter
     private LocalDate currentDate;
     private CommonButton prevButton, nextButton;
     private BoldLabel dateLabel;

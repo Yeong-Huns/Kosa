@@ -2,16 +2,23 @@ package main.java.kosa.myapp.ui.views.attendance;
 
 import main.java.kosa.myapp.Main;
 import main.java.kosa.myapp.config.Image;
+import main.java.kosa.myapp.controller.UIController;
 import main.java.kosa.myapp.dto.approval.Approval;
 import main.java.kosa.myapp.dto.attendance.Attendance;
+import main.java.kosa.myapp.dto.member.Member;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
 import main.java.kosa.myapp.repository.approval.ApprovalRepository;
 import main.java.kosa.myapp.repository.attendance.AttendanceRepository;
+import main.java.kosa.myapp.repository.member.MemberRepository;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
+import main.java.kosa.myapp.ui.frames.MainCard;
+import main.java.kosa.myapp.ui.frames.MainLayOut;
 import main.java.kosa.myapp.ui.views.View;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AttendanceAndManagementDetailPanel extends JPanel {
     public AttendanceAndManagementDetailPanel() {
@@ -20,6 +27,7 @@ public class AttendanceAndManagementDetailPanel extends JPanel {
         initialize();
 
     }
+
     private void initialize() {
         CommonButton annualLeavesBtn = new CommonButton(ButtonType.IMAGE_BUTTON)
                 .setImage(Image.ANNUAL)

@@ -38,6 +38,7 @@ public class UIController extends JFrame {
     private AttendanceDetailView attendanceDetailView;
     private AnnualLeavesView annualLeavesView;
     private ApprovalView approvalView;
+
     private UIController() {
         super("타임 인 아웃 V2");
         cardLayout = MainLayOut.getInstance();

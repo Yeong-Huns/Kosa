@@ -26,4 +26,15 @@ public class Attendance {
     private LocalTime startOfWork;
     private LocalTime endOfWork;
     private int memberId;
+
+    @Override
+    public String toString() {
+        return "Attendance{" +
+                "attendanceId=" + attendanceId +
+                ", attendanceDate=" + attendanceDate +
+                ", startOfWork=" + startOfWork +
+                ", endOfWork=" + endOfWork +
+                ", memberId=" + memberId +
+                '}';
+    }
 }
