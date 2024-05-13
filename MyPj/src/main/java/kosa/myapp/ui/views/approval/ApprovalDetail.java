@@ -74,6 +74,7 @@ public class ApprovalDetail extends JPanel{
         add(tabbedPane, BorderLayout.CENTER);
     }
     public void submittedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue){
+        //if(dropBoxValue == null) dropBoxValue = "연차";
         switch(dropBoxValue){
             case "연차" -> {
                 GridBagConstraints gbc = new GridBagConstraints();
@@ -132,6 +133,7 @@ public class ApprovalDetail extends JPanel{
     }
 
     public void receivedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue){
+        //if(dropBoxValue == null) dropBoxValue = "연차";
         switch(dropBoxValue){
             case "연차" -> {
                 GridBagConstraints gbc = new GridBagConstraints();
@@ -190,6 +192,7 @@ public class ApprovalDetail extends JPanel{
     }
 
     private void addDataRow(JPanel panel, Approval approval, GridBagConstraints gbc) {
+
         JPanel rowPanel = new JPanel();
         rowPanel.setLayout(new BoxLayout(rowPanel, BoxLayout.Y_AXIS));
         rowPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
@@ -266,56 +269,4 @@ public class ApprovalDetail extends JPanel{
         panel.repaint();
     }
 
-    /*```java
-
-    private void showOptions() {
-        String[] options = {"퇴근 누락", "휴가"};
-        String choice = (String) JOptionPane.showInputDialog(this, "구분 선택", "결재 신청",
-                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-        if (choice != null) {
-            showOptionsDetail(choice);
-        }
-    }
-
-    private void showOptionsDetail(String choice) {
-        JCalendar calendar = new JCalendar();
-        JTextArea reasonTextArea = new JTextArea(5, 30);
-        reasonTextArea.setLineWrap(true);
-        reasonTextArea.setWrapStyleWord(true);
-
-        JLabel dateLabel = new JLabel("날짜를 선택하세요");
-        dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        dateLabel.setPreferredSize(new Dimension(400, 20));
-
-        calendar.getDayChooser().addPropertyChangeListener("day", e -> {
-            LocalDate selectedDate = LocalDate.of(calendar.getYearChooser().getYear(),
-                    calendar.getMonthChooser().getMonth() + 1,
-                    calendar.getDayChooser().getDay());
-            dateLabel.setText(selectedDate.format(DateTimeFormatter.ofPattern("신청 날짜 : yyyy년-MM월-dd일")));
-        });
-
-        JScrollPane scrollPane = new JScrollPane(reasonTextArea);
-
-        JPanel datePanel = new JPanel(new BorderLayout());
-        datePanel.add(dateLabel, BorderLayout.NORTH);
-
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(new JLabel("사유:"), BorderLayout.WEST);
-        bottomPanel.add(scrollPane, BorderLayout.CENTER);
-
-        datePanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        JPanel panel = new JPanel(new BorderLayout(5, 5));
-        panel.add(calendar, BorderLayout.CENTER);
-        panel.add(datePanel, BorderLayout.SOUTH);
-
-        int result = JOptionPane.showConfirmDialog(null, panel, choice,
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (result == JOptionPane.OK_OPTION) {
-            System.out.println("Selected Date: " + dateLabel.getText());
-            System.out.println("Reason: " + reasonTextArea.getText());
-        }
-    }
-```*/
 }

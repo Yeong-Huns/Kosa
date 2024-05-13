@@ -23,12 +23,15 @@ public class ExtendedCalendarPanel extends CalendarPanel {
     private void initializeUI() {
         initializeDropDown();
         setupListeners();
+        triggerInitialDataLoad();
     }
 
     private void initializeDropDown() {
         dropBox = new JComboBox<>(new String[]{"연차", "퇴근 누락"});
         add(dropBox);
-        dropBox.addActionListener(e -> selectedDropBoxValue = (String) dropBox.getSelectedItem());
+        dropBox.addActionListener(e -> {selectedDropBoxValue = (String) dropBox.getSelectedItem();
+                    onDateChangeExternal.accept(getCurrentDate(), selectedDropBoxValue);});
+                 // 드롭박스 변경 시 콜백 실행);
     }
 
     private void setupListeners() {
@@ -36,6 +39,11 @@ public class ExtendedCalendarPanel extends CalendarPanel {
 
         getPrevButton().addActionListener(changeListener);
         getNextButton().addActionListener(changeListener);
+    }
+
+    private void triggerInitialDataLoad() {
+        // 객체가 완전히 초기화된 후 콜백 함수를 호출하여 초기 데이터를 로드합니다.
+        onDateChangeExternal.accept(getCurrentDate(), selectedDropBoxValue);
     }
 }
 

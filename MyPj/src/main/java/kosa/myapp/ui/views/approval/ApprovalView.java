@@ -1,7 +1,8 @@
 package main.java.kosa.myapp.ui.views.approval;
 
 import lombok.Getter;
-import main.java.kosa.myapp.ui.components.panels.*;
+import main.java.kosa.myapp.ui.components.panels.BottomPanel;
+import main.java.kosa.myapp.ui.components.panels.TopPanel;
 import main.java.kosa.myapp.ui.frames.MainCard;
 import main.java.kosa.myapp.ui.views.View;
 
