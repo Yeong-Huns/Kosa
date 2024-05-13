@@ -118,8 +118,8 @@ public class Test {
         JLabel nameLabel = new JLabel("이름: " + attendance.memberName());
         JLabel deptLabel = new JLabel("부서 번호: " + attendance.deptNo());
         JLabel dateLabel = new JLabel("날짜: " + attendance.date().toString());
-        JLabel startLabel = new JLabel("출근 시간: " + (attendance.startOfWork() == null ? "--:--:--" : attendance.startOfWork()));
-        JLabel endLabel = new JLabel("퇴근 시간: " + (attendance.endOfWork() == null ? "--:--:--" : attendance.endOfWork()));
+        JLabel startLabel = new JLabel("출근 시간: " + (attendance.startOfWork() == null ? "--:--:--" : attendance.startOfWork().format(DateTimeFormatter.ofPattern("HH:mm:ss"))));
+        JLabel endLabel = new JLabel("퇴근 시간: " + (attendance.endOfWork() == null ? "--:--:--" : attendance.endOfWork().format(DateTimeFormatter.ofPattern("HH:mm:ss"))));
 
         nameLabel.setBorder(new EmptyBorder(5,5,5,5));
         deptLabel.setBorder(new EmptyBorder(5,5,5,5));
