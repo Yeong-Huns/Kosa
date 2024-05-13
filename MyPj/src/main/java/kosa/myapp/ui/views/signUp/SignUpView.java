@@ -70,6 +70,7 @@ public class SignUpView extends JPanel {
             MemberRepository.getInstance().login(member).runIfSuccess(Main::setSessionKey);
             UIController.getInstance().getCommuteTimeView().innerPanelUpdate();
             MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE);
+            UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents();
         }
     }
 }

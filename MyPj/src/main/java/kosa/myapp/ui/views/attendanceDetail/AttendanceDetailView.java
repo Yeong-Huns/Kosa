@@ -1,15 +1,12 @@
 package main.java.kosa.myapp.ui.views.attendanceDetail;
 
-import main.java.kosa.myapp.dto.attendance.Attendance;
-import main.java.kosa.myapp.repository.attendance.AttendanceRepository;
+import lombok.Getter;
 import main.java.kosa.myapp.ui.components.panels.*;
 import main.java.kosa.myapp.ui.frames.MainCard;
 import main.java.kosa.myapp.ui.views.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * packageName    : me.mini.view.commuteLIst
@@ -22,18 +19,18 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2024-05-02        Yeong-Huns       최초 생성
  */
+@Getter
 public class AttendanceDetailView extends JPanel{
+    private final AttendanceDetail attendanceDetail;
     public AttendanceDetailView(String string) {
         super(new BorderLayout());
+        attendanceDetail = new AttendanceDetail();
         MainCard.getInstance().add(this, View.MY_ATTENDANCE);
         initialize(string);
     }
     private void initialize(String string){
         add(new TopPanelWithBackBtn(string), BorderLayout.NORTH);
-        JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("나의 근태", new ScrollPanel(new ScrollableRecordsPanel()));
-
-        add(tabbedPane, BorderLayout.CENTER);
+        add(attendanceDetail , BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

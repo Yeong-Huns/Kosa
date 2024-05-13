@@ -1,5 +1,6 @@
 package main.java.kosa.myapp.ui.views.approval;
 
+import lombok.Getter;
 import main.java.kosa.myapp.ui.components.panels.*;
 import main.java.kosa.myapp.ui.frames.MainCard;
 import main.java.kosa.myapp.ui.views.View;
@@ -18,15 +19,18 @@ import java.awt.*;
  * -----------------------------------------------------------
  * 2024-05-07        Yeong-Huns       최초 생성
  */
+@Getter
 public class ApprovalView extends JPanel {
+    ApprovalDetail approvalDetail;
     public ApprovalView() {
         setLayout(new BorderLayout());
+        approvalDetail = new ApprovalDetail();
         MainCard.getInstance().add(this, View.APPROVAL);
         initialize();
     }
     private void initialize() {
         add(new TopPanel("결재함"), BorderLayout.NORTH);
-        add(new ApprovalDetail(1), BorderLayout.CENTER);
+        add(approvalDetail, BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }
 }

@@ -72,4 +72,5 @@ public class UIController extends JFrame {
         add(cards);
         cardLayout.show(cards, View.LOGIN);//처음에 로그인 패널을 보여줍니다.
     }
+
 }

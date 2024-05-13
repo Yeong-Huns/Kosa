@@ -1,109 +1,62 @@
 package main.java.kosa.myapp.ui.components.panels;
 
 import lombok.Getter;
-import lombok.Setter;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
-import main.java.kosa.myapp.ui.components.label.BoldLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Consumer;
 
 /**
- * packageName    : main.java.kosa.myapp.ui.components.panels
- * fileName       : CalendarPanel
+ * packageName    : main.java.kosa.myapp.ui.views.attendanceDetail
+ * fileName       : AttendanceCalendarPanel
  * author         : Yeong-Huns
- * date           : 2024-05-08
+ * date           : 2024-05-14
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2024-05-08        Yeong-Huns       최초 생성
+ * 2024-05-14        Yeong-Huns       최초 생성
  */
 @Getter
 public class CalendarPanel extends JPanel {
     private LocalDate currentDate;
     private CommonButton prevButton, nextButton;
-    private BoldLabel dateLabel;
+    private JLabel dateLabel;
     private final CalendarType type;
+    private Consumer<LocalDate> onDateChange;
 
-    public CalendarPanel(CalendarType type) {
-        SpringLayout layout = new SpringLayout();
+    public CalendarPanel(CalendarType type, Consumer<LocalDate> onDateChange) {
         this.type = type;
-        setPreferredSize(new Dimension(560, 50));
-        setBorder(BorderFactory.createLineBorder(Color.red));
-        setLayout(layout);
-        initialize();
-        alignComponents(layout);
+        this.onDateChange = onDateChange;
+        initializeUI();
+        setCurrentDate(LocalDate.now());
     }
 
-    private void initialize() {
-        currentDate = LocalDate.now();
+    private void initializeUI() {
+        setLayout(new FlowLayout());
         prevButton = new CommonButton("<", ButtonType.ARROW);
         nextButton = new CommonButton(">", ButtonType.ARROW);
 
-        switch (type) {
-            case YEAR_MONTH -> {
-                dateLabel = new BoldLabel(currentDate.getYear() + "년 " + (currentDate.getMonthValue()) + "월", 18);
-                prevButton.addActionListener(e -> navigateMonths(-1));
-                nextButton.addActionListener(e -> navigateMonths(1));
-            }
-            case YEAR_MONTH_DAY -> {
-                dateLabel = new BoldLabel(currentDate.getYear() + "년 " + currentDate.getMonthValue() + "월 " + currentDate.getDayOfMonth() + "일", 18);
-                prevButton.addActionListener(e -> navigateDays(-1));
-                nextButton.addActionListener(e -> navigateDays(1));
-            }
-        }
-        add(dateLabel);
+        dateLabel = new JLabel();
         add(prevButton);
+        add(dateLabel);
         add(nextButton);
+
+        prevButton.addActionListener(e -> changeMonth(-1));
+        nextButton.addActionListener(e -> changeMonth(1));
     }
 
-    private void navigateDays(int daysToAdd){
-        currentDate = currentDate.plusDays(daysToAdd);
-        dateLabel.setText(currentDate.getYear() + "년 " + currentDate.getMonthValue() + "월 " + currentDate.getDayOfMonth() + "일");
+    private void changeMonth(int months) {
+        setCurrentDate(currentDate.plusMonths(months));
     }
 
-    private void navigateMonths(int monthToAdd) {
-        currentDate = currentDate.plusMonths(monthToAdd);
-        dateLabel.setText(currentDate.getYear() + "년 " + (currentDate.getMonthValue()) + "월");
-    }
-
-    private void alignComponents(SpringLayout layout) {
-        layout.putConstraint(SpringLayout.WEST, prevButton, -90, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, prevButton, 0, SpringLayout.NORTH, this);
-
-        layout.putConstraint(SpringLayout.WEST, dateLabel, 10, SpringLayout.EAST, prevButton);
-        layout.putConstraint(SpringLayout.NORTH, dateLabel, 15, SpringLayout.NORTH, this);
-
-        layout.putConstraint(SpringLayout.WEST, nextButton, 10, SpringLayout.EAST, dateLabel);
-        layout.putConstraint(SpringLayout.NORTH, nextButton, 0, SpringLayout.NORTH, this);
-    }
-
-    private void updateLabel(){
-        switch (type){
-            case YEAR_MONTH -> {
-                dateLabel.setText(currentDate.getYear() + "년 " + (currentDate.getMonthValue()) + "월");
-            }
-            case YEAR_MONTH_DAY -> {
-                dateLabel.setText(currentDate.getYear() + "년 " + currentDate.getMonthValue() + "월 " + currentDate.getDayOfMonth() + "일");
-            }
-        }
-    }
-    public void resetDate(){
-        currentDate = LocalDate.now();
-        updateLabel();
-    }
-    public void setPrevButtonAction(ActionListener actionListener){
-        prevButton.addActionListener(actionListener);
-    }
-    public void setNextButtonAction(ActionListener actionListener){
-        nextButton.addActionListener(actionListener);
-    }
-    public void setButtonAction(ActionListener actionListener){
-        prevButton.addActionListener(actionListener);
-        nextButton.addActionListener(actionListener);
+    protected void setCurrentDate(LocalDate date) {
+        currentDate = date;
+        dateLabel.setText(currentDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월")));
+        onDateChange.accept(currentDate);
     }
 }

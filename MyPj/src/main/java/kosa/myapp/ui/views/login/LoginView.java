@@ -6,6 +6,7 @@ import main.java.kosa.myapp.dto.response.ResponseEntity;
 import main.java.kosa.myapp.repository.member.MemberRepository;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
+import main.java.kosa.myapp.ui.components.panels.BottomPanel;
 import main.java.kosa.myapp.ui.components.panels.TopPanel;
 import main.java.kosa.myapp.ui.components.placeholder.PlaceHolder;
 import main.java.kosa.myapp.ui.components.placeholder.PwdPlaceHolder;
@@ -54,5 +55,6 @@ public class LoginView extends JPanel {
         response.runIfSuccess(Main::setSessionKey);
         UIController.getInstance().getCommuteTimeView().innerPanelUpdate();
         response.ifPresent(()->MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE));
+        response.ifPresent(()->UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents());
     }
 }

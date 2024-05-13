@@ -39,7 +39,7 @@ public class AttendanceTest {
         System.out.println("특정 멤버 범위 내 기록이 존재하지 않는 경우 : ");
         ResponseEntity<List<Attendance>>  response = repository.getMemberMonthlyAttendance(
                 Attendance.builder()
-                        .memberId(3)
+                        .memberId(163)
                         .attendanceDate(LocalDate.of(2032,5,1))
                         .build());
         System.out.println(response.getErrorMessage());

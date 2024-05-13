@@ -16,8 +16,8 @@ public class RepositoryTest {
     RepositoryTest test = new RepositoryTest();
 
         //test.memberTest();
-        //test.attendanceTest();
-        test.ApprovalTest();
+        test.attendanceTest();
+        //test.ApprovalTest();
     }
 
     public void memberTest(){
