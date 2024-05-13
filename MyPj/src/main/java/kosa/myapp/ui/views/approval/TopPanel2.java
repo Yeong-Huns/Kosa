@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
  * 2024-05-14        Yeong-Huns       최초 생성
  */
 public class TopPanel2 extends TopPanel {
+    private int approvalType;
     public TopPanel2() {
         super("결재함");
         initialize();
@@ -35,25 +36,25 @@ public class TopPanel2 extends TopPanel {
     }
 
     private void addButton() {
-        // 외부 패널 설정
+
         JPanel outerPanel = new JPanel(new BorderLayout());
 
-        // 버튼을 추가할 내부 패널 생성
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));  // Y_AXIS로 설정하여 수직 배치
-        buttonPanel.add(Box.createVerticalGlue());  // 버튼 위에 빈 공간 추가
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.add(Box.createVerticalGlue());
 
         CommonButton optionsButton = new CommonButton("신청", ButtonType.SMALL);
 
-        optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);  // 버튼을 중앙 정렬
-        optionsButton.addActionListener(this::showOptions);  // 버튼 액션 리스너 설정
-        buttonPanel.add(optionsButton);  // 버튼 추가
+        optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsButton.addActionListener(this::showOptions);
+        buttonPanel.add(optionsButton);
 
-        buttonPanel.add(Box.createVerticalGlue());  // 버튼 아래 빈 공간 추가
+        buttonPanel.add(Box.createVerticalGlue());
 
-        outerPanel.add(buttonPanel, BorderLayout.EAST);  // 외부 패널의 EAST에 버튼 패널 추가
-        add(outerPanel, BorderLayout.EAST);  // TopPanel의 EAST에 외부 패널 추가
+        outerPanel.add(buttonPanel, BorderLayout.EAST);
+        add(outerPanel, BorderLayout.EAST);
     }
 
     private void showOptions(ActionEvent e) {
@@ -63,6 +64,7 @@ public class TopPanel2 extends TopPanel {
 
         if (choice != null) {
             showOptionsDetail(choice);
+            approvalType = choice.equals("휴가") ? 1 : 2;
         }
     }
 
@@ -81,6 +83,7 @@ public class TopPanel2 extends TopPanel {
                     calendar.getMonthChooser().getMonth() + 1,
                     calendar.getDayChooser().getDay());
             dateLabel.setText(selectedDate.format(DateTimeFormatter.ofPattern("신청 날짜 : yyyy년-MM월-dd일")));
+            
         });
 
         JScrollPane scrollPane = new JScrollPane(reasonTextArea);
