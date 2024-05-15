@@ -19,7 +19,7 @@ import java.sql.Connection;
  * 2024-05-02        Yeong-Huns       최초 생성
  */
 public class Main {
-    private static int sessionKey;
+    private static Integer sessionKey;
     public static void main(String[] args) {
 
 
@@ -43,5 +43,10 @@ public class Main {
     public static void setSessionKey(int sessionKey) {
         Main.sessionKey = sessionKey;
         System.out.println("현재 저장된 세션키 : " + sessionKey);
+    }
+    public static void logout(){
+        sessionKey = null;
+        UIController.getInstance().getLoginView().initialize();
+        UIController.getInstance().getSignUpView().initialize();
     }
 }

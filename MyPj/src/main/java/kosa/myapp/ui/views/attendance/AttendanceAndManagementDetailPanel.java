@@ -13,10 +13,9 @@ public class AttendanceAndManagementDetailPanel extends JPanel {
         setBounds(0, 80, 586, 250);
         setLayout(null);
         initialize();
-
     }
 
-    private void initialize() {
+    public void initialize() {
         CommonButton annualLeavesBtn = new CommonButton(ButtonType.IMAGE_BUTTON)
                 .setImage(Image.ANNUAL)
                 .setPosition(0, 125);

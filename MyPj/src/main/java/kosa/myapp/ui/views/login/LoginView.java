@@ -29,6 +29,8 @@ import javax.swing.*;
  * 2024-05-02        Yeong-Huns       최초 생성
  */
 public class LoginView extends JPanel {
+    private PlaceHolder idField;
+    private PwdPlaceHolder pwdPlaceHolder;
 
     public LoginView() {
         setBounds(0, 0, 586, 863);
@@ -36,9 +38,12 @@ public class LoginView extends JPanel {
         initialize();
         MainCard.getInstance().add(this, View.LOGIN);
     }
-    private void initialize() {
-        PlaceHolder idField = new PlaceHolder("아이디를 입력하세요").setYPosition(288);
-        PwdPlaceHolder pwdPlaceHolder = new PwdPlaceHolder("비밀번호를 입력하세요").setYPosition(395);
+    public void initialize() {
+        removeAll(); // 기존 컴포넌트를 모두 제거
+
+        idField = new PlaceHolder("아이디를 입력하세요").setYPosition(288);
+        pwdPlaceHolder = new PwdPlaceHolder("비밀번호를 입력하세요").setYPosition(395);
+
         CommonButton loginBtn = new CommonButton("로그인", ButtonType.X_LARGE).setPosition(161,495);
         loginBtn.addActionListener(e-> redirectCommuteTime(Member.builder().id(idField.getText()).password(pwdPlaceHolder.getText()).build()));
         add(idField);
@@ -48,6 +53,8 @@ public class LoginView extends JPanel {
         SignUpPageBtn.setButtonAppearance(false);
         add(SignUpPageBtn);
         add(new TopPanel("로그인").setAbsoluteLayout());
+        revalidate();
+        repaint();
     }
     private void redirectCommuteTime(Member member){
         ResponseEntity<Integer> response = MemberRepository.getInstance().login(member);
@@ -57,4 +64,5 @@ public class LoginView extends JPanel {
         response.ifPresent(()->MainLayOut.getInstance().show(MainCard.getInstance(), View.COMMUTE));
         response.ifPresent(()->UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents());
     }
+
 }

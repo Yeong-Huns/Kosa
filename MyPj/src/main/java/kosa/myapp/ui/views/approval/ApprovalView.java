@@ -30,7 +30,7 @@ public class ApprovalView extends JPanel {
         initialize();
     }
     private void initialize() {
-        add(new TopPanel("결재함"), BorderLayout.NORTH);
+        add(new ExtendedTopPanel(), BorderLayout.NORTH);
         add(approvalDetail, BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }

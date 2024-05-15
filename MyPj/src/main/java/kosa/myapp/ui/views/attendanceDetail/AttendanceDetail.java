@@ -43,6 +43,7 @@ public class AttendanceDetail extends JPanel{
     }
 
     public void initUIComponents(){
+        removeAll();
         tabbedPane = new JTabbedPane();
         dataPanel1 = new JPanel(new GridBagLayout());
         dataPanel2 = new JPanel(new GridBagLayout());
@@ -59,9 +60,11 @@ public class AttendanceDetail extends JPanel{
         scrollPane1 = new JScrollPane(dataPanel1);
         scrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane1.getViewport().setBackground(Color.WHITE);
+
         scrollPane2 = new JScrollPane(dataPanel2);
         scrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane2.getViewport().setBackground(Color.WHITE);
+
 
 
         JPanel panel1 = new JPanel(new BorderLayout());
@@ -74,6 +77,8 @@ public class AttendanceDetail extends JPanel{
         tabbedPane.addTab("나의 근태", panel1);
         tabbedPane.addTab("부서 근태", panel2);
         add(tabbedPane, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
 

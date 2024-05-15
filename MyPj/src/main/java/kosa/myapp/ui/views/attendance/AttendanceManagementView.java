@@ -15,7 +15,7 @@ public class AttendanceManagementView extends JPanel  {
         MainCard.getInstance().add(this, View.ATTENDANCE);
     }
 
-    private void initialize() {
+    public void initialize() {
         add(new TopPanel("근태관리"), BorderLayout.NORTH);
         add(new AttendanceAndManagementDetailPanel(),BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);

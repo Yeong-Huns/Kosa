@@ -11,5 +11,9 @@
     <orderEntry type="library" name="ojdbc8" level="project" />
     <orderEntry type="library" name="projectlombok.lombok" level="project" />
     <orderEntry type="library" name="toedter.jcalendar" level="project" />
+    <orderEntry type="library" name="apache.poi" level="project" />
+    <orderEntry type="library" name="apache.poi.ooxml" level="project" />
+    <orderEntry type="library" name="apache.logging.log4j.api" level="project" />
+    <orderEntry type="library" name="apache.logging.log4j.core" level="project" />
   </component>
 </module>

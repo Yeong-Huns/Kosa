@@ -34,7 +34,8 @@ public class SignUpView extends JPanel {
         initialize();
         MainCard.getInstance().add(this, View.SIGNUP); // 카드 레이아웃
     }
-    private void initialize() {
+    public void initialize() {
+        removeAll();
         PlaceHolder idField = new PlaceHolder("아이디를 입력하세요").setYPosition(208);
         PwdPlaceHolder pwdField = new PwdPlaceHolder("비밀번호를 입력하세요").setYPosition(295);
         PlaceHolder nameField = new PlaceHolder("이름을 입력하세요.").setYPosition(378);
@@ -62,6 +63,8 @@ public class SignUpView extends JPanel {
         });
         add(submit);
         add(new TopPanelWithBackBtn("회원가입").setAbsoluteLayout());
+        revalidate(); // 레이아웃을 다시 계산하여 새로 고침
+        repaint();
     }
     private void redirectCommuteTime(Member member){
         ResponseEntity<Void> response = MemberRepository.getInstance().insertMember(member);

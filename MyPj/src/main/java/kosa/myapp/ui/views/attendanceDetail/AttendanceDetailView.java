@@ -29,7 +29,7 @@ public class AttendanceDetailView extends JPanel{
         initialize(string);
     }
     private void initialize(String string){
-        add(new TopPanelWithBackBtn(string), BorderLayout.NORTH);
+        add(new ExtendTopPanelAttendanceDetail(string), BorderLayout.NORTH);
         add(attendanceDetail , BorderLayout.CENTER);
         add(new BottomPanel(), BorderLayout.SOUTH);
     }

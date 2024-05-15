@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  */
 @Getter
 public class CalendarPanel extends JPanel {
-    private LocalDate currentDate;
+    public LocalDate currentDate;
     private CommonButton prevButton, nextButton;
     private JLabel dateLabel;
     private final CalendarType type;
@@ -33,30 +33,31 @@ public class CalendarPanel extends JPanel {
         this.type = type;
         this.onDateChange = onDateChange;
         initializeUI();
-        setCurrentDate(LocalDate.now());
+        setCurrentDate(LocalDate.now()); // 초기 날짜를 현재 날짜로 설정
     }
 
     private void initializeUI() {
         setLayout(new FlowLayout());
-        prevButton = new CommonButton("<", ButtonType.ARROW);
-        nextButton = new CommonButton(">", ButtonType.ARROW);
+        prevButton = new CommonButton("<", ButtonType.ARROW); // 이전 버튼 초기화
+        nextButton = new CommonButton(">", ButtonType.ARROW); // 다음 버튼 초기화
 
         dateLabel = new JLabel();
         add(prevButton);
         add(dateLabel);
         add(nextButton);
 
-        prevButton.addActionListener(e -> changeMonth(-1));
-        nextButton.addActionListener(e -> changeMonth(1));
+        prevButton.addActionListener(e -> changeMonth(-1)); // 이전 월로 변경하는 리스너 추가
+        nextButton.addActionListener(e -> changeMonth(1));  // 다음 월로 변경하는 리스너 추가
     }
 
     private void changeMonth(int months) {
-        setCurrentDate(currentDate.plusMonths(months));
+        setCurrentDate(currentDate.plusMonths(months)); // 현재 날짜를 월 단위로 변경
     }
 
     protected void setCurrentDate(LocalDate date) {
         currentDate = date;
-        dateLabel.setText(currentDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월")));
-        onDateChange.accept(currentDate);
+        dateLabel.setText(currentDate.format(DateTimeFormatter.ofPattern("yyyy년 MM월"))); // 날짜 레이블 업데이트
+        onDateChange.accept(currentDate); // 내부 onDateChange 호출
     }
+
 }

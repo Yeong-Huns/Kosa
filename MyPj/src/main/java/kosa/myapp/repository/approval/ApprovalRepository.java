@@ -153,7 +153,7 @@ public class ApprovalRepository {
 
     public ResponseEntity<Void> approveOrRejectAnnualLeave(Approval approval){ //연차 수락 혹은 거절
         return callableStatementTemplate.executeUpdate(
-                "{ call approval_package.approve_or_reject_annual_leave(?, ?, ?, ?, ?)}",
+                "{ call approval_package.approve_or_reject(?, ?, ?, ?, ?)}",
                 cs -> {
                     cs.setInt(1, approval.getMemberId());
                     cs.setInt(2,approval.getApprovalId());
@@ -163,15 +163,29 @@ public class ApprovalRepository {
                 });
     }
 
-    public ResponseEntity<Void> approveOrRejectMissing(Approval approval) { //퇴근 누락 사유서 수락 혹은 반려
-        return callableStatementTemplate.executeUpdate(
-                "{ call approval_package.approve_or_reject_missing(?, ?, ?, ?, ?)}",
+    public ResponseEntity<List<GetDeptApprovalResponse>> getDeptApprovedAnnualLeaves(Approval approval){ //부서별 연차조회
+        return callableStatementTemplate.queryForMany(
+                "{ call approval_package.get_dept_approved_annual_leaves(?, ?, ?, ?, ?, ?, ?) }",
                 cs -> {
                     cs.setInt(1, approval.getMemberId());
-                    cs.setInt(2, approval.getApprovalId());
-                    cs.setInt(3, approval.getConfirm());
-                    cs.registerOutParameter(4, Types.INTEGER);
-                    cs.registerOutParameter(5, Types.VARCHAR);
+                    cs.setInt(2, approval.getApprovalType());
+                    cs.setInt(3, approval.getApprovalDate().getYear());
+                    cs.setInt(4, approval.getApprovalDate().getMonthValue());
+                    cs.registerOutParameter(5, OracleTypes.CURSOR);
+                    cs.registerOutParameter(6, Types.INTEGER);
+                    cs.registerOutParameter(7, Types.VARCHAR);
+                }, (rs, rowNum) -> {
+                    LocalDate approvalDate = rs.getDate(6) != null ? rs.getDate(6).toLocalDate() : null;
+                    return GetDeptApprovalResponse.builder()
+                            .approvalId(rs.getInt(1))
+                            .memberId(rs.getInt(2))
+                            .memberName(rs.getString(3))
+                            .confirm(rs.getInt(4))
+                            .content(rs.getString(5))
+                            .approvalDate(approvalDate)
+                            .build();
                 });
     }
+
+
 }

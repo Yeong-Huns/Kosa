@@ -1,6 +1,13 @@
 package main.java.kosa.myapp.ui.views.approval;
 
 import com.toedter.calendar.JCalendar;
+import lombok.Getter;
+import main.java.kosa.myapp.Main;
+import main.java.kosa.myapp.controller.UIController;
+import main.java.kosa.myapp.dto.approval.Approval;
+import main.java.kosa.myapp.dto.response.ResponseEntity;
+import main.java.kosa.myapp.repository.approval.ApprovalRepository;
+import main.java.kosa.myapp.repository.attendance.AttendanceRepository;
 import main.java.kosa.myapp.ui.components.button.ButtonType;
 import main.java.kosa.myapp.ui.components.button.CommonButton;
 import main.java.kosa.myapp.ui.components.panels.TopPanel;
@@ -8,6 +15,7 @@ import main.java.kosa.myapp.ui.components.panels.TopPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,9 +30,12 @@ import java.time.format.DateTimeFormatter;
  * -----------------------------------------------------------
  * 2024-05-14        Yeong-Huns       최초 생성
  */
-public class TopPanel2 extends TopPanel {
+@Getter
+public class ExtendedTopPanel extends TopPanel {
     private int approvalType;
-    public TopPanel2() {
+    private LocalDate localDate;
+
+    public ExtendedTopPanel() {
         super("결재함");
         initialize();
         addButton();
@@ -36,9 +47,7 @@ public class TopPanel2 extends TopPanel {
     }
 
     private void addButton() {
-
         JPanel outerPanel = new JPanel(new BorderLayout());
-
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.LIGHT_GRAY);
@@ -46,7 +55,6 @@ public class TopPanel2 extends TopPanel {
         buttonPanel.add(Box.createVerticalGlue());
 
         CommonButton optionsButton = new CommonButton("신청", ButtonType.SMALL);
-
         optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsButton.addActionListener(this::showOptions);
         buttonPanel.add(optionsButton);
@@ -63,12 +71,16 @@ public class TopPanel2 extends TopPanel {
                 JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         if (choice != null) {
-            showOptionsDetail(choice);
             approvalType = choice.equals("휴가") ? 1 : 2;
+            System.out.println("Before showOptionsDetail:");
+            System.out.println("Choice: " + choice);
+            System.out.println("ApprovalType: " + approvalType);
+
+            showOptionsDetail(choice, approvalType);
         }
     }
 
-    private void showOptionsDetail(String choice) {
+    private void showOptionsDetail(String choice, int approvalType) {
         JCalendar calendar = new JCalendar();
         JTextArea reasonTextArea = new JTextArea(5, 30);
         reasonTextArea.setLineWrap(true);
@@ -79,11 +91,10 @@ public class TopPanel2 extends TopPanel {
         dateLabel.setPreferredSize(new Dimension(400, 20));
 
         calendar.getDayChooser().addPropertyChangeListener("day", e -> {
-            LocalDate selectedDate = LocalDate.of(calendar.getYearChooser().getYear(),
+            localDate = LocalDate.of(calendar.getYearChooser().getYear(),
                     calendar.getMonthChooser().getMonth() + 1,
                     calendar.getDayChooser().getDay());
-            dateLabel.setText(selectedDate.format(DateTimeFormatter.ofPattern("신청 날짜 : yyyy년-MM월-dd일")));
-            
+            dateLabel.setText(localDate.format(DateTimeFormatter.ofPattern("신청 날짜 : yyyy년-MM월-dd일")));
         });
 
         JScrollPane scrollPane = new JScrollPane(reasonTextArea);
@@ -106,14 +117,35 @@ public class TopPanel2 extends TopPanel {
         if (result == JOptionPane.OK_OPTION) {
             System.out.println("Selected Date: " + dateLabel.getText());
             System.out.println("Reason: " + reasonTextArea.getText());
-        }
-    }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Demo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new TopPanel2());
-        frame.pack();
-        frame.setVisible(true);
+            System.out.println("Before switch:");
+            System.out.println("ApprovalType: " + approvalType);
+
+            switch (approvalType) {
+                case 1 -> {
+                    ResponseEntity<Void> response = ApprovalRepository.getInstance().resisterApproval(
+                            Approval.builder()
+                                    .memberId(Main.getSessionKey())
+                                    .content(reasonTextArea.getText())
+                                    .approvalDate(localDate)
+                                    .build());
+                    response.showDialogs();
+
+                }
+                case 2 -> {
+                    ResponseEntity<Void> response = ApprovalRepository.getInstance().insertStatementReason(
+                            Approval.builder()
+                                    .memberId(Main.getSessionKey())
+                                    .content(reasonTextArea.getText())
+                                    .approvalDate(localDate)
+                                    .build());
+                    response.showDialogs();
+
+                }
+            }
+            UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents();
+            System.out.println("After switch:");
+            System.out.println("ApprovalType: " + approvalType);
+        }
     }
 }

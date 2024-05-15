@@ -17,6 +17,7 @@ public class CommuteTimeInnerPanel extends JPanel {
         setLayout(null);
     }
     public void initialize() {
+        removeAll();
         ResponseEntity<GetCommuteInfoResponse> response = AttendanceRepository.getInstance().getCommuteInfo(Main.getSessionKey());
         if(response.isSuccess()){
             GetCommuteInfoResponse responseBody = response.getData();
@@ -48,6 +49,8 @@ public class CommuteTimeInnerPanel extends JPanel {
             });
             add(commonButton);
         }
+        revalidate();
+        repaint();
     }
     private void refreshPanel(){
         removeAll();        // 패널에서 모든 컴포넌트 제거

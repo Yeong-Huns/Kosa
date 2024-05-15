@@ -3,6 +3,7 @@ package main.java.kosa.myapp.dto.attendance;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

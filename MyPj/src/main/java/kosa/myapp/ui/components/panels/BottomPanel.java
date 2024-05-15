@@ -29,6 +29,7 @@ public class BottomPanel extends JPanel {
         super(new FlowLayout(FlowLayout.CENTER));
         setPreferredSize(new Dimension(580, 100));
         attendanceBtn = new CommonButton("근태관리", ButtonType.DEFAULT);
+
         attendanceBtn.changeViewTo(View.ATTENDANCE);
 
         commuteTimeBtn = new CommonButton("출퇴근체크", ButtonType.DEFAULT);
@@ -36,9 +37,9 @@ public class BottomPanel extends JPanel {
 
         approvalBtn = new CommonButton("결재함", ButtonType.DEFAULT);
         approvalBtn.changeViewTo(View.APPROVAL);
-        //approvalBtn.addActionListener(e->UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents()); // 순환참조 발생!!
 
-        settingBtn = new CommonButton("구현예정 ", ButtonType.DEFAULT);
+        settingBtn = new CommonButton("로그아웃", ButtonType.DEFAULT);
+        settingBtn.addActionListener(e->Main.logout());
         settingBtn.changeViewTo(View.LOGIN);
 
         add(attendanceBtn);
