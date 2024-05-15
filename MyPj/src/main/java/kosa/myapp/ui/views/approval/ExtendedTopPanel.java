@@ -120,7 +120,7 @@ public class ExtendedTopPanel extends TopPanel {
 
             System.out.println("Before switch:");
             System.out.println("ApprovalType: " + approvalType);
-
+            try{
             switch (approvalType) {
                 case 1 -> {
                     ResponseEntity<Void> response = ApprovalRepository.getInstance().resisterApproval(
@@ -129,8 +129,8 @@ public class ExtendedTopPanel extends TopPanel {
                                     .content(reasonTextArea.getText())
                                     .approvalDate(localDate)
                                     .build());
-                    response.showDialogs();
 
+                    response.showDialogs();
                 }
                 case 2 -> {
                     ResponseEntity<Void> response = ApprovalRepository.getInstance().insertStatementReason(
@@ -139,13 +139,19 @@ public class ExtendedTopPanel extends TopPanel {
                                     .content(reasonTextArea.getText())
                                     .approvalDate(localDate)
                                     .build());
-                    response.showDialogs();
 
+                    response.showDialogs();
                 }
             }
-            UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents();
-            System.out.println("After switch:");
-            System.out.println("ApprovalType: " + approvalType);
+            } finally {
+                UIController.getInstance().getApprovalView().getApprovalDetail().removeAll();
+                UIController.getInstance().getApprovalView().getApprovalDetail().initUIComponents();
+                UIController.getInstance().getApprovalView().getApprovalDetail().revalidate();
+                UIController.getInstance().getApprovalView().getApprovalDetail().repaint();
+                System.out.println("After switch:");
+                System.out.println("ApprovalType: " + approvalType);
+            }
+
         }
     }
 }

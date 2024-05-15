@@ -45,7 +45,7 @@ public class ExtendTopPanelAttendanceDetail extends TopPanelWithBackBtn {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.add(Box.createVerticalGlue());
 
-        CommonButton optionsButton = new CommonButton("신청", ButtonType.SMALL);
+        CommonButton optionsButton = new CommonButton("엑셀변환", ButtonType.SMALL);
         optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsButton.addActionListener(this::showOptionsDetail);
         buttonPanel.add(optionsButton);

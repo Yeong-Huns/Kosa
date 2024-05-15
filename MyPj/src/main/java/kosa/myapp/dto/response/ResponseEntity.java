@@ -83,8 +83,7 @@ public class ResponseEntity<T> {
                     "에러 메세지 : " + errorMessage,
                     "에러! ",
                     JOptionPane.ERROR_MESSAGE);
-            //throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
-
+            throw new IllegalArgumentException("{ 오류코드 : " + getErrorCode() + " , 오류 메세지 : " + getErrorMessage() + "}");
         }
     }
 }
