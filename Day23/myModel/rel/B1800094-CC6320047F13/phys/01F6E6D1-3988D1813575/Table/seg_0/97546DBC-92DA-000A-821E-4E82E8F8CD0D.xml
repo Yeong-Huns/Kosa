@@ -8,6 +8,7 @@
 <temporaryChanged>false</temporaryChanged>
 <accessDriverType>oracle_loader</accessDriverType>
 <rejectLimit></rejectLimit>
+<storeAs>CLOB</storeAs>
 <columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
 <ColumnProxy name="location" id="23FE725D-63FC-21EE-EDF7-60D4C94557DA">
 <createdBy>KOSA</createdBy>

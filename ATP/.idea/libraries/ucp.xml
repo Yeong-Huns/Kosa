@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="ucp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/ucp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/osdt_core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/ojdbc8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/osdt_cert.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/xdb6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/oraclepki.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../dev/ojdbc8-full/ojdbc8-full/orai18n.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

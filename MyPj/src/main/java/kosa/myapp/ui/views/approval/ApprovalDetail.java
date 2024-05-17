@@ -30,11 +30,12 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2024-05-14        Yeong-Huns       최초 생성
  */
-public class ApprovalDetail extends JPanel{
+public class ApprovalDetail extends JPanel {
     private ExtendedCalendarPanel calendarPanel1, calendarPanel2;
-    private JPanel dataPanel1, dataPanel2;;
-    private  JScrollPane scrollPane1, scrollPane2;
-    private  JTabbedPane tabbedPane;
+    private JPanel dataPanel1, dataPanel2;
+    ;
+    private JScrollPane scrollPane1, scrollPane2;
+    private JTabbedPane tabbedPane;
     private int confirmType;
 
     public ApprovalDetail() {
@@ -43,7 +44,7 @@ public class ApprovalDetail extends JPanel{
         //initUIComponents();
     }
 
-    public void initUIComponents(){
+    public void initUIComponents() {
         tabbedPane = new JTabbedPane();
         dataPanel1 = new JPanel(new GridBagLayout());
         dataPanel2 = new JPanel(new GridBagLayout());
@@ -75,9 +76,10 @@ public class ApprovalDetail extends JPanel{
         tabbedPane.addTab("수신함", panel2);
         add(tabbedPane, BorderLayout.CENTER);
     }
-    public void submittedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue){
 
-        switch(dropBoxValue){
+    public void submittedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue) {
+
+        switch (dropBoxValue) {
             case "연차" -> {
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -94,15 +96,19 @@ public class ApprovalDetail extends JPanel{
                 System.out.println("approvalList 넘기는 값 : " + Main.getSessionKey() + " date : " + date);
                 System.out.println("받아오는 에러코드 값 : " + approvalList.getErrorCode() + " 메세지 : " + approvalList.getErrorMessage());
                 dataPanel.removeAll();
-                if (approvalList.isSuccess()) {
-                    approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
-                    gbc.weighty = 1;
-                    dataPanel.add(Box.createVerticalGlue(), gbc);
-                } else if (approvalList.getErrorCode() == 1) {
-                    addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
+                try {
+                    if (approvalList.isSuccess()) {
+                        approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
+                        gbc.weighty = 1;
+                        dataPanel.add(Box.createVerticalGlue(), gbc);
+                    } else if (approvalList.getErrorCode() == 1) {
+                        addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
+                    }
+                } finally {
+                    dataPanel.revalidate();
+                    dataPanel.repaint();
                 }
-                dataPanel.revalidate();
-                dataPanel.repaint();
+
             }
             case "퇴근 누락" -> {
                 GridBagConstraints gbc = new GridBagConstraints();
@@ -116,79 +122,18 @@ public class ApprovalDetail extends JPanel{
                                 .approvalType(2)
                                 .approvalDate(date)
                                 .build());
-                System.out.println("getDeptAnnualLeaves 넘기는 값 : " + Main.getSessionKey() +" date : " + date);
-                System.out.println("받아오는 에러코드 값 : " + approvalList.getErrorCode() + " 메세지 : " + approvalList.getErrorMessage());
-                dataPanel.removeAll();
-                if (approvalList.isSuccess()) {
-                    System.out.println("Approval list size: " + approvalList.getData().size());
-                    approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
-                    gbc.weighty = 1;
-                    dataPanel.add(Box.createVerticalGlue(), gbc);
-                } else if (approvalList.getErrorCode() == 1) {
-                    addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
-                }
-
-                dataPanel.revalidate();
-                dataPanel.repaint();
-            }
-        }
-
-    }
-
-    public void receivedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue){
-        //if(dropBoxValue == null) dropBoxValue = "연차";
-        switch(dropBoxValue){
-            case "연차" -> {
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.gridwidth = GridBagConstraints.REMAINDER;
-                gbc.weightx = 1;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.insets = new Insets(10, 10, 10, 10);
-                ResponseEntity<List<GetDeptApprovalResponse>> approvalList = ApprovalRepository.getInstance().getDeptApprovedAnnualLeaves(
-                        Approval.builder()
-                                .memberId(Main.getSessionKey())
-                                .approvalType(1)
-                                .approvalDate(date)
-                                .build());
-                System.out.println("getDeptApprovedAnnualLeaves 넘기는 값 : " + Main.getSessionKey() + " date : " + date);
-                System.out.println("받아오는 에러코드 값 : " + approvalList.getErrorCode() + " 메세지 : " + approvalList.getErrorMessage());
-                dataPanel.removeAll();
-                if (approvalList.isSuccess()) {
-                    approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
-                    gbc.weighty = 1;
-                    dataPanel.add(Box.createVerticalGlue(), gbc);
-                } else  {
-                    addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
-                }
-
-                dataPanel.revalidate();
-                dataPanel.repaint();
-            }
-            case "퇴근 누락" -> {
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.gridwidth = GridBagConstraints.REMAINDER;
-                gbc.weightx = 1;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.insets = new Insets(10, 10, 10, 10);
-
-                ResponseEntity<List<GetDeptApprovalResponse>> approvalList = ApprovalRepository.getInstance().getDeptStatementOfReason(
-                        Approval.builder()
-                                .memberId(Main.getSessionKey())
-                                .approvalType(2)
-                                .approvalDate(date)
-                                .build());
                 System.out.println("getDeptAnnualLeaves 넘기는 값 : " + Main.getSessionKey() + " date : " + date);
                 System.out.println("받아오는 에러코드 값 : " + approvalList.getErrorCode() + " 메세지 : " + approvalList.getErrorMessage());
                 dataPanel.removeAll();
-                try{
-                if (approvalList.isSuccess()) {
-                    System.out.println("Approval list size: " + approvalList.getData().size());
-                    approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
-                    gbc.weighty = 1;
-                    dataPanel.add(Box.createVerticalGlue(), gbc);
-                } else {
-                    addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
-                }
+                try {
+                    if (approvalList.isSuccess()) {
+                        System.out.println("Approval list size: " + approvalList.getData().size());
+                        approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
+                        gbc.weighty = 1;
+                        dataPanel.add(Box.createVerticalGlue(), gbc);
+                    } else if (approvalList.getErrorCode() == 1) {
+                        addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
+                    }
                 } finally {
                     dataPanel.revalidate();
                     dataPanel.repaint();
@@ -196,8 +141,57 @@ public class ApprovalDetail extends JPanel{
 
             }
         }
+
     }
 
+    public void receivedApprovals(LocalDate date, JPanel dataPanel, String dropBoxValue) {
+        // 새로운 데이터를 추가하기 전에 패널을 초기화
+        dataPanel.removeAll();
+
+        // 일관된 레이아웃 설정
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        ResponseEntity<List<GetDeptApprovalResponse>> approvalList;
+
+        if ("연차".equals(dropBoxValue)) {
+            approvalList = ApprovalRepository.getInstance().getDeptApprovedAnnualLeaves(
+                    Approval.builder()
+                            .memberId(Main.getSessionKey())
+                            .approvalType(1)
+                            .approvalDate(date)
+                            .build()
+            );
+        } else  {
+            approvalList = ApprovalRepository.getInstance().getDeptStatementOfReason(
+                    Approval.builder()
+                            .memberId(Main.getSessionKey())
+                            .approvalType(2)
+                            .approvalDate(date)
+                            .build()
+            );
+        }
+
+        System.out.println("Request sent with parameters: " + Main.getSessionKey() + ", date: " + date);
+        System.out.println("Response error code: " + approvalList.getErrorCode() + ", message: " + approvalList.getErrorMessage());
+
+        try {
+            if (approvalList.isSuccess()) {
+                approvalList.getData().forEach(approval -> addDataRow(dataPanel, approval, gbc));
+                gbc.weighty = 1;
+                dataPanel.add(Box.createVerticalGlue(), gbc);
+            } else {
+                addErrorRow(dataPanel, approvalList.getErrorMessage(), gbc);
+            }
+        } finally {
+            // 패널을 제대로 갱신하기 위해 revalidate와 repaint 호출
+            dataPanel.revalidate();
+            dataPanel.repaint();
+        }
+    }
     private void addDataRow(JPanel panel, Approval approval, GridBagConstraints gbc) {
 
         JPanel rowPanel = new JPanel();
@@ -209,9 +203,9 @@ public class ApprovalDetail extends JPanel{
         PlainLabel confirmLabel = new PlainLabel("승인여부: " + (approval.getConfirm() == 2 ? "승인 대기중" : approval.getConfirm() == 1 ? "승인됨" : "거절됨"), 16);
         PlainLabel contentLabel = new PlainLabel("내용: " + (approval.getContent()), 14);
 
-        dateLabel.setBorder(new EmptyBorder(5,5,5,5));
-        confirmLabel.setBorder(new EmptyBorder(5,5,5,5));
-        contentLabel.setBorder(new EmptyBorder(5,5,5,5));
+        dateLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        confirmLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         rowPanel.add(dateLabel);
         rowPanel.add(confirmLabel);
@@ -219,6 +213,7 @@ public class ApprovalDetail extends JPanel{
 
         panel.add(rowPanel, gbc);
     }
+
     private void addDataRow(JPanel panel, GetDeptApprovalResponse getDeptApprovalResponse, GridBagConstraints gbc) {
         DataPanel rowPanel = new DataPanel();
         rowPanel.setLayout(new GridBagLayout()); // GridBagLayout 사용
@@ -254,7 +249,6 @@ public class ApprovalDetail extends JPanel{
         gbcInner.gridy = 3;
         rowPanel.add(content, gbcInner);
 
-
         CommonButton button = new CommonButton("승인", ButtonType.SMALL);
         gbcInner.gridx = 1;
         gbcInner.gridy = 0;
@@ -263,15 +257,16 @@ public class ApprovalDetail extends JPanel{
         gbcInner.fill = GridBagConstraints.NONE;
         gbcInner.anchor = GridBagConstraints.NORTHEAST;
         rowPanel.add(button, gbcInner);
-        button.addActionListener(e->{showOptions(e);
+        button.addActionListener(e -> {
+            showOptions(e);
             System.out.println(Main.getSessionKey());
-            System.out.println(" approvalId " + (int)rowPanel.getData("approvalId"));
+            System.out.println(" approvalId " + (int) rowPanel.getData("approvalId"));
             ResponseEntity<Void> approveOrRejectAnnualLeave = ApprovalRepository.getInstance().approveOrRejectAnnualLeave(
-                Approval.builder()
-                        .memberId(Main.getSessionKey())
-                        .approvalId((int)rowPanel.getData("approvalId"))
-                        .confirm(confirmType)
-                        .build());
+                    Approval.builder()
+                            .memberId(Main.getSessionKey())
+                            .approvalId((int) rowPanel.getData("approvalId"))
+                            .confirm(confirmType)
+                            .build());
             approveOrRejectAnnualLeave.showDialogs();
             panel.removeAll();
             panel.revalidate();
@@ -279,6 +274,7 @@ public class ApprovalDetail extends JPanel{
         });
         panel.add(rowPanel, gbc);
     }
+
     private void addErrorRow(Container panel, String errorMessage, GridBagConstraints gbc) {
         BoldLabel errorLabel = new BoldLabel(errorMessage, 24);
         errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -308,6 +304,7 @@ public class ApprovalDetail extends JPanel{
         panel.revalidate();
         panel.repaint();
     }
+
     private void showOptions(ActionEvent e) {
         String[] options = {"승인", "거절"};
         String choice = (String) JOptionPane.showInputDialog(this, "결재 옵션", "결재 승인",
