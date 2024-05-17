@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 로그인</title>
+<link rel="stylesheet" href="../css3/login.css">
+<!-- css 외부파일을 링크하는 부분 -->
+<script src="../js/jquery.js"></script>
+<!--  제이쿼리를 링크하여 참조하는 부분 -->
+<script src="../js/login.js"></script>
+<!-- 실제 제이쿼리 함수를 이용하여 작성한 외부파일 링크 부분 -->
+</head>
+<body>
+  <div id ="login_wrap">
+    <h2 class="login_title">회원 로그인 </h2>
+    <form name="f" method="post" 
+          action="http://www.naver.com"
+          onsubmit="return login_check()">
+          
+     <table id="login_t">
+       <tr>
+          <th> 아이디 </th> <!-- <th> 태그 : 표의 열 제목 -->
+          <td> <input type="text" name="id" id="id" size="14"
+                class = "input_box"> </td>
+       </tr>
+       <tr>
+          <th> 비밀번호 </th> <!-- <th> 태그 : 표의 열 제목 -->
+          <td> <input type="password" name="pwd" id="pwd" 
+                size="14" class = "input_box"> </td>
+       </tr>          
+     </table>
+     <div id="login_menu">
+        <input type="submit" value="로그인" class="login_b" />
+        <input type="reset" value="취소" 
+              onclick="$('#id').focus();" class="login_b" />
+    </div>
+   </form>          
+  </div>
+</body>
+</html>

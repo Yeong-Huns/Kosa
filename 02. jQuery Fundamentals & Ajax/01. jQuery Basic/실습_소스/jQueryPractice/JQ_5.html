@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#버튼1").click(function () {
+                $("#단락1").hide("slow", function () {
+                    alert("단락 1번이 숨겨집니다.")
+                })
+            })
+        });
+        $(document).ready(function () {
+            $("#버튼2").click(function () {
+                $("#단락2").hide("slow");
+                alert("단락 2번이 숨겨집니다.")
+            })
+        });
+    </script>
+    <meta charset="UTF-8">
+    <title>JQ_5_practice</title>
+</head>
+<body>
+<button id="버튼1">숨기기</button>
+<p id="단락1">적은 내용을 가진 단락 1번 </p>
+<button id="버튼2">숨기기2</button>
+<p id="단락2">적은 내용을가진 단락 2번</p>
+</body>
+</html>

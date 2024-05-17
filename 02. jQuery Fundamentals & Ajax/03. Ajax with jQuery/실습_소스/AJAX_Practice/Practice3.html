@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script>
+        $(document).ready(function (){
+            $(`#here_table_1`).append('<table>');
+            for(i=0; i<3; i++){
+                $(`#here_table_1`).append(`<tr><td>` +`result`+i + `</td></tr>`);
+            }
+            $(`#here_table_1`).append(`</table>`)
+        });
+    </script>
+</head>
+<body>
+    <div id="here_table_1"></div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+/*  한글 인코딩 방식 : UTF-8 */
+
+/* test.html 파일에 대한 디자인 적용 */
+body{    /* body 태그안에 있는 모든 요소를 대상으로 스타일 적용 */
+	  font-family : 도움, 굴림;  /* 글꼴 */
+	  font-size : 80%;         /* 글자 크기 */ 
+	  line-height : 2;         /* 줄 간격 */
+	  color : #ececec;         /* RGB 색생표로 색상 지정 */
+	  background : black;      /* 배경색 */ 
+}
+h1, h2{   /* h1과 h2 태그로 정의된 요소를 대상으로 스타일 적용 */
+	color : yellow;    /* RGB 색생표는 네이버에서 검색하여 참조 */
+}
+
+/* 스타일 적용 결과확인은 test.html에서 ... */

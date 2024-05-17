@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ready()와 addClass()</title>
+<style>
+  .redtext{color : #f00; }  /* 글자색 빨강 */
+  .largetext{font-size : 30pt; } /* 큰 글자 */
+  .italictext{font-style : italic; } /* 글자 기울림 */  
+</style>
+<!-- 현재 위치에는 jquery.js 라이브러리를 참조하기 위해 파일 링크 -->
+<script src="./jquery.js"> </script> 
+<!-- 사용자가 작성한 jquery 내용 -->
+<script>
+ $(document).ready(function(){ // 문서가 로드되어 준비된 상태에서 함수 수행
+	$("div").addClass("italictext");
+	$("#text1").addClass("largetext");
+	$(".text2").addClass("redtext");
+ });
+</script>
+</head>
+<body>
+  <span id="text1"> text1 </span>
+  <div class="text2"> text2 </div>
+  <div> text3 </div>
+</body>
+</html>

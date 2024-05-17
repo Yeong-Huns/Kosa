@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> bind() 메소드 </title>
+<style> 
+  img{margin-top : 100px; margin-left : 200px}
+</style>
+<script src="./jquery.js"></script>
+<script>
+   $(function(){
+	   $('img').bind({ // 하나의 객체에 여러 개의 이벤트 적용
+		   mouseover : function(){  // 마우스 오버 시
+			   $('img').attr("src", "../images/img01.gif");
+		   },
+		   mouseout : function(){   // 마우스 아웃 시
+			   $('img').attr("src", "../images/img02.gif");
+		   },
+		   click : function(){      // 마우스 클릭 시
+			   alert("마우스를 클릭했군요!!");
+		   }		   
+	   });
+   });
+</script>
+</head>
+<body>
+   <img src="../images/img02.gif">
+</body>
+</html>

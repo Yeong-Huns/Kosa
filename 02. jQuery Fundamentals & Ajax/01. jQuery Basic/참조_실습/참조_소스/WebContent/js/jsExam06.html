@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>show()와 hide() 메소드</title>
+<script src="jquery.js"></script>
+<script>
+function showImage(){     // 보이기 버튼 클릭 시 호출되는 함수
+	$("#target").show(2000, hi2);  // 2초 동안에 보여줌
+}
+function hideImage(){     // 감추기 버튼 클릭 시 호출되는 함수
+	$("#target").hide(2000, hi);
+}
+function hi(){
+	$("#p1").text("이미지가 서서히 사라집니다!!");	
+}
+function hi2(){
+	$("#p1").text("이미지가 서서히 나타납니다!!");	
+}
+</script>
+</head>
+<body>
+<img id="target" src="../images/img02.gif">
+<input type="button" value="보이기" onClick="showImage()"/>
+<input type="button" value="감추기" onClick="hideImage()"/>
+<p id="p1"></p>  <!-- 이 위치에 text가 표시됨 -->
+</body>
+</html>
+
+
+

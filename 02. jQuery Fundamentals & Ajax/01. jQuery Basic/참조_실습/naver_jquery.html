@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" 
+ src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=9_UGpNOVHvJc2OCu4iZw">
+</script> <!-- 네이버 클라이언트 아이디값 30일 가능  text파일에서 복사해서 사용-->
+<!--  CDN jQuery 복사해서 사용   -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+</head>
+<body>
+<!-- 지도 출력할 공간 지정-->
+<div id="map" style="width:100%;height:600px;">
+</div>   <!-- 버튼 생성 -->
+    <input id="to-jeju" type="button" value="제주도로 setCenter"  />
+    <input id="to-1" type="button" value="1레벨로 setZoom"  />
+    <input id="to-busan" type="button" value="부산으로 panTo"  />
+    <input id="to-seoul" type="button" value="서울로 panToBounds"  />
+<script type="text/javascript">
+var map = new naver.maps.Map('map', { //기본 지도 생성
+    center: new naver.maps.LatLng(37.5666805, 126.9784147)
+    , zoom: 4 //지도 배율 설정
+});
+// 버튼에서 사용할 지도 위도 경도 저장
+var jeju = new naver.maps.LatLng(33.3590628, 126.534361)
+    , busan = new naver.maps.LatLng(35.1797865, 129.0750194)
+    , seoul = new naver.maps.LatLngBounds(
+            new naver.maps.LatLng(37.42829747263545, 126.76620435615891)
+            , new naver.maps.LatLng(37.7010174173061, 127.18379493229875)
+            );
+$("#to-jeju").on("click", function(e) {
+    e.preventDefault();
+    map.setCenter(jeju);
+}); //jquery 로 이벤트 처리
+$("#to-1").on("click", function(e) {
+    e.preventDefault();
+    map.setZoom(1, true); // 지도 배율 설정
+});
+$("#to-busan").on("click", function(e) {
+    e.preventDefault();
+    map.panTo(busan); //지정한 좌표를 중심점으로 지도를 이동시킵니다
+});
+$("#to-seoul").on("click", function(e) {
+    e.preventDefault();
+    map.panToBounds(seoul); //지정한 좌표 경계를 포함하는 위치로 지도를 부드럽게 이동시킵니다.
+});
+</script>
+</body>
+</html>

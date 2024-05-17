@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        function fn_slowhide(){
+            if( $("h1").is(':visible') ){
+                $("h1").hide("slow", function (){alert("단락이 숨겨집니다.")})
+            }else {
+                $("h1").show("slow", function (){alert("단락이 드러납니다.")})
+            }
+        };
+        /*$(document).ready(function () {
+            $("button").click(function () {
+                $("#헤더").toggle("slow");
+            })
+        });*/
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="헤더">이것은 헤더입니다.</h1>
+<button onclick="fn_slowhide()">클릭해라</button>
+</body>
+</html>

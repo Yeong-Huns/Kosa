@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>transform</title>
+<style>
+  .photo{
+      position : absolute;
+      left : 50px;  /* 외쪽에서 50픽셀 */
+      top : 70px;   /* 위에서 70픽셀  교차점에 이미지 표시*/
+      /* 각 브라우저 별 css3 명령어 인식을 위한 접두사 */
+      -ms-transform : rotate(-15deg); /* ms 브라우저-15도 변형 */
+      -webkit-transform : rotate(-15deg); /* 사파리 크롬 브라우저 */
+      -moz-transform : rotate(-15deg); /* 파이어폭스 브라우저 */
+      -o-transform : rotate(-15deg); /* 오페라 브라우저 */      
+  }
+
+</style>
+</head>
+<body>
+  <img class="photo" src="../images/photo.jpg" 
+                   width="200" height="250">
+</body>
+</html>

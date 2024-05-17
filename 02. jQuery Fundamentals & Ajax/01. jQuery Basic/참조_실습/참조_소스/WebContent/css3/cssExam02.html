@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>box-shadow</title>
+<style type="text/css">
+  #photo{    /* 첫번째 이미지에 그림자 적용 안함 */
+     position : absolute;  /* 위치 고정 */
+     /* 이미지가 놓여질 좌표  */
+     left : 50px;    /* 왼쪽 위치 */      
+     top : 20px;     /* 상단 위치 */
+  }
+  #shadow{   /* 두번째 이미지에 그림자 적용  */
+     position : absolute;  /* 위치 고정 */
+     left : 300px;   /* 왼쪽 위치 */      
+     top : 20px;     /* 상단 위치 */
+     box-shadow : 10px 10px 10px #666;
+     /*      그림자 길이   방향   농도   색상   */
+     /*      방향이 양수이면 아래쪽으로, */
+     /*      방향이 음수이면 위쪽으로 그림자 생성 */  
+  }
+</style>
+</head>
+<body>
+ <img id="photo" src="../images/img03.jpg"
+          width ="200" height="250">
+ <img id="shadow" src="../images/img03.jpg"
+          width ="200" height="250">          
+</body>
+</html>

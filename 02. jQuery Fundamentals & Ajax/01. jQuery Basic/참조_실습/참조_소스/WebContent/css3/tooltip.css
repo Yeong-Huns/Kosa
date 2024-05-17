@@ -1,0 +1,82 @@
+@CHARSET "UTF-8";
+
+body{
+	padding : 150px;
+	background : url(../images/bg.jpg);
+}
+h1{
+	margin:bottom : 40px;
+	font-family : 맑은 고딕, 고딕;
+	color: #fff;
+}
+.gallery-nav li{
+	float : left;
+	margin-right : 100px;
+	list-style : none;   /* 목록 점 없애기 */
+}
+a.tooltip {
+	position: relative;
+	display: block;
+	width: 100px;
+	height: 100px;
+	border: 5px solid #4b4b4b;
+	background: #fff no-repeat center;/* 이미지 반복 안하고, 가운데 정렬 */
+	/* CSS3 Border-radius 사각형을  원형으로 처리*/
+	border-radius: 55px;
+	/* CSS3 Transition */		
+	transition: all .4s ease-in .3s;
+}
+a.tooltip:hover,
+a.tooltip:focus {
+		border-color: #fff;
+	}
+	a.tooltip .tooltip-box {
+		opacity: 0;
+		position: absolute;
+		left: 50%;
+		bottom: 100px;
+		width: 20em;   /*가로 폭을 글자 크기의 20배 만큼 설정 */ 
+		margin-left: -10.4em;
+		padding: .8em;  /* 가로 폭을 글자 크기의 0.8배 만큼 설정 */
+		background: #111;
+		/* CSS3 Border-radius 외곽선 라운드 처리*/		
+		border-radius: 15px 0px;
+		/* CSS3 Transition  */				
+		transition: all .4s ease-in .3s;
+		/* 모든 속성이 0.3초 뒤에 부드럽게 0.4초 동안 변화하도록 설정 */
+	}
+	/* a.tooltip:hover : 마우스 포인터가 툴 팁에 올라올 때*/
+	a.tooltip:hover .tooltip-box, 
+	a.tooltip:focus .tooltip-box {
+		opacity: 1;   /* 불투명도  : 1은 가장 선명한 상태 */
+		bottom: 90px;
+	}
+	a.tooltip .tooltip-box:before {
+		content: '';
+		position: absolute;   /* 위치를 절대적으로 지정-위치 불변 */
+		bottom: -10px;
+		left: 120px;
+		border-top: 10px solid #111;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		}
+		a.tooltip .tooltip-title {
+			color: #fff;
+		}
+		a.tooltip .tooltip-desc {
+			margin-bottom: 0;
+			font-size: 11px;
+			text-align: justify;  /* 텍스트 균등 정렬 방식 */
+			color: #bcbcbc;
+		}
+
+/* 이미지 링크 */
+a.tooltip.photo1 {
+	background-image: url(../images/google.gif);
+}
+a.tooltip.photo2 {
+	background-image: url(../images/naver.gif);
+}
+a.tooltip.photo3 {
+	background-image: url(../images/nate.gif);
+}

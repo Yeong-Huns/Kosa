@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prac1</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script>
+        $(document).ready(function (){
+            $.ajax('../data.html', {
+                success: function (data){
+                    console.log(data);
+                    $('body').append(data);
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

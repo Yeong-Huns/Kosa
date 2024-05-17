@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Json2</title>
+</head>
+<body>
+<div id="result"></div>
+
+<script>
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "student.json");
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let students = JSON.parse(xhr.responseText);
+            renderHTML(students);
+        }
+    }
+
+    function renderHTML(data) {
+        let output = "";
+
+        for (let i of data) {
+output +=
+`
+<h2>${i.name}</h2>
+<ul>
+<li>전공 : ${i.major}</li>
+<li>학년 : ${i.grade}</li>
+</ul>
+<hr>
+`;
+}
+document.getElementById("result").innerHTML = output;
+}
+
+</script>
+</body>
+</html>

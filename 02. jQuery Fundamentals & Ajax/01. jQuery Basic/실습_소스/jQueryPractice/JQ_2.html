@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                $("button").click(
+                    function () {
+                        $("#테스트").css("color", "red")
+                    }
+                )
+            }
+        );
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>이것은 단락</p>
+<p id="테스트">이것은 또 다른 단락</p>
+<button>클릭</button>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> change() 메소드</title>
+<script src="jquery.js"></script>
+<script>
+$(function(){
+	$("#sel").change(function(event){
+		// select 상자의 value값을 imgSrc 변수에 저장
+		var imgSrc=$(event.target).val();
+		//  src 속서에 imgSrc 내용을 복사
+	$("#img").attr("src", imgSrc);	
+	}).change(); // 웹문서가 로드되면서 자동으로 사과 이미지 선택
+});
+</script>
+</head>
+<body>
+  <table border="1">
+    <tr>
+      <td> 
+      <select id="sel">
+       <option value="../images/f1.jpg">배
+       <option value="../images/f2.jpg" selected>사과
+       <option value="../images/f3.jpg">감
+      </select> </td>
+      <td> <img id="img"> </td>
+    </tr>
+  </table>
+</body>
+</html>

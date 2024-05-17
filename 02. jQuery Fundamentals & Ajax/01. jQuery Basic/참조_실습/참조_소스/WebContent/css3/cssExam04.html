@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>transition</title>
+<style>
+ img{   /* 평상시 이미지 크기는 30% 축소되어서 보임 */
+	 width : 30%;
+      /* transition-property : width; /* 적용할 속성 */     
+      /* transition-duration : 2s;    /* 지속 시간 2초 */     
+     transition : width 2s;   /* 위 2문장을 한 줄로 표현 */
+ }
+ img:hover{ /* 이미지 위에 마우스포인트를 올리면 100% 확대 */
+	 width : 100%;
+ }
+</style>
+
+</head>
+<body>
+   <div>
+      <p> 마우스를 그림위에 올려보세요 !!! </p>
+      <img src="../images/orange.jpg">   
+   </div>
+</body>
+</html>

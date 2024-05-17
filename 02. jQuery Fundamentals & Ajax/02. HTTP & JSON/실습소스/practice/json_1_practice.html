@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>예외 처리</title>
+</head>
+<body>
+    <h1>json 예외처리</h1>
+
+    <script>
+        let json = '{"grade": 6, "age": 30, "name": "김좌진"}';
+        let test = JSON.parse(json);
+        console.log(test);
+        console.log(test.grade);
+        console.log(`${test.grade}`);
+        console.log("${test.grade}");
+
+        try{
+            let user = JSON.parse(json);
+            if(!user.name){
+                console.log("사용자 이름없음");
+                throw "에러 사용자 이름 없음";
+            }
+            else console.log(user.name);
+        } catch (err){
+            console.error(err);
+        }
+
+    </script>
+</body>
+</html>

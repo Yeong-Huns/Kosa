@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> val()와 focus() 메소드</title>
+<style>
+  div{ 
+     padding : 5px 5px 5px 5px; /* 안쪽 여백 : 위,오른,아래,왼쪽 */
+  }
+  .item{float : left; width : 80px; }     
+  .b{margin-left:80px; margin-top : 20px;}
+</style>
+<script src="./jquery.js"> </script>
+<script>
+  $(document).ready(function(){
+	  $("#logBtn:button").click(function(){
+		 invalidItem();  // 로그인 버튼을 클릭했다면  invalidItem()호출
+	  });
+	  function invalidItem(){
+		  if($("#id").val()==""){
+			  alert("아이디를 입력하세요!!!");
+			  $("#id").val("").focus();
+			  return;			  
+		  }
+		  if($("#pwd").val()==""){
+			  alert("비밀번호를 입력하세요!!!");
+			  $("#pwd").val("").focus();
+			  return;
+			  // val()는 해당 폼 필드의 값을 지정하거나 반환 역할을 한다.
+		  }
+		  alert("로그인이 완료되었습니다.");
+	  }
+  });
+</script>
+</head>
+<body>
+   <div> <span class="item"> 아이디</span>
+         <input type="text" id="id" />
+   </div>
+   <div> <span class="item"> 비밀번호 </span>
+         <input type="password" id="pwd" />
+   </div>
+   <input type="button" id="logBtn" 
+          value="로그인" class="b">
+</body>
+</html>

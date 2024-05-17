@@ -1,0 +1,53 @@
+<html>            
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> 주민등록번호 체크 </title>
+<script>
+<!-- 
+function juminCheck(frm) {
+  var yy=frm.jumin1.value.substring(0,2); 
+  var mm=frm.jumin1.value.substring(2,4);   
+  var dd=frm.jumin1.value.substring(4,6); 
+  var sex=frm.jumin2.value.substring(0,1);   
+  var chk=0; 
+  //주민등록번호 앞자리, 성별 검사 
+  if (frm.jumin1.value.length !=6 || frm.jumin2.value.length !=7 ||   
+      yy<20 || mm<1 || mm>12 || dd<0 || dd>31 || sex>2 || sex<1) {
+    alert("잘못된 주민등록번호입니다.");   
+	frm.jumin1.value=""; 
+	frm.jumin2.value=""; 
+	frm.jumin1.focus();   
+	return; 
+  } 
+  //주민등록번호 뒷자리 검사 
+  //주민등록번호 앞자리와 뒷자리를 연결한다. 
+  var total=frm.jumin1.value + frm.jumin2.value; 
+  //총 13자리의 주민등록번호에서 인덱스가 0인 위치부터 11인 위치까지 12자리의 주민번호를 얻어 와서 
+  for (i=0; i<12; i++) { // 각 자리를 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5와 각각 곱한 후 모두 합한다.  
+    chk += (i%8+2)*total.substring(i, i+1); 
+  } 
+  //11에서 구해진 총합을 11로 나눈 나머지를 뺀다.  
+  chk=(11-(chk%11))%10; 
+  //지금까지 구해진 값이 주민등록번호 맨 마지막 위치 값과 동일한지를 비교한다.
+  if(parseInt(chk) != parseInt(total.substring(12,13))) { //같지 않으면
+    alert("잘못된 주민등록번호입니다."); //오류 메시지를 출력한 후 
+    frm.jumin1.value="";  //입력 상자를 모두 초기화한 후 
+    frm.jumin2.value=""; 
+    frm.jumin1.focus();   //주민등록번호 앞자리를 입력하는 입력상자에 포커스를 둔다. 
+    return; 
+  } 
+  alert("올바른 주민등록번호입니다."); 
+} 
+--> 
+</script>
+</head>
+<body >
+
+<br><br> 주민등록번호 유효성 검사 <br><br> 
+<form> 주민등록번호 
+<input type="text" name="jumin1" size="6" maxlength="6">- 
+<input type="text" name="jumin2" size="7" maxlength="7"> 
+<input type="button" value="확인" onClick="juminCheck(this.form)"> 
+</form> 
+</body> 
+</html> 

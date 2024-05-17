@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        function fn_submit() {
+            var value = $("#t_input").val();
+            $("#t_output").val(value)
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="t_input">
+<input type="button" value="입력하기" onclick="fn_submit()"><br><br>
+<div>
+    결과: <br>
+    <input type="text" id="t_output" disabled>
+</div>
+</body>
+</html>
