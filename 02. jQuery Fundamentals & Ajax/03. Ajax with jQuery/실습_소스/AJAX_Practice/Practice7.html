@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prac7</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxComplete(function () {
+                $(`#ajax-event`).append(`<h1>AjaxComplete</h1>`)
+            }).ajaxError(function () {
+                $(`#ajax-event`).append(`<h1>AjaxError</h1>`)
+            }).ajaxSend(function () {
+                $(`#ajax-event`).append(`<h1>AjaxSend</h1>`)
+            }).ajaxSuccess(function () {
+                $(`#ajax-event`).append(`<h1>AjaxSuccess</h1>`)
+            }).ajaxStart(function () {
+                $(`#ajax-event`).append(`<h1>AjaxStart</h1>`)
+            });
+            $(`#wrap`).load(`../data.json`);
+        });
+    </script>
+</head>
+<body>
+<dic id="ajax-event"></dic>
+<div id="wrap"></div>
+</body>
+</html>
