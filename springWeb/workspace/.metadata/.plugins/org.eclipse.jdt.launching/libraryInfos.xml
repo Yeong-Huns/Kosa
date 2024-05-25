@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+    <libraryInfo home="C:\springWeb\sts-4.22.1.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.11.v20240426-1830" version="17.0.11"/>
+    <libraryInfo home="C:\Program Files\Java\jdk-21" version="21.0.3"/>
+    <libraryInfo home="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08" version="1.8.0_412">
+        <bootpath>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\resources.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\rt.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\sunrsasign.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\jsse.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\jce.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\charsets.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\jfr.jar"/>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\classes"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\ext"/>
+            <entry path="C:\windows\Sun\Java\lib\ext"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="C:\springWeb\OpenJDK8U-jdk_x64_windows_hotspot_8u412b08\jdk8u412-b08\jre\lib\endorsed"/>
+        </endorsedDirs>
+    </libraryInfo>
+    <libraryInfo home="C:\springWeb\sts-4.22.1.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.11.v20240426-1830\jre" version="17.0.11"/>
+</libraryInfos>
