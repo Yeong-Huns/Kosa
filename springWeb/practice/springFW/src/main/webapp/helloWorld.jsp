@@ -12,9 +12,9 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>
-        반갑습니다!!
-        <span><%= new Date()%></span>
-    </h1>
+<div style="text-align:center;">
+    <h1>안뇽~~!!</h1>
+    <span><%=new Date() %></span>
+</div>
 </body>
 </html>
