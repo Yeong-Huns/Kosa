@@ -1,17 +1,16 @@
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>helloWorld</title>
 </head>
 <body>
-	<h1>안녕~~~~~~~
-	<span><%= new Date() %></span>
-	</h1>
-	
+	<div style="text-align:center;">
+			<h1>안뇽~~!!</h1>
+			<span><%=new Date() %></span>
+	</div>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="personBean" class="springFw.ex03.di02.Person" scope="prototype">
+		<property name="name" value="홍길동"/>
+		<property name="age" value="22"/>
+	</bean>
+
+	<bean id="customer" class="springFw.ex03.di02.Customer">
+		<property name="lists">
+			<list>
+				<value>1</value>
+				<ref bean="personBean"/>
+				<bean class="springFw.ex03.di02.Person">
+					<property name="name" value="고길동"/>
+					<property name="age" value="23"/>
+				</bean>
+			</list>
+		</property>
+		<property name="sets">
+			<set>
+				<value>2</value>
+				<ref bean="personBean"/>
+				<bean class="springFw.ex03.di02.Person">
+					<property name="name" value="마이클"/>
+					<property name="age" value="32"/>
+				</bean>
+			</set>
+		</property>
+		<property name="maps">
+			<map>
+				<entry key="Key1" value="3"/>
+				<entry key="Key2" value-ref="personBean"/>
+				<entry key="Key3">
+					<bean class="springFw.ex03.di02.Person">
+						<property name="name" value="둘리"/>
+						<property name="age" value="4"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
+		<property name="props">
+			<props>
+				<prop key="webmaster">webmaster@labs.com</prop>
+				<prop key="support">support@labs.com</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>

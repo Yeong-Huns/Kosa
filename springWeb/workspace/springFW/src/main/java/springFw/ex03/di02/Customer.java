@@ -1,0 +1,66 @@
+package springFw.ex03.di02;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+/**
+ * packageName    : springFW.ex03.di02
+ * fileName       : Customer
+ * author         : Yeong-Huns
+ * date           : 2024-05-28
+ * description    :
+ * ===========================================================
+ * DATE              AUTHOR             NOTE
+ * -----------------------------------------------------------
+ * 2024-05-28        Yeong-Huns       최초 생성
+ */
+public class Customer {
+    private List<Object> lists;
+    private Set<Object> sets;
+    private Map<String, Object> maps;
+    private Properties props;
+
+    public List<Object> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<Object> lists) {
+        this.lists = lists;
+    }
+
+    public Set<Object> getSets() {
+        return sets;
+    }
+
+    public void setSets(Set<Object> sets) {
+        this.sets = sets;
+    }
+
+    public Map<String, Object> getMaps() {
+        return maps;
+    }
+
+    public void setMaps(Map<String, Object> maps) {
+        this.maps = maps;
+    }
+
+    public Properties getProps() {
+        return props;
+    }
+
+    public void setProps(Properties props) {
+        this.props = props;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "lists=" + lists +
+                ", sets=" + sets +
+                ", maps=" + maps +
+                ", props=" + props +
+                '}';
+    }
+}
