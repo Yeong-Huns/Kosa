@@ -1,9 +1,7 @@
-package springFW.ex03.di03;
+package springFW.ex04.aop01;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 /**
  * packageName    : springFW.ex03.di01
@@ -19,13 +17,10 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 public class HelloMain {
     public static void main(String[] args) {
 
-        //spring DL, DI, XML 사용
-        AbstractApplicationContext context;
-        //context = new GenericXmlApplicationContext("classpath:config/di03/application-config.xml");
-        context = new AnnotationConfigApplicationContext(Appconfig.class);
-
-        HelloController controller = context.getBean("helloController",HelloController.class);
-        controller.hello("홍길동");
+        AbstractApplicationContext context = new GenericXmlApplicationContext("classpath:config/aop01/application-config.xml");
+        //Setter 사용
+        HelloController helloController = context.getBean("helloController", HelloController.class);
+        helloController.hello("이연복");
         context.close();
     }
 }
