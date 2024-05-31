@@ -23,13 +23,21 @@
 
 	<bean id="helloLog" class="springFw.ex04.aop01.HelloLog"/>
 
+	<bean id="performanceAspect" class="springFw.ex04.aop01.PerformanceAspect"/>
+
 	<aop:config>
 		<!-- 핵심 코드(target) Method만 적용-->
 		<aop:pointcut id="helloPointcut" expression="execution(* springFw.ex04..HelloService.sayHello(..))"/>
+		<!-- <aop:pointcut id="byePointcut" expression="execution(* springFw.ex04..HelloService.sayGoodbye(..))"/> -->
 		<!--helloPointcut 에 before 어드바이스 설정-->
 		<!--공통코드(aspect)-->
 		<aop:aspect ref="helloLog">
 			<aop:before method="log" pointcut-ref="helloPointcut"/>
+			<!-- <aop:before method="log" pointcut-ref="byePointcut"/> -->
+		</aop:aspect>
+		
+		<aop:aspect ref="performanceAspect">
+			<aop:around pointcut-ref="helloPointcut" method="trace"/>
 		</aop:aspect>
 	</aop:config>
 
