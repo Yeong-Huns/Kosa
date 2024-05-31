@@ -73,36 +73,68 @@ public class EmpRepository implements IEmpRepository {
 
     @Override
     public void updateEmp(EmpVO emp) {
+        String sql = "update employees set first_name=?, last_name=?, email=?, phone_number=?, hire_date=?, job_id=?, salary=?, commission_pct=?, manager_id=?, department_id=? where employee_id = ?";
+        jdbcTemplate.update(sql,
+                emp.getFirstName(),
+                emp.getLastName(),
+                emp.getEmail(),
+                emp.getPhoneNumber(),
+                emp.getHireDate(),
+                emp.getJobId(),
+                emp.getSalary(),
+                emp.getCommissionPct(),
+                emp.getManagerId(),
+                emp.getDepartmentId(),
+                emp.getEmployeeId()
+                );
 
     }
 
     @Override
     public void insertEmp(EmpVO emp) {
-
+        String sql = "insert into employees(employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id) values (?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql,
+                emp.getEmployeeId(),
+                emp.getFirstName(),
+                emp.getLastName(),
+                emp.getEmail(),
+                emp.getPhoneNumber(),
+                emp.getHireDate(),
+                emp.getJobId(),
+                emp.getSalary(),
+                emp.getCommissionPct(),
+                emp.getManagerId(),
+                emp.getDepartmentId()
+                );
     }
 
     @Override
     public void deleteJobHistory(int empId) {
-
+        String sql = "delete from job_history where employee_id = ?";
+        jdbcTemplate.update(sql, empId);
     }
 
     @Override
     public int deleteEmp(int empId, String email) {
-        return 0;
+        String sql = "delete from employees where employee_id = ? and email = ?";
+        return jdbcTemplate.update(sql, empId, email);
     }
 
     @Override
     public List<Map<String, Object>> getAllDeptId() {
-        return Collections.emptyList();
+        String sql = "select department_id as departmentId, department_name as departmentName from departments";
+        return jdbcTemplate.queryForList(sql);
     }
 
     @Override
     public List<Map<String, Object>> getAllJobId() {
-        return Collections.emptyList();
+        String sql = "select job_id as jobId, job_title as jobTitle from jobs";
+        return jdbcTemplate.queryForList(sql);
     }
 
     @Override
     public List<Map<String, Object>> getAllManagerId() {
-        return Collections.emptyList();
+        String sql = "select d.manager_id as managerId, e.first_name as firstName from departments d join employees e on d.manager_id = e.employee_id order by d.manager_id";
+        return jdbcTemplate.queryForList(sql);
     }
 }

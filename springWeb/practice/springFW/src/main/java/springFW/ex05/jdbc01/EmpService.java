@@ -1,10 +1,9 @@
 package springFW.ex05.jdbc01;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -56,22 +55,24 @@ public class EmpService implements IEmpService {
     }
 
     @Override
+    @Transactional
     public int deleteEmp(int empId, String email) {
-        return 0;
+        empRepository.deleteJobHistory(empId);
+        return empRepository.deleteEmp(empId, email);
     }
 
     @Override
     public List<Map<String, Object>> getAllDeptId() {
-        return Collections.emptyList();
+        return empRepository.getAllDeptId();
     }
 
     @Override
     public List<Map<String, Object>> getAllJobId() {
-        return Collections.emptyList();
+        return empRepository.getAllJobId();
     }
 
     @Override
     public List<Map<String, Object>> getAllManagerId() {
-        return Collections.emptyList();
+        return empRepository.getAllManagerId();
     }
 }
