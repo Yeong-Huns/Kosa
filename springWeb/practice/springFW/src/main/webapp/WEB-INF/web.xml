@@ -20,7 +20,7 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
-    
+    <!--
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>springFW.ex06.mvc01.DispatcherServlet</servlet-class>
@@ -34,7 +34,33 @@
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-    
+    -->
+    <!-- Spring MVC -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/mvc02/root-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/mvc02/servlet-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
