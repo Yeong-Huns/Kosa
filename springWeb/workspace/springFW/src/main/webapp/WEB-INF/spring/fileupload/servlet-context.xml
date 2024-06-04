@@ -19,35 +19,20 @@
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/WEB-INF/views/mvc02/" />
+        <beans:property name="prefix" value="/WEB-INF/views/fileupload/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
 
-    <interceptors>
-        <interceptor>
-            <mapping path="/hr/**"/>
-            <exclude-mapping path="/hr/insert"/>
-            <beans:bean class="springFW.ex06.mvc02.PageViewLogInterceptor"/>
-        </interceptor>
-    </interceptors>
 
 
-    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <beans:property name="messageConverters">
-            <beans:list>
-                <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                    <beans:property name="supportedMediaTypes">
-                        <beans:list>
-                            <beans:value>text/html;charset=UTF-8</beans:value>
-                            <beans:value>application/json;charset=UTF-8</beans:value>
-                        </beans:list>
-                    </beans:property>
-                </beans:bean>
-            </beans:list>
-        </beans:property>
+    <!--멀티파트 50메가바이트-->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="defaultEncoding" value="UTF-8"/>
+        <beans:property name="maxUploadSize" value="50000000"/>
     </beans:bean>
 
-    <context:component-scan base-package="springFW.ex06.mvc02" />
+    <context:component-scan base-package="springFw.ex07.fileupload" />
 
+    <view-controller path="/upload" view-name="index"/>
 
 </beans:beans>
