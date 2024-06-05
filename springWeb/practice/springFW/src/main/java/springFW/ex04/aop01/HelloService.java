@@ -1,7 +1,5 @@
 package springFW.ex04.aop01;
 
-import java.util.Date;
-
 /**
  * packageName    : springFW.ex03.di01
  * fileName       : HelloService

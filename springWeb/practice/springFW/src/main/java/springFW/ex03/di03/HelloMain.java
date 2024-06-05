@@ -2,8 +2,6 @@ package springFW.ex03.di03;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 /**
  * packageName    : springFW.ex03.di01

@@ -41,7 +41,10 @@
         <!--
         <param-value>/WEB-INF/spring/mvc02/root-context.xml</param-value>
         -->
+        <!--
         <param-value>/WEB-INF/spring/fileupload/root-context.xml</param-value>
+        -->
+        <param-value>/WEB-INF/spring/mybatis/root-context.xml</param-value>
     </context-param>
 
     <listener>
@@ -57,7 +60,10 @@
             <!--
             <param-value>/WEB-INF/spring/mvc02/servlet-context.xml</param-value>
             -->
+            <!--
             <param-value>/WEB-INF/spring/fileupload/servlet-context.xml</param-value>
+            -->
+            <param-value>/WEB-INF/spring/mybatis/servlet-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
