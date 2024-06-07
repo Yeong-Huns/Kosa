@@ -4,6 +4,15 @@
 
 <mapper namespace="app.labs.board.dao.IBoardCategoryRepository">
 
+
+	<select id="selectArticleListByCategory" parameterType="map" resultType="app.labs.board.model.Board">
+		SELECT *
+		FROM board
+		WHERE category_id = #{categoryId}
+		ORDER BY board_id
+			LIMIT #{start}, #{end}
+	</select>
+
 	<select id="selectAllCategory" resultType="app.labs.board.model.BoardCategory">
 	<![CDATA[
 		SELECT 
