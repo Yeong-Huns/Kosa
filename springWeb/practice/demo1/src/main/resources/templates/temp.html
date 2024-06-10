@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>temp</title>
+</head>
+<body>
+<div class="container">
+    <h3 th:text="#{home.message}">Welcome</h3>
+
+</div>
+<p th:text="${session.message}">message</p>
+<img width="400px" th:src="@{/image/KakaoTalk_20240530_124514197_01.jpg}"/>
+<hr/>
+<a th:href="@{/board/link(id=10)}">aaaaa</a>
+</body>
+</html>
